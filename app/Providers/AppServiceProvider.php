@@ -3,13 +3,15 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\LocationRepositoryInterface;
+use App\Repositories\Contracts\NoteRepositoryInterface;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Eloquent\LocationRepository;
+use App\Repositories\Eloquent\NoteRepository;
 use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
-use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(LocationRepositoryInterface::class, LocationRepository::class);
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
+        $this->app->bind(NoteRepositoryInterface::class, NoteRepository::class);
     }
 
     /**

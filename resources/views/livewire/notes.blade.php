@@ -12,11 +12,9 @@
     <livewire:create-note />
     <livewire:edit-note />
 
-    {{-- search --}}
-
 
     {{-- table --}}
-    <table class="hidden md:table w-full divide-y divide-gray-200 dark:divide-gray-700 mt-6 text-sm">
+    <table class="hidden md:table w-full divide-y divide-gray-200 dark:divide-gray-700 mt-4 text-sm">
         <thead
             class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-bold text-xs uppercase tracking-wider">
             <tr>
@@ -41,7 +39,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" class="px-6 py-5 text-center text-gray-500">Don't have data.</td>
+                    <td colspan="3" class="px-6 py-5 text-center text-red-500">Không có dữ liệu.</td>
                 </tr>
             @endforelse
         </tbody>

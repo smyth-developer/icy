@@ -7,6 +7,7 @@ use Flux\Flux;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use App\Repositories\Contracts\NoteRepositoryInterface;
 
 class EditNote extends Component
 {
@@ -30,10 +31,10 @@ class EditNote extends Component
             'title' => ['required','string','max:255', Rule::unique('notes')->ignore($this->NoteId)],
             'content' => 'required|string',
         ]);
-        $note = Note::find($this->NoteId);
-        $note->title = $this->title;
-        $note->content = $this->content;
-        $note->save();
+        app(NoteRepositoryInterface::class)->update($this->NoteId, [
+            'title' => $this->title,
+            'content' => $this->content,
+        ]);
         session()->flash('success', 'Note updated successfully.');
         
         $this->redirectRoute('notes', navigate: true);

@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Note; // Assuming you have a Note model
 use Flux\Flux;
+use App\Repositories\Contracts\NoteRepositoryInterface;
 
 class Notes extends Component
 {
@@ -25,7 +26,7 @@ class Notes extends Component
 
     public function deleteNote()
     {
-        Note::find($this->NoteId)->delete();
+        app(NoteRepositoryInterface::class)->delete($this->NoteId);
         Flux::modal('delete-note')->close();
         session()->flash('success', 'Note deleted successfully.');
         $this->redirectRoute('notes', navigate: true);
@@ -33,7 +34,7 @@ class Notes extends Component
 
     public function render()
     {
-        $note = Note::orderBy('created_at','desc')->paginate(5);
+        $note = app(NoteRepositoryInterface::class)->getAll(5);
         return view('livewire.notes',[
             'notes' => $note,
         ]);

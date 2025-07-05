@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Note;
 use Flux\Flux;
 use Livewire\Component;
+use App\Repositories\Contracts\NoteRepositoryInterface;
 
 class CreateNote extends Component
 {
@@ -23,11 +24,10 @@ class CreateNote extends Component
     {
         $this->validate();
 
-        $note = new Note();
-        $note->title = $this->title;
-        $note->content = $this->content;
-        $note->save();
-        // Logic to save the note, e.g., Note::create(['title' => $this->title, 'content' => $this->content]);
+        app(NoteRepositoryInterface::class)->create([
+            'title' => $this->title,
+            'content' => $this->content,
+        ]);
 
         session()->flash('success', 'Note created successfully.');
 

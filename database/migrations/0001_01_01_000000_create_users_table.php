@@ -15,9 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username')->unique();
+            $table->string('account_code')->unique();
             $table->string('password');
+            $table->enum('status', ['active', 'locked', 'resigned', 'pending'])->default('pending');
+            $table->unsignedTinyInteger('login_attempts')->default(0); 
+            $table->boolean('must_change_password')->default(true); 
+            $table->timestamp('last_password_change_at')->nullable(); 
+            $table->timestamp('first_login_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 

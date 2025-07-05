@@ -15,8 +15,8 @@ use Livewire\Component;
 #[Layout('components.layouts.auth')]
 class Login extends Component
 {
-    #[Validate('required|string|email')]
-    public string $email = '';
+    #[Validate('required|string')]
+    public string $login_id = '';
 
     #[Validate('required|string')]
     public string $password = '';
@@ -32,11 +32,18 @@ class Login extends Component
 
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+        // Determine if the login_id is an email or username
+        if (filter_var($this->login_id, FILTER_VALIDATE_EMAIL)) {
+            $login_id = 'email';
+        } else {
+            $login_id = 'username';
+        }
+
+        if (! Auth::attempt([$login_id => $this->login_id, 'password' => $this->password], $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'login_id' => ('Thông tin đăng nhập không chính xác.'),
             ]);
         }
 
@@ -72,6 +79,6 @@ class Login extends Component
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->login_id).'|'.request()->ip());
     }
 }
