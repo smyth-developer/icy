@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Livewire;
+
+use Livewire\Component;
+use Livewire\WithPagination;
+use App\Models\Note; // Assuming you have a Note model
+use Flux\Flux;
+
+class Notes extends Component
+{
+    use WithPagination;
+    public $NoteId;
+
+    public function edit($id)
+    {
+        $this->dispatch('edit-note',$id); 
+    }
+
+    public function delete($id)
+    {
+        $this->NoteId = $id;
+        Flux::modal('delete-note')->show();
+    }
+
+    public function deleteNote()
+    {
+        Note::find($this->NoteId)->delete();
+        Flux::modal('delete-note')->close();
+        session()->flash('success', 'Note deleted successfully.');
+        $this->redirectRoute('notes', navigate: true);
+    }
+
+    public function render()
+    {
+        $note = Note::orderBy('created_at','desc')->paginate(5);
+        return view('livewire.notes',[
+            'notes' => $note,
+        ]);
+    }
+}
