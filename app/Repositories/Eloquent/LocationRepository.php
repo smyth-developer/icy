@@ -23,6 +23,7 @@ class LocationRepository implements LocationRepositoryInterface
     {
         $data['name'] = ucwords(strtolower(trim($data['name'])));
         $data['address'] = ucwords(strtolower(trim($data['address'])));
+        $data['created_by'] = $data['created_by'] ?? Auth::id();
         return $data;
     }
 
