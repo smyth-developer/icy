@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Note; // Assuming you have a Note model
 use Flux\Flux;
 use App\Repositories\Contracts\NoteRepositoryInterface;
 
