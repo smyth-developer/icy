@@ -16,9 +16,9 @@
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('dashboard.Dashboard') }}</flux:navlist.item>
                     <flux:navlist.item icon="notebook-pen" :href="route('notes')" :current="request()->routeIs('notes')" wire:navigate>{{ __('dashboard.Notes') }}</flux:navlist.item>
                 </flux:navlist.group>
-               <flux:navlist.group :heading="__('Management')" class="grid">
+               {{-- <flux:navlist.group :heading="__('Management')" class="grid">
                     <flux:navlist.item icon="home" :href="route('locations')" :current="request()->routeIs('locations')" wire:navigate>{{ __('dashboard.location') }}</flux:navlist.item>
-                </flux:navlist.group> 
+                </flux:navlist.group>  --}}
             </flux:navlist>
 
             <flux:spacer />
