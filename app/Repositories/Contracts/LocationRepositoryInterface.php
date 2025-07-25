@@ -9,4 +9,5 @@ interface LocationRepositoryInterface
     public function update(int $id, array $data);
     public function delete(int $id);
     public function getLocationById(int $id);
+    public function showName(string $name);
 }

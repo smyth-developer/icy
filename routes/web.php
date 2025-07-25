@@ -1,6 +1,8 @@
 <?php
 
 use App\Livewire\Notes;
+
+use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -18,6 +20,8 @@ Route::view('dashboard', 'dashboard')
 Route::middleware(['auth', 'preventBackHistory'])->group(function () {
 
     Route::get('notes', Notes::class)->name('notes');
+
+    Route::get('locations', Locations::class)->name('locations');
 
     Route::redirect('settings', 'settings/profile');
 

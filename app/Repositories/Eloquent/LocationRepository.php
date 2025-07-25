@@ -53,4 +53,9 @@ class LocationRepository implements LocationRepositoryInterface
     {
         return $this->getLocationById($id)->delete();
     }
+
+    public function showName(string $name): string
+    {
+        return Location::where('name', $name)->value('name');
+    }
 }
