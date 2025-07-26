@@ -130,16 +130,7 @@
             </flux:menu>
         </flux:dropdown>
     </flux:header>
-
-    <div class="min-h-screen flex flex-col">
-        <main class="flex-grow">
-            {{ $slot }}
-        </main>
-
-        @include('components.layouts.app.footer')
-
-    </div>
-
+    {{ $slot }}
     @fluxScripts
 </body>
 
