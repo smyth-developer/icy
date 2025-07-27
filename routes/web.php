@@ -20,11 +20,15 @@ Route::view('dashboard', 'dashboard')
 
 Route::middleware(['auth', 'preventBackHistory'])->group(function () {
 
-    Route::get('notes', Notes::class)->name('notes');
+    Route::prefix('management')->name('management.')->group(function () {
 
-    Route::get('locations', Locations::class)->name('locations');
+        Route::get('notes', Notes::class)->name('notes');
 
-    Route::get('seasons', Seasons::class)->name('seasons');
+        Route::get('locations', Locations::class)->name('locations');
+
+        Route::get('seasons', Seasons::class)->name('seasons');
+
+    });
 
     Route::redirect('settings', 'settings/profile');
 

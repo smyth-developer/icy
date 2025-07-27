@@ -35,7 +35,7 @@ class CreateNote extends Component
         $this->reset(['title', 'content']);
         Flux::modal('create-note')->close();
 
-        $this->redirectRoute('notes', navigate: true); // Redirect to the notes page after saving
+        $this->redirectRoute('management.notes', navigate: true); // Redirect to the notes page after saving
     }
     public function render()
     {

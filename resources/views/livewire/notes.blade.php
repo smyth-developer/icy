@@ -14,7 +14,7 @@
 
 
     {{-- table --}}
-    <table class="hidden md:table w-full divide-y divide-gray-200 dark:divide-gray-700 mt-4 text-sm">
+    <table class="w-full divide-y divide-gray-200 dark:divide-gray-700 mt-4 text-sm">
         <thead
             class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-bold text-xs uppercase tracking-wider">
             <tr>
@@ -30,9 +30,9 @@
                     <td class="px-6 py-5 text-gray-900 dark:text-white">{{ $note->content }}</td>
                     <td class="px-6 py-5 text-center">
                         <div class="text-center gap-2">
-                            <flux:button variant="primary" icon="square-pen" wire:click="edit({{ $note->id }})">Sửa
+                            <flux:button class="my-0.5" variant="primary" icon="square-pen" wire:click="edit({{ $note->id }})">Sửa
                             </flux:button>
-                            <flux:button variant="danger" icon="trash" wire:click="delete({{ $note->id }})">Xóa
+                            <flux:button class="my-0.5" variant="danger" icon="trash" wire:click="delete({{ $note->id }})">Xóa
                             </flux:button>
                         </div>
                     </td>

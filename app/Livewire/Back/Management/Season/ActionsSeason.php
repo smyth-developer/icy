@@ -64,7 +64,7 @@ class ActionsSeason extends Component
         ]);
         Flux::modal('modal-season')->close();
 
-        $this->redirectRoute('seasons', navigate: true);
+        $this->redirectRoute('management.seasons', navigate: true);
     }
 
     #[On('edit-season')]
@@ -104,7 +104,7 @@ class ActionsSeason extends Component
 
         session()->flash('success', 'Học kỳ đã được cập nhật thành công.');
         Flux::modal('modal-season')->close();
-        $this->redirectRoute('seasons', navigate: true);
+        $this->redirectRoute('management.seasons', navigate: true);
     }
 
     #[On('delete-season')]
@@ -119,7 +119,7 @@ class ActionsSeason extends Component
         app(SeasonRepositoryInterface::class)->delete($this->seasonId);
         session()->flash('success', 'Học kỳ đã được xóa thành công.');
         Flux::modal('delete-season')->close();
-        $this->redirectRoute('seasons', navigate: true);
+        $this->redirectRoute('management.seasons', navigate: true);
     }
 
     public function mount()

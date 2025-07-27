@@ -28,7 +28,7 @@ class Locations extends Component
         app(LocationRepositoryInterface::class)->delete($this->locationId);
         Flux::modal('delete-location')->close();
         session()->flash('success', 'Xoá cơ sở thành công.');
-        $this->redirectRoute('locations', navigate: true);
+        $this->redirectRoute('management.locations', navigate: true);
     }
 
     public function render()

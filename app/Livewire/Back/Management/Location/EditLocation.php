@@ -45,7 +45,7 @@ class EditLocation extends Component
 
         session()->flash('success', 'Cập nhật cơ sở '. app(LocationRepositoryInterface::class)->showName($this->name) .' thành công.');
         Flux::modal('edit-location')->close();
-        $this->redirectRoute('locations', navigate: true);
+        $this->redirectRoute('management.locations', navigate: true);
     }
 
     public function render()

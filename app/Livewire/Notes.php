@@ -28,7 +28,7 @@ class Notes extends Component
         app(NoteRepositoryInterface::class)->delete($this->NoteId);
         Flux::modal('delete-note')->close();
         session()->flash('success', 'Note deleted successfully.');
-        $this->redirectRoute('notes', navigate: true);
+        $this->redirectRoute('management.notes', navigate: true);
     }
 
     public function render()

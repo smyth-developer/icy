@@ -31,7 +31,7 @@ class CreateLocation extends Component
             'address' => $this->address,
         ]);
         session()->flash('success', 'Tạo cơ sở '. app(LocationRepositoryInterface::class)->showName($this->name) .' thành công.');
-        $this->redirectRoute('locations', navigate: true);
+        $this->redirectRoute('management.locations', navigate: true);
     }
 
     public function render()

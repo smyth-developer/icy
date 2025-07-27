@@ -43,10 +43,10 @@
                     <td class="px-6 py-5 text-center text-gray-900 dark:text-white">{{ $location->createdBy->name }}</td>
                     <td class="px-6 py-5 text-center">
                         <div class="text-center gap-2">
-                            <flux:button variant="primary" icon="square-pen"
+                            <flux:button class="my-0.5" variant="primary" icon="square-pen"
                                 wire:click="editLocation({{ $location->id }})">Sửa
                             </flux:button>
-                            <flux:button variant="danger" icon="trash"
+                            <flux:button class="my-0.5" variant="danger" icon="trash"
                                 wire:click="deleteLocation({{ $location->id }})">Xóa
                             </flux:button>
                         </div>

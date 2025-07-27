@@ -43,10 +43,10 @@
                     </td>
                     <td class="px-6 py-5 text-center">
                         <div class="text-center gap-2">
-                            <flux:button variant="primary" icon="square-pen"
+                            <flux:button class='my-0.5' variant="primary" icon="square-pen"
                                 wire:click="editSeason({{ $season->id }})">Sửa
                             </flux:button>
-                            <flux:button variant="danger" icon="trash" wire:click="deleteSeason({{ $season->id }})">
+                            <flux:button class='my-0.5' variant="danger" icon="trash" wire:click="deleteSeason({{ $season->id }})">
                                 Xóa
                             </flux:button>
                         </div>

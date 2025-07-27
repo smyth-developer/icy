@@ -37,7 +37,7 @@ class EditNote extends Component
         ]);
         session()->flash('success', 'Note updated successfully.');
         
-        $this->redirectRoute('notes', navigate: true);
+        $this->redirectRoute('management.notes', navigate: true);
         Flux::modal('edit-note')->close();
     }
 
