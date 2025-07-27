@@ -17,24 +17,36 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group :heading="__('Platform')" class="grid">
+
                     <flux:navlist.item icon="home" :href="route('dashboard')"
                         :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('dashboard.Dashboard') }}
                     </flux:navlist.item>
-                    <flux:navlist.item icon="notebook-pen" :href="route('management.notes')" :current="request()->routeIs('management.notes')"
-                        wire:navigate>
+
+                    <flux:navlist.item icon="notebook-pen" :href="route('management.notes')"
+                        :current="request()->routeIs('management.notes')" wire:navigate>
                         {{ __('dashboard.Notes') }}
                     </flux:navlist.item>
+
                 </flux:navlist.group>
+
                 <flux:navlist.group :heading="__('Management')" class="grid">
+
                     <flux:navlist.item icon="map-pin-house" :href="route('management.locations')"
                         :current="request()->routeIs('management.locations')" wire:navigate>
                         {{ __('dashboard.location') }}
                     </flux:navlist.item>
+
                     <flux:navlist.item icon="calendar-cog" :href="route('management.seasons')"
                         :current="request()->routeIs('management.seasons')" wire:navigate>
                         Học kỳ
                     </flux:navlist.item>
+
+                    <flux:navlist.item icon="book-marked" :href="route('management.courses')"
+                        :current="request()->routeIs('management.courses')" wire:navigate>
+                        Khoá học
+                    </flux:navlist.item>
+
                 </flux:navlist.group>
             </flux:navlist>
 
