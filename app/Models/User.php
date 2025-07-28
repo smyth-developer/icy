@@ -60,21 +60,13 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-     * Get the user's initialss
-     */
-    public function initials(): string
+    public function detail()
     {
-        return Str::of($this->name)
-            ->explode(' ')
-            ->take(2)
-            ->map(fn($word) => Str::substr($word, 0, 1))
-            ->implode('');
+        return $this->hasOne(UserDetail::class);
     }
 
     public function locations()
     {
         return $this->belongsToMany(Location::class, 'location_user');
     }
-
 }
