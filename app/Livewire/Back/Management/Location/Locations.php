@@ -5,7 +5,9 @@ namespace App\Livewire\Back\Management\Location;
 use Livewire\Component;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 use Flux\Flux;
+use Livewire\Attributes\Title;
 
+#[Title('Cơ sở')]
 class Locations extends Component
 {
     public $locationId;

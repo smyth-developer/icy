@@ -1,3 +1,4 @@
+@push('title', 'Notes')
 <div class="relative mb-6 w-full">
     <flux:heading size="xl" level="1">{{ __('Notes') }}</flux:heading>
     <flux:subheading size="lg" class="mb-6">{{ __('Manage notes') }}</flux:subheading>

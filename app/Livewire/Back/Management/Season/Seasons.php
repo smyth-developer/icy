@@ -6,7 +6,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Repositories\Contracts\SeasonRepositoryInterface;
 use Flux\Flux;
+use Livewire\Attributes\Title;
 
+#[Title('Học kỳ')]
 class Seasons extends Component
 {
     use WithPagination;

@@ -4,7 +4,7 @@ use App\Livewire\Notes;
 
 use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Management\Season\Seasons;
-use App\Livewire\Back\Management\Courses;
+use App\Livewire\Back\Management\Course\Courses;
 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;

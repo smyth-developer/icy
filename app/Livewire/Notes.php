@@ -6,7 +6,9 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Flux\Flux;
 use App\Repositories\Contracts\NoteRepositoryInterface;
+use Livewire\Attributes\Title;
 
+#[Title('Ghi chú')]
 class Notes extends Component
 {
     use WithPagination;

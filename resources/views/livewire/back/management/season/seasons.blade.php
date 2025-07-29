@@ -26,23 +26,23 @@
             <thead
                 class="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 font-bold text-xs uppercase tracking-wider">
                 <tr>
-                    <th class="px-6 py-3 text-center">Mã</th>
-                    <th class="px-6 py-3 text-center hidden sm:table-cell">Tên học kỳ</th>
-                    <th class="px-6 py-3 text-center">Trạng thái</th>
-                    <th class="px-6 py-3 text-center">Thao tác</th>
+                    <th class="px-3 py-3 text-center">Mã</th>
+                    <th class="px-3 py-3 text-center hidden sm:table-cell">Tên học kỳ</th>
+                    <th class="px-3 py-3 text-center">Trạng thái</th>
+                    <th class="px-3 py-3 text-center">Thao tác</th>
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                 @forelse ($seasons as  $season)
                     <tr wire:key="role-{{ $season->id }}" class="hover:bg-gray-100 dark:hover:bg-gray-800 transition">
-                        <td class="px-6 py-5 text-gray-900 dark:text-white text-center">{{ $season->code }}</td>
-                        <td class="px-6 py-5 text-gray-900 dark:text-white hidden sm:table-cell">{{ $season->name }}</td>
-                        <td class="px-6 py-5 text-center text-gray-900 dark:text-white">
+                        <td class="px-3 py-3 text-gray-900 dark:text-white text-center">{{ $season->code }}</td>
+                        <td class="px-3 py-3 text-gray-900 dark:text-white hidden sm:table-cell">{{ $season->name }}</td>
+                        <td class="px-3 py-3 text-center text-gray-900 dark:text-white">
                             <flux:badge variant="solid" color="{{ $season->status_badge_color }}">
                                 {{ $season->status_badge_label }}
                             </flux:badge>
                         </td>
-                        <td class="px-6 py-5 text-center">
+                        <td class="px-3 py-3 text-center">
                             <div class="text-center gap-2">
                                 <flux:button class='my-0.5 mx-0.5' variant="primary" icon="square-pen"
                                     wire:click="editSeason({{ $season->id }})">Sửa

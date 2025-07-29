@@ -25,7 +25,7 @@
                     </flux:navlist.item>
 
                     <flux:navlist.item icon="notebook-pen" :href="route('management.notes')"
-                        :current="request()->routeIs('management.notes')" wire:navigate>
+                        :current="request()->routeIs('management.notes')" title="Ghi chú" wire:navigate>
                         {{ __('dashboard.Notes') }}
                     </flux:navlist.item>
 
@@ -57,7 +57,7 @@
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
                 <flux:profile :name="auth()->user()->name" avatar="{{ auth()->user()->detail?->avatar }}"
                     icon:trailing="chevrons-up-down" />
-                <flux:menu class="w-[220px]">
+                <flux:menu >
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
@@ -98,7 +98,7 @@
                 <flux:dropdown position="top" align="end">
                     <flux:profile avatar="{{ auth()->user()->detail?->avatar }}" icon-trailing="chevron-down" />
 
-                    <flux:menu>
+                    <flux:menu >
                         <flux:menu.radio.group>
                             <div class="p-0 text-sm font-normal">
                                 <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">

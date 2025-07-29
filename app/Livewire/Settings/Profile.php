@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
+#[Title('Quản lý hồ sơ')]
 class Profile extends Component
 {
     public string $name = '';
