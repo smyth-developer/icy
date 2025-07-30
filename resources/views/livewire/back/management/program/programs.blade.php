@@ -46,7 +46,7 @@
                     </tr>
                 </thead>
                 <tbody id="sortable-program"
-                    class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                    class="bg-white dark:bg-black divide-y divide-gray-200 dark:divide-gray-700">
                     @forelse ($programs as  $program)
                         <tr wire:key="role-{{ $program->id }}" data-id="{{ $program->id }}"
                             class="hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-move drag-handle">
@@ -60,7 +60,7 @@
                                     <flux:button class="my-0.5 cursor-pointer" variant="primary" icon="square-pen"
                                         wire:click="editProgram({{ $program->id }})">Sửa
                                     </flux:button>
-                                    <flux:button class="my-0.5 cursor-pointer" variant="danger" icon="trash"
+                                    <flux:button class="my-0.5 cursor-pointer" variant="primary" color="pink" icon="trash"
                                         wire:click="deleteProgram({{ $program->id }})">Xóa
                                     </flux:button>
                                 </div>

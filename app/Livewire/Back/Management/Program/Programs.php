@@ -43,7 +43,7 @@ class Programs extends Component
 
     public function render()
     {
-        $programs = app(ProgramRepositoryInterface::class)->getAll(5);
+        $programs = app(ProgramRepositoryInterface::class)->getAll(10);
         return view('livewire.back.management.program.programs', [
             'programs' => $programs,
         ]);
