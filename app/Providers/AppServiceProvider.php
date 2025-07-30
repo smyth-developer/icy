@@ -7,12 +7,14 @@ use App\Repositories\Contracts\NoteRepositoryInterface;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\Contracts\SeasonRepositoryInterface;
+use App\Repositories\Contracts\ProgramRepositoryInterface;
 
 use App\Repositories\Eloquent\LocationRepository;
 use App\Repositories\Eloquent\NoteRepository;
 use App\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\Eloquent\SeasonRepository;
+use App\Repositories\Eloquent\ProgramRepository;
 
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
@@ -31,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(RoleRepositoryInterface::class, RoleRepository::class);
         $this->app->bind(NoteRepositoryInterface::class, NoteRepository::class);
         $this->app->bind(SeasonRepositoryInterface::class, SeasonRepository::class);
+        $this->app->bind(ProgramRepositoryInterface::class, ProgramRepository::class);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Nguyễn Đức Huỳnh',
@@ -32,6 +34,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Manager Center TB',
@@ -126,5 +129,14 @@ class UserSeeder extends Seeder
         foreach ($users as $item){
             app(UserRepositoryInterface::class)->create($item);
         }
+
+        UserDetail::updateOrCreate(
+            [
+                'user_id' => 1,
+                'phone' => '0868191110',
+                'address' => 'Thường Tân',
+                'avatar' => 'ICE00001-67ecb59fdfad6.png',
+            ]
+        );
     }
 }

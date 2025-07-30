@@ -39,7 +39,7 @@ class ActionsSeason extends Component
         Flux::modal('modal-season')->show();
     }
 
-    public function  createSeason()
+    public function createSeason()
     {
         $this->seasonId = null;
         $this->validate();

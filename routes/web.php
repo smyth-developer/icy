@@ -4,7 +4,7 @@ use App\Livewire\Notes;
 
 use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Management\Season\Seasons;
-use App\Livewire\Back\Management\Course\Courses;
+use App\Livewire\Back\Management\Program\Programs;
 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -30,7 +30,7 @@ Route::middleware(['auth', 'preventBackHistory'])->group(function () {
 
         Route::get('seasons', Seasons::class)->name('seasons');
 
-        Route::get('courses', Courses::class)->name('courses');
+        Route::get('programs', Programs::class)->name('programs');
 
     });
 

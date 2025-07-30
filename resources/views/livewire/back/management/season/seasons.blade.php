@@ -9,7 +9,7 @@
             </flux:breadcrumbs>
         </div>
 
-        <flux:button wire:click='addSeason'>Thêm học kỳ</flux:button>
+        <flux:button wire:click='addSeason' icon="plus-circle" class="cursor-pointer">Thêm học kỳ</flux:button>
     </div>
 
     <flux:separator variant="subtle" />
@@ -44,10 +44,10 @@
                         </td>
                         <td class="px-3 py-3 text-center">
                             <div class="text-center gap-2">
-                                <flux:button class='my-0.5 mx-0.5' variant="primary" icon="square-pen"
+                                <flux:button class='my-0.5 mx-0.5 cursor-pointer' variant="primary" icon="square-pen"
                                     wire:click="editSeason({{ $season->id }})">Sửa
                                 </flux:button>
-                                <flux:button class='my-0.5 mx-0.5' variant="danger" icon="trash"
+                                <flux:button class='my-0.5 mx-0.5 cursor-pointer' variant="danger" icon="trash"
                                     wire:click="deleteSeason({{ $season->id }})">
                                     Xóa
                                 </flux:button>

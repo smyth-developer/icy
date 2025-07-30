@@ -43,16 +43,15 @@
                         Học kỳ
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="book-marked" :href="route('management.courses')"
-                        :current="request()->routeIs('management.courses')" wire:navigate>
-                        Khoá học
+                    <flux:navlist.item icon="book-marked" :href="route('management.programs')"
+                        :current="request()->routeIs('management.programs')" wire:navigate>
+                        Chương trình học
                     </flux:navlist.item>
 
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
-
 
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
                 <flux:profile :name="auth()->user()->name" avatar="{{ auth()->user()->detail?->avatar }}"

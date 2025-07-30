@@ -1,4 +1,3 @@
-@push('title', 'Notes')
 <div class="relative mb-4 w-full">
 
     <div class="flex items-center justify-between mb-6">
@@ -11,7 +10,7 @@
         </div>
 
         <flux:modal.trigger name="create-location">
-            <flux:button>Thêm cơ sở</flux:button>
+            <flux:button icon="plus-circle" class="cursor-pointer">Thêm cơ sở</flux:button>
         </flux:modal.trigger>
     </div>
 
@@ -46,10 +45,10 @@
                         </td>
                         <td class="px-3 py-3 text-center">
                             <div class="text-center gap-2">
-                                <flux:button class="my-0.5" variant="primary" icon="square-pen"
+                                <flux:button class="my-0.5 cursor-pointer" variant="primary" icon="square-pen"
                                     wire:click="editLocation({{ $location->id }})">Sửa
                                 </flux:button>
-                                <flux:button class="my-0.5" variant="danger" icon="trash"
+                                <flux:button class="my-0.5 cursor-pointer" variant="danger" icon="trash"
                                     wire:click="deleteLocation({{ $location->id }})">Xóa
                                 </flux:button>
                             </div>
@@ -71,8 +70,7 @@
     <flux:modal name="delete-location" class="min-w-[22rem]">
         <div class="space-y-6">
             <div>
-                <flux:heading size="lg">Xoá cơ sở?</flux:heading>
-
+                <flux:heading class="font-bold" size="lg">Xoá cơ sở?</flux:heading>
                 <flux:text class="mt-2">
                     <p>Bạn có muốn xoá cơ sở này không?</p>
                     <p>Hành động này không thể hoàn tác.</p>
@@ -86,7 +84,7 @@
                     <flux:button variant="ghost">Huỷ</flux:button>
                 </flux:modal.close>
 
-                <flux:button type="submit" variant="danger" wire:click='deleteLocationConfirm'>Xoá
+                <flux:button type="submit" class="cursor-pointer" variant="danger" wire:click='deleteLocationConfirm'>Xoá
                 </flux:button>
             </div>
         </div>
