@@ -48,11 +48,11 @@
             </div>
 
             {{-- Table content --}}
-            <div class="flex-1 min-w-0">
-                <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div class="flex-1 min-w-0" wire:key="table-{{ $selectedProgramId }}">
+                <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden" wire:key="table-container-{{ $selectedProgramId }}">
                     <div class="overflow-x-auto">
-                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                            <thead class="bg-gray-50 dark:bg-gray-700">
+                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700" wire:key="table-inner-{{ $selectedProgramId }}">
+                            <thead class="bg-gray-50 dark:bg-gray-700" wire:key="thead-{{ $selectedProgramId }}">
                                 <tr>
                                     <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-16">STT</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tên môn học</th>
@@ -60,7 +60,7 @@
                                     <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Thao tác</th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700" wire:key="tbody-{{ $selectedProgramId }}">
                                 @forelse ($subjects as $subject)
                                     <tr wire:key="subject-{{ $subject->id }}"
                                         class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
@@ -96,7 +96,7 @@
                     </div>
                     
                     @if($subjects->hasPages())
-                        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700" wire:key="pagination-{{ $selectedProgramId }}">
                             {{ $subjects->links() }}
                         </div>
                     @endif

@@ -33,9 +33,15 @@ class Subjects extends Component
         $this->resetPage();
     }
 
+    public function updatedSelectedProgramId()
+    {
+        $this->resetPage();
+    }
+
     public function selectProgram($programId)
     {
         $this->selectedProgramId = (int)$programId;
+        $this->resetPage();
         $this->dispatch('update-selected-program', $programId);
         $this->loadPrograms();
     }
