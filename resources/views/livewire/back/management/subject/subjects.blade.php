@@ -1,4 +1,4 @@
-<div class="relative mb-4 w-full" wire:key="subjects-component">
+<div class="relative mb-4 w-full">
 
     <div class="flex items-center justify-between mb-6">
         <div>
@@ -96,7 +96,7 @@
                     </div>
                     
                     @if($subjects->hasPages())
-                        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700" wire:key="pagination-{{ $selectedProgramId }}">
+                        <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                             {{ $subjects->links() }}
                         </div>
                     @endif

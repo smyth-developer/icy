@@ -19,11 +19,13 @@ class Subjects extends Component
     use WithoutUrlPagination;
 
     public $selectedProgramId;
+    public $programs;
 
     public function mount()
     {
         $programId = request('program') ?? Program::first()?->id;
         $this->selectedProgramId = $programId ? (int)$programId : null;
+        $this->loadPrograms();
     }
 
     public function updatingSelectedProgramId()
@@ -35,6 +37,7 @@ class Subjects extends Component
     {
         $this->selectedProgramId = (int)$programId;
         $this->dispatch('update-selected-program', $programId);
+        $this->loadPrograms();
     }
 
     public function addSubject()
@@ -57,7 +60,12 @@ class Subjects extends Component
     {
         $this->selectedProgramId = (int)$programId;
         $this->resetPage();
-        $this->dispatch('$refresh');
+        $this->loadPrograms();
+    }
+
+    public function loadPrograms()
+    {
+        $this->programs = Program::orderBy('ordering', 'asc')->get();
     }
 
     public function render()
@@ -66,11 +74,14 @@ class Subjects extends Component
             ->orderBy('ordering')
             ->paginate(10);
 
-        $programs = app(ProgramRepositoryInterface::class)->getAll(100);
+        // Đảm bảo programs được load
+        if (!$this->programs) {
+            $this->loadPrograms();
+        }
 
         return view('livewire.back.management.subject.subjects', [
             'subjects' => $subjects,
-            'programs' => $programs,
+            'programs' => $this->programs,
             'selectedProgramId' => $this->selectedProgramId,
         ]);
     }
