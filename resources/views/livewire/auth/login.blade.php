@@ -4,15 +4,15 @@
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
 
-    <form wire:submit="login" class="flex flex-col gap-6">
+    <form wire:submit="login" class="flex flex-col gap-6 ">
         <!-- Email Address -->
         <flux:input
             wire:model="login_id"
             :label="__('Địa chỉ Email / Username')"
             type="text"
             required
-            autofocus
             placeholder="email@example.com / Username"
+            labelClass="text-pink-500"
         />
 
         <!-- Password -->
@@ -35,10 +35,10 @@
         </div>
 
         <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Ghi nhớ đăng nhập')" />
+        <flux:checkbox wire:model="remember" class="cursor-pointer" :label="__('Ghi nhớ đăng nhập')" />
 
         <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('Đăng nhập') }}</flux:button>
+            <flux:button variant="primary" color="pink" type="submit" class="w-full cursor-pointer">{{ __('Đăng nhập') }}</flux:button>
         </div>
     </form>
 </div>

@@ -14,13 +14,14 @@ class ActionsProgram extends Component
 
     public $programId;
     public $name;
+    public $english_name;
     public $description;
     public $isEditProgramMode = false;
 
     #[On('add-program')]
     public function addProgram()
     {
-        $this->reset(['programId', 'name', 'description']);
+        $this->reset(['programId', 'name', 'english_name', 'description']);
         Flux::modal('modal-program')->show();
     }
 
@@ -30,8 +31,9 @@ class ActionsProgram extends Component
         app(ProgramRepositoryInterface::class)->create([
             'name' => $this->name,
             'description' => $this->description,
+            'english_name' => $this->english_name,
         ]);
-        $this->reset(['name', 'description', 'programId']);
+        $this->reset(['name', 'description', 'english_name', 'programId']);
         session()->flash('success', 'Thêm chương trình học thành công.');
         Flux::modal('modal-program')->close();
         $this->redirectRoute('management.programs', navigate: true);
@@ -43,6 +45,7 @@ class ActionsProgram extends Component
         $program = app(ProgramRepositoryInterface::class)->getProgramById($id);
         $this->programId = $program->id;
         $this->name = $program->name;
+        $this->english_name = $program->english_name;
         $this->description = $program->description;
         $this->isEditProgramMode = true;
         Flux::modal('modal-program')->show();
@@ -54,6 +57,7 @@ class ActionsProgram extends Component
         app(ProgramRepositoryInterface::class)->update($this->programId, [
             'name' => $this->name,
             'description' => $this->description,
+            'english_name' => $this->english_name,
         ]);
         session()->flash('success', 'Cập nhật chương trình học thành công.');
         Flux::modal('modal-program')->close();

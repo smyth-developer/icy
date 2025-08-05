@@ -5,6 +5,8 @@ use App\Livewire\Notes;
 use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Management\Season\Seasons;
 use App\Livewire\Back\Management\Program\Programs;
+use App\Livewire\Back\Management\Subject\Subjects; 
+use App\Livewire\Back\Management\curriculum\Curricula;
 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -13,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return redirect()->route('login');
+});
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified', 'preventBackHistory'])
@@ -31,6 +33,10 @@ Route::middleware(['auth', 'preventBackHistory'])->group(function () {
         Route::get('seasons', Seasons::class)->name('seasons');
 
         Route::get('programs', Programs::class)->name('programs');
+
+        Route::get('subjects', Subjects::class)->name('subjects');
+
+        Route::get('curricula', Curricula::class)->name('curricula');
 
     });
 

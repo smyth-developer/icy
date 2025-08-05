@@ -7,15 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. Lớp học
      */
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->integer('ordering')->default(1000);
-            $table->foreignId('program_id')->constrained('programs')->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
             $table->string('name');
+            $table->string('code');
             $table->text('description')->nullable();
             $table->timestamps();
         });

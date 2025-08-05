@@ -19,68 +19,85 @@
 
     <livewire:back.management.program.actions-program />
 
-    {{-- table --}}
+    {{-- Main content area --}}
+    <div class="mt-6">
+        <div x-data x-init="const el = document.getElementById('sortable-program');
+        new Sortable(el, {
+            animation: 150,
+            handle: '.drag-handle',
+            onEnd: function() {
+                let orderedIds = [];
+                el.querySelectorAll('[data-id]').forEach(item => {
+                    orderedIds.push(item.getAttribute('data-id'));
+                });
+        
+                $wire.updateProgramOrdering(orderedIds);
+            }
+        });">
 
-    <div x-data x-init="const el = document.getElementById('sortable-program');
-    new Sortable(el, {
-        animation: 150,
-        handle: '.drag-handle',
-        onEnd: function() {
-            let orderedIds = [];
-            el.querySelectorAll('[data-id]').forEach(item => {
-                orderedIds.push(item.getAttribute('data-id'));
-            });
-    
-            $wire.updateProgramOrdering(orderedIds);
-        }
-    });">
-
-        <div class="overflow-x-auto border rounded-xl shadow-md mt-2 bg-gray-100 dark:bg-gray-800">
-            <table class=" min-w-full table-auto divide-y divide-gray-200 dark:divide-gray-700 text-sm">
-                <thead class=" text-gray-700 dark:text-gray-300 font-bold border-b text-xs uppercase tracking-wider">
-                    <tr>
-                        <th class="px-6 py-3 text-center">STT</th>
-                        <th class="px-6 py-3 text-center">Chương trình học</th>
-                        <th class="px-6 py-3 text-center hidden sm:table-cell">Mô tả</th>
-                        <th class="px-6 py-3 text-center">Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody id="sortable-program"
-                    class="bg-white dark:bg-black divide-y divide-gray-200 dark:divide-gray-700">
-                    @forelse ($programs as  $program)
-                        <tr wire:key="role-{{ $program->id }}" data-id="{{ $program->id }}"
-                            class="hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-move drag-handle">
-                            <td class="px-3 py-2 text-gray-900 dark:text-white text-center">{{ $program->ordering }}</td>
-                            <td class="px-3 py-2 text-gray-900 dark:text-white">{{ $program->name }}</td>
-                            <td class="px-3 py-2 text-gray-900 dark:text-white hidden sm:table-cell">
-                                {{ $program->description }}</td>
-                            </td>
-                            <td class="px-3 py-2 text-center">
-                                <div class="text-center gap-2">
-                                    <flux:button class="my-0.5 cursor-pointer" variant="primary" icon="square-pen"
-                                        wire:click="editProgram({{ $program->id }})">Sửa
-                                    </flux:button>
-                                    <flux:button class="my-0.5 cursor-pointer" variant="primary" color="pink" icon="trash"
-                                        wire:click="deleteProgram({{ $program->id }})">Xóa
-                                    </flux:button>
-                                </div>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="px-6 py-5 text-center text-red-500">
-                                <flux:text class="flex items-center justify-center text-red-500">
-                                    <flux:icon.exclamation-triangle class="mr-1" />Không có khoá học nào
-                                </flux:text>
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-
-
-            <div class="my-2 mx-3">
-                {{ $programs->links() }}
+            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+                <div class="overflow-x-auto">
+                    <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-16">STT</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Chương trình học</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden 2xl:table-cell">Mô tả</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sortable-program" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @forelse ($programs as $program)
+                                <tr wire:key="program-{{ $program->id }}" data-id="{{ $program->id }}"
+                                    class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 cursor-move drag-handle">
+                                    <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-center">
+                                        {{ $program->ordering }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                        <div class="flex items-center">
+                                            <span class="font-medium">{{ $program->name }}</span>
+                                            <span class="ml-2 text-xs text-pink-500 dark:text-pink-400 font-medium">
+                                                ({{ $program->english_name }})
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-white hidden 2xl:table-cell">
+                                        <div class="max-w-xs truncate" title="{{ $program->description }}">
+                                            {{ $program->description }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <flux:button size="sm" variant="primary" icon="square-pen"
+                                                wire:click="editProgram({{ $program->id }})" class="cursor-pointer">
+                                                Sửa
+                                            </flux:button>
+                                            <flux:button size="sm" variant="danger" icon="trash"
+                                                wire:click="deleteProgram({{ $program->id }})" class="cursor-pointer">
+                                                Xóa
+                                            </flux:button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                        <div class="flex flex-col items-center">
+                                            <flux:icon.exclamation-triangle class="w-8 h-8 text-gray-400 dark:text-gray-500 mb-2" />
+                                            <div class="text-sm">Không có khoá học nào</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+                
+                @if($programs->hasPages())
+                    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                        {{ $programs->links() }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -16,7 +16,7 @@ class ProgramRepository implements ProgramRepositoryInterface
     protected function prepareData(array $data): array
     {
         $data['name'] = trim($data['name']);
-        $data['description'] = trim($data['description']);
+        $data['english_name'] = trim($data['english_name']);
         return $data;
     }
 
@@ -50,7 +50,6 @@ class ProgramRepository implements ProgramRepositoryInterface
         try {
             $program = $this->getProgramById($id);
             $program->delete();
-
             $remainingIds = Program::orderBy('ordering')->pluck('id')->toArray();
             $this->updateOrdering($remainingIds);
         } catch (Throwable $e) {

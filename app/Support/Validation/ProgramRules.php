@@ -9,6 +9,7 @@ class ProgramRules
         return [
             'name' => ['required', 'string', 'min:3', 'max:255', 'unique:programs,name' . ($id ? ",$id" : ''),'regex:/^[\p{L}0-9\s]+$/u'],
             'description' => ['nullable', 'string', 'max:500'],
+            'english_name' => ['nullable','string', 'max:100']
         ];
     }
 
@@ -21,6 +22,7 @@ class ProgramRules
             'name.unique' => 'Tên chương trình học này đã được sử dụng.',
             'name.regex' => 'Tên chương trình học chỉ không được chứa ký tự đặc biệt.',
             'description.max' => 'Mô tả không được vượt quá 500 ký tự.',
+            'english_name.max' => 'Tên tiếng anh không được vượt quá 100 ký tự.',
         ];
     }
 }

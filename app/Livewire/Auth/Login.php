@@ -11,8 +11,10 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\Attributes\Title;
 
 #[Layout('components.layouts.auth')]
+#[Title('Đăng nhập')]
 class Login extends Component
 {
     #[Validate('required|string')]

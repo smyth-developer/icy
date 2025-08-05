@@ -15,38 +15,47 @@ class ProgramSeeder extends Seeder
     {
         $programs = [
             [
-                'name' => 'Anh ngữ mẫu giáo',
+            'name' => 'Anh ngữ mẫu giáo',
+            'english_name' => 'Kindergarten',
             ],
             [
-                'name' => 'Anh ngữ thiếu nhi',
+            'name' => 'Anh ngữ thiếu nhi',
+            'english_name' => 'Kids',
             ],
             [
-                'name' => 'Anh ngữ thiếu niên',
+            'name' => 'Anh ngữ thiếu niên',
+            'english_name' => "Teenager's English",
             ],
             [
-                'name' => 'Anh ngữ giao tiếp',
+            'name' => 'Anh ngữ giao tiếp',
+            'english_name' => 'English for Communication',
             ],
             [
-                'name' => 'Chứng chỉ IELTS',
+            'name' => 'Anh ngữ doanh nghiệp',
+            'english_name' => 'English for Business',
             ],
             [
-                'name' => 'Luyện thi vào lớp 10',
+            'name' => 'Chứng chỉ IELTS',
+            'english_name' => 'Ielts Achievers',
             ],
             [
-                'name' => 'Luyện thi THPT Quốc Gia',
+            'name' => 'Luyện thi vào lớp 10',
+            'english_name' => 'Highschool Entrance',
             ],
             [
-                'name' => 'Anh ngữ trường học',
+            'name' => 'Luyện thi THPT Quốc Gia',
+            'english_name' => 'Higher Education Entrance',
             ],
             [
-                'name' => 'Anh ngữ doanh nghiệp',
+            'name' => 'Anh ngữ trường học',
+            'english_name' => 'English for Schools',
             ]
         ];
 
         foreach ($programs as $program) {
             app(ProgramRepositoryInterface::class)->create([
                 'name' => $program['name'],
-                'description' => 'Khóa học ' . $program['name']
+                'english_name' => $program['english_name']
             ]);
         }
     }

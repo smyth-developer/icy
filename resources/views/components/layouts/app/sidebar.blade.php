@@ -5,7 +5,7 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800">
+<body class="min-h-screen bg-white dark:bg-zinc-800 ">
     <div class="flex min-h-screen">
         {{-- Sidebar bên trái --}}
         <flux:sidebar sticky stashable
@@ -48,6 +48,16 @@
                         Chương trình học
                     </flux:navlist.item>
 
+                    <flux:navlist.item icon="book-open" :href="route('management.subjects')"
+                        :current="request()->routeIs('management.subjects')" wire:navigate>
+                        Môn học
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="book-open-text" :href="route('management.curricula')"
+                        :current="request()->routeIs('management.curricula')" wire:navigate>
+                        Giáo trình
+                    </flux:navlist.item>
+
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -56,7 +66,7 @@
             <flux:dropdown class="hidden lg:block" position="bottom" align="start">
                 <flux:profile :name="auth()->user()->name" avatar="{{ auth()->user()->detail?->avatar }}"
                     icon:trailing="chevrons-up-down" />
-                <flux:menu >
+                <flux:menu>
                     <flux:menu.radio.group>
                         <div class="p-0 text-sm font-normal">
                             <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
@@ -97,11 +107,11 @@
                 <flux:dropdown position="top" align="end">
                     <flux:profile avatar="{{ auth()->user()->detail?->avatar }}" icon-trailing="chevron-down" />
 
-                    <flux:menu >
+                    <flux:menu>
                         <flux:menu.radio.group>
                             <div class="p-0 text-sm font-normal">
                                 <div class="flex items-center gap-2 px-1 py-1.5 text-start text-sm">
-                                   <flux:avatar src="{{ auth()->user()->detail?->avatar }}" />
+                                    <flux:avatar src="{{ auth()->user()->detail?->avatar }}" />
                                     <div class="grid flex-1 text-start text-sm leading-tight">
                                         <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
                                         <span class="truncate text-xs">{{ auth()->user()->email }}</span>
@@ -139,7 +149,7 @@
             @include('components.layouts.app.footer')
         </div>
     </div>
-
+    @stack('scripts')
     @fluxScripts
 </body>
 

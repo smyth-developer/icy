@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             LocationSeeder::class,
             RoleSeeder::class,
             ProgramSeeder::class,
+            SubjectSeeder::class,
         ]);
     }
 }
