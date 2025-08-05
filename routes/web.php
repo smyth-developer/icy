@@ -6,6 +6,7 @@ use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Management\Season\Seasons;
 use App\Livewire\Back\Management\Program\Programs;
 use App\Livewire\Back\Management\Subject\Subjects; 
+use App\Livewire\Back\Management\Course\Courses;
 use App\Livewire\Back\Management\curriculum\Curricula;
 
 use App\Livewire\Settings\Appearance;
@@ -35,6 +36,8 @@ Route::middleware(['auth', 'preventBackHistory'])->group(function () {
         Route::get('programs', Programs::class)->name('programs');
 
         Route::get('subjects', Subjects::class)->name('subjects');
+
+        Route::get('courses', Courses::class)->name('courses');
 
         Route::get('curricula', Curricula::class)->name('curricula');
 

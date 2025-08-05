@@ -35,25 +35,25 @@
             }
         });">
 
-            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+            <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
                 <div class="overflow-x-auto">
-                    <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                        <thead class="bg-gray-50 dark:bg-gray-700">
+                    <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
+                        <thead class="bg-gray-50 dark:bg-gray-800">
                             <tr>
-                                <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-16">STT</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Chương trình học</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden 2xl:table-cell">Mô tả</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Thao tác</th>
+                                <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">STT</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-30">Chương trình học</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell">Mô tả</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody id="sortable-program" class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        <tbody id="sortable-program" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                             @forelse ($programs as $program)
                                 <tr wire:key="program-{{ $program->id }}" data-id="{{ $program->id }}"
-                                    class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 cursor-move drag-handle">
-                                    <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-center">
+                                    class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 cursor-move drag-handle">
+                                    <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center">
                                         {{ $program->ordering }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                         <div class="flex items-center">
                                             <span class="font-medium">{{ $program->name }}</span>
                                             <span class="ml-2 text-xs text-pink-500 dark:text-pink-400 font-medium">
@@ -61,8 +61,8 @@
                                             </span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-white hidden 2xl:table-cell">
-                                        <div class="max-w-xs truncate" title="{{ $program->description }}">
+                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300 hidden 2xl:table-cell">
+                                        <div class=" truncate" title="{{ $program->description }}">
                                             {{ $program->description }}
                                         </div>
                                     </td>
@@ -83,7 +83,7 @@
                                 <tr>
                                     <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
                                         <div class="flex flex-col items-center">
-                                            <flux:icon.exclamation-triangle class="w-8 h-8 text-gray-400 dark:text-gray-500 mb-2" />
+                                            <flux:icon.exclamation-triangle class="w-8 h-8 text-gray-400 dark:text-gray-600 mb-2" />
                                             <div class="text-sm">Không có khoá học nào</div>
                                         </div>
                                     </td>
@@ -94,7 +94,7 @@
                 </div>
                 
                 @if($programs->hasPages())
-                    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                         {{ $programs->links() }}
                     </div>
                 @endif

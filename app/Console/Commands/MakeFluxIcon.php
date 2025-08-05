@@ -25,6 +25,7 @@ class MakeFluxIcon extends Command
         File::ensureDirectoryExists(dirname($path));
 
         File::put($path, <<<BLADE
+            @php \$attributes = \$unescapedForwardedAttributes ?? \$attributes; @endphp
             @props([
                 'variant' => 'outline', // Các biến thể: outline, mini, micro
             ])

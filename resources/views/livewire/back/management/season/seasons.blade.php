@@ -21,24 +21,24 @@
 
     {{-- Main content area --}}
     <div class="mt-6">
-        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+        <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
-                <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
+                <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
+                    <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-16">Mã</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell">Tên học kỳ</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Trạng thái</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Thao tác</th>
+                            <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">Mã</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden sm:table-cell">Tên học kỳ</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Trạng thái</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                         @forelse ($seasons as $season)
-                            <tr wire:key="season-{{ $season->id }}" class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-center font-medium">
+                            <tr wire:key="season-{{ $season->id }}" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center font-medium">
                                     {{ $season->code }}
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white hidden sm:table-cell">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 hidden sm:table-cell">
                                     {{ $season->name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
@@ -63,7 +63,7 @@
                             <tr>
                                 <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
                                     <div class="flex flex-col items-center">
-                                        <flux:icon.calendar class="w-8 h-8 text-gray-400 dark:text-gray-500 mb-2" />
+                                        <flux:icon.calendar class="w-8 h-8 text-gray-400 dark:text-gray-600 mb-2" />
                                         <div class="text-sm">Không có học kỳ nào</div>
                                     </div>
                                 </td>
@@ -74,7 +74,7 @@
             </div>
             
             @if($seasons->hasPages())
-                <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                     {{ $seasons->links() }}
                 </div>
             @endif

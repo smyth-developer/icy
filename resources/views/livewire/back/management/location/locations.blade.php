@@ -23,29 +23,29 @@
 
     {{-- Main content area --}}
     <div class="mt-6">
-        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
+        <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
-                <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                    <thead class="bg-gray-50 dark:bg-gray-700">
+                <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
+                    <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Tên cơ sở</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Địa chỉ</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden sm:table-cell">Người tạo</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Thao tác</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Tên cơ sở</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Địa chỉ</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden sm:table-cell">Người tạo</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                         @forelse ($locations as $location)
-                            <tr wire:key="location-{{ $location->id }}" class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white font-medium">
+                            <tr wire:key="location-{{ $location->id }}" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
                                     {{ $location->name }}
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
                                     <div class="max-w-xs">
                                         {{ $location->address }}
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white text-center hidden sm:table-cell">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300 text-center hidden sm:table-cell">
                                     {{ $location->createdBy->name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
@@ -65,7 +65,7 @@
                             <tr>
                                 <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
                                     <div class="flex flex-col items-center">
-                                        <flux:icon.map-pin class="w-8 h-8 text-gray-400 dark:text-gray-500 mb-2" />
+                                        <flux:icon.map-pin class="w-8 h-8 text-gray-400 dark:text-gray-600 mb-2" />
                                         <div class="text-sm">Không có cơ sở nào</div>
                                     </div>
                                 </td>
@@ -76,7 +76,7 @@
             </div>
             
             @if($locations->hasPages())
-                <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                     {{ $locations->links() }}
                 </div>
             @endif

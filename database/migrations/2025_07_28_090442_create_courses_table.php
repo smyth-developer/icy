@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->integer('ordering')->default(1000);
-            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('location_id')->constrained('locations')->onDelete('restrict');
+            $table->foreignId('season_id')->constrained('seasons')->onDelete('restrict');
+            $table->foreignId('subject_id')->constrained('subjects')->onDelete('restrict');
             $table->string('name');
-            $table->string('code');
             $table->text('description')->nullable();
             $table->timestamps();
         });

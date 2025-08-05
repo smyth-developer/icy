@@ -59,8 +59,8 @@
                 <flux:text class="mt-2">
                     <p>Bạn có muốn xoá môn học này không?</p>
                     <p>Hành động này không thể hoàn tác.</p>
+                </flux:text>
             </div>
-            </flux:text>
 
             <div class="flex gap-2">
                 <flux:spacer />

@@ -38,7 +38,7 @@
                         {{ __('dashboard.location') }}
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="calendar-cog" :href="route('management.seasons')"
+                    <flux:navlist.item icon="calendar" :href="route('management.seasons')"
                         :current="request()->routeIs('management.seasons')" wire:navigate>
                         Học kỳ
                     </flux:navlist.item>
@@ -51,6 +51,11 @@
                     <flux:navlist.item icon="book-open" :href="route('management.subjects')"
                         :current="request()->routeIs('management.subjects')" wire:navigate>
                         Môn học
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="academic-cap" :href="route('management.courses')"
+                        :current="request()->routeIs('management.courses')" wire:navigate>
+                        Khoá học
                     </flux:navlist.item>
 
                     <flux:navlist.item icon="book-open-text" :href="route('management.curricula')"
