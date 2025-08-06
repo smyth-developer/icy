@@ -15,7 +15,7 @@
 
     <flux:separator variant="subtle" />
 
-    <x-alert-toastr />
+
 
     <livewire:back.management.program.actions-program />
 

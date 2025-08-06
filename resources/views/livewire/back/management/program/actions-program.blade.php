@@ -55,7 +55,7 @@
                     <flux:button class="cursor-pointer" variant="ghost">Huỷ</flux:button>
                 </flux:modal.close>
 
-                <flux:button type="submit" variant="danger" class="cursor-pointer" wire:click='deleteProgramConfirm'>
+                <flux:button variant="danger" class="cursor-pointer" wire:click='deleteProgramConfirm'>
                     Xoá
                 </flux:button>
             </div>

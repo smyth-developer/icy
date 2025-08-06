@@ -63,7 +63,7 @@ class SubjectRepository implements SubjectRepositoryInterface
         return $subject;
     }
 
-    protected function updateOrdering(array $ids): void
+    public function updateOrdering(array $ids): void
     {
         foreach ($ids as $index => $id) {
             Subject::where('id', $id)->update(['ordering' => $index + 1]);

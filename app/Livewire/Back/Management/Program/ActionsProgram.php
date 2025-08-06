@@ -7,7 +7,7 @@ use Livewire\Attributes\On;
 use Flux\Flux;
 use App\Repositories\Contracts\ProgramRepositoryInterface;
 use App\Support\Validation\ProgramRules;
-use Throwable;
+
 
 class ActionsProgram extends Component
 {
@@ -73,16 +73,11 @@ class ActionsProgram extends Component
 
     public function deleteProgramConfirm()
     {
-        try {
-            app(ProgramRepositoryInterface::class)->delete($this->programId);
-            session()->flash('success', 'Xoá chương trình học thành công.');
-            $this->reset(['programId']);
-        } catch (Throwable $e) {
-            session()->flash('error', 'Đã có lỗi xảy ra. Vui lòng thử lại sau.');
-            return;
-        }
-        Flux::modal('delete-program')->close();
+        app(ProgramRepositoryInterface::class)->delete($this->programId);
+        session()->flash('success', 'Xoá chương trình học thành công.');
+        $this->reset(['programId']);
         $this->redirectRoute('management.programs', navigate: true);
+        Flux::modal('delete-program')->close();
     }
 
 

@@ -7,6 +7,7 @@ use App\Models\Program;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Exception;
 use Throwable;
+use Illuminate\Database\QueryException;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
@@ -49,12 +50,18 @@ class ProgramRepository implements ProgramRepositoryInterface
     {
         try {
             $program = $this->getProgramById($id);
+
+            if ($program->subjects()->count() > 0) {
+                session()->flash('error', "Không thể xóa chương trình học này vì có môn học đang sử dụng.");
+                return;
+            }
+
             $program->delete();
             $remainingIds = Program::orderBy('ordering')->pluck('id')->toArray();
             $this->updateOrdering($remainingIds);
         } catch (Throwable $e) {
-            report($e);
-            throw new Exception("Lỗi khi xoá chương trình: " . $e->getMessage());
+            session()->flash('error', "Lỗi không xác định: " . $e->getMessage());
+            return;
         }
     }
 

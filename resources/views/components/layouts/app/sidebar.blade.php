@@ -149,6 +149,9 @@
             <main class="flex-grow p-4">
                 {{ $slot }}
             </main>
+            
+            {{-- Alert Messages --}}
+            <x-alert-toastr />
 
             {{-- Footer --}}
             @include('components.layouts.app.footer')

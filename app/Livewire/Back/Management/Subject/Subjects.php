@@ -74,6 +74,15 @@ class Subjects extends Component
         $this->programs = Program::orderBy('ordering', 'asc')->get();
     }
 
+    public function updateSubjectOrdering(array $orderedIds)
+    {
+        app(SubjectRepositoryInterface::class)->updateOrdering(
+            $orderedIds
+        );
+        session()->flash('success', 'Sắp xếp môn học thành công.');
+        $this->redirectRoute('management.subjects', navigate: true);
+    }
+
     public function render()
     {
         $subjects = Subject::where('program_id', $this->selectedProgramId)
