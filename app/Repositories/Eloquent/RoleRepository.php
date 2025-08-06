@@ -12,7 +12,7 @@ class RoleRepository implements RoleRepositoryInterface
 
     protected function prepareDataBeforeCreate(array $data): array
     {
-        $data['name'] = ucwords(strtolower(trim($data['name'])));
+        $data['name'] = strtoupper(trim($data['name']));
         $data['description'] = trim($data['description']);
         $data['created_by'] = $data['created_by'] ?? Auth::id();
         return $data;
@@ -20,7 +20,7 @@ class RoleRepository implements RoleRepositoryInterface
 
     protected function prepareDataBeforeUpdate(array $data): array
     {
-        $data['name'] = ucwords(strtolower(trim($data['name'])));
+        $data['name'] = strtoupper(trim($data['name']));
         $data['description'] = trim($data['description']);
         return $data;
     }

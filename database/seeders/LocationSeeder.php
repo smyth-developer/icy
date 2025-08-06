@@ -21,9 +21,16 @@ class LocationSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'Ho Chi Minh',
+                'address' => 'Tan Binh, Ho Chi Minh',
+                'created_by' => '1',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ];
 
-        foreach ($location as $item){
+        foreach ($location as $item) {
             app(LocationRepositoryInterface::class)->create($item);
         }
     }

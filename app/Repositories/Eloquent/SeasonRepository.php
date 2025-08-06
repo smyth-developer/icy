@@ -44,6 +44,20 @@ class SeasonRepository implements SeasonRepositoryInterface
 
     public function update(int $id, array $data)
     {
+
+        //Check status finished
+        if ($data['status'] == 'finished') {
+            session()->flash('error', 'Mùa này đã kết thúc');
+            return;
+        }
+
+        //Check status ongoing
+        if ($data['status'] == 'ongoing') {
+            session()->flash('error', 'Mùa này đang diễn ra');
+            return;
+        }
+
+        //Check status upcoming
         $season = $this->getSeasonById($id);
         $season->update($data);
         return $season;
@@ -51,7 +65,21 @@ class SeasonRepository implements SeasonRepositoryInterface
 
     public function delete(int $id)
     {
-        return $this->getSeasonById($id)->delete();
+        $season = $this->getSeasonById($id);
+        //Check status finished
+        if ($season->status == 'finished') {
+            session()->flash('error', 'Mùa này đã kết thúc');
+            return;
+        }
+
+        //Check status ongoing
+        if ($season->status == 'ongoing') {
+            session()->flash('error', 'Mùa này đang diễn ra');
+            return;
+        }
+
+        //Check status upcoming
+        return $season->delete();
     }
 
     public function showName(string $name): string

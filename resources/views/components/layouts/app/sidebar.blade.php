@@ -78,6 +78,16 @@
                     </flux:navlist.item>
 
                 </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Employee')" class="grid">
+
+                    <flux:navlist.item icon="user-group" :href="route('admin.personnel.staff')"
+                        :current="request()->routeIs('admin.personnel.staff')" wire:navigate>
+                        Nhân viên
+                    </flux:navlist.item>
+
+                </flux:navlist.group>
+
             </flux:navlist>
 
             <flux:spacer />

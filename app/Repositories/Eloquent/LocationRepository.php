@@ -51,6 +51,12 @@ class LocationRepository implements LocationRepositoryInterface
 
     public function delete(int $id)
     {
+        //check if location has users
+        if (Location::find($id)->users->count() > 0) {
+            session()->flash('error', 'Cơ sở này vẫn còn nhân viên');
+            return;
+        }
+
         return $this->getLocationById($id)->delete();
     }
 

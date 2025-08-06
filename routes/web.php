@@ -12,6 +12,7 @@ use App\Livewire\Back\Management\curriculum\Curricula;
 use App\Livewire\Back\Access\Role\Roles;
 use App\Livewire\Back\Access\Permission\Permissions;
 
+use App\Livewire\Back\Personnel\Employee\Staff;
 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -53,6 +54,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('permissions', Permissions::class)->name('permissions');
         });
 
+        Route::prefix('personnel')->name('personnel.')->group(function () {
+            Route::get('staff', Staff::class)->name('staff');
+        });
 
         Route::redirect('settings', 'settings/profile');
 
