@@ -84,7 +84,7 @@
                                             Thao tác</th>
                                     </tr>
                                 </thead>
-                                <tbody id="sortable-subject" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800"
+                                <tbody  id="sortable-subject" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800"
                                     wire:key="tbody-{{ $selectedProgramId }}">
                                     @forelse ($subjects as $subject)
                                         <tr wire:key="subject-{{ $subject->id }}" data-id="{{ $subject->id }}"

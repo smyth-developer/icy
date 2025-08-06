@@ -69,3 +69,30 @@ select:focus[data-flux-control] {
 .form-group div[role="alert"] {
     margin-top: 0px !important;
 }
+
+/* Sortable styles */
+.sortable-ghost {
+    opacity: 0.5;
+    background: #f3f4f6 !important;
+}
+
+.sortable-chosen {
+    background: #fef3c7 !important;
+}
+
+.sortable-drag {
+    background: #fbbf24 !important;
+    transform: rotate(5deg);
+}
+
+.dark .sortable-ghost {
+    background: #374151 !important;
+}
+
+.dark .sortable-chosen {
+    background: #92400e !important;
+}
+
+.dark .sortable-drag {
+    background: #f59e0b !important;
+}
