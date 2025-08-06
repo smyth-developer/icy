@@ -10,6 +10,7 @@ class Role extends Model
         'name',
         'description',
         'type',
+        'created_by',
     ];
 
     public function createdBy()

@@ -14,8 +14,6 @@
     </div>
 
     <flux:separator variant="subtle" />
-    {{-- alert toastr --}}
-    <x-alert-toastr />
 
     <livewire:back.management.subject.actions-subject />
 

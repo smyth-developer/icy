@@ -38,7 +38,7 @@ class Programs extends Component
             $orderedIds
         );
         session()->flash('success', 'Sắp xếp chương trình học thành công.');
-        $this->redirectRoute('management.programs', navigate: true);
+        $this->redirectRoute('admin.management.programs', navigate: true);
     }
 
     public function render()

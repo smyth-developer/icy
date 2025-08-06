@@ -25,9 +25,15 @@ class RoleRepository implements RoleRepositoryInterface
         return $data;
     }
 
-    public function getAll()
+    public function getAll($perPage = null)
     {
-        return Role::with('createdBy:id,name')->orderBy('id', 'asc')->get();
+        $query = Role::with('createdBy:id,name')->orderBy('id', 'asc');
+        
+        if ($perPage) {
+            return $query->paginate($perPage);
+        }
+        
+        return $query->get();
     }
 
     public function create(array $data)

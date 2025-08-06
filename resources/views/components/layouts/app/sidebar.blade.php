@@ -24,8 +24,8 @@
                         {{ __('dashboard.Dashboard') }}
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="notebook-pen" :href="route('management.notes')"
-                        :current="request()->routeIs('management.notes')" title="Ghi chú" wire:navigate>
+                    <flux:navlist.item icon="notebook-pen" :href="route('admin.management.notes')"
+                        :current="request()->routeIs('admin.management.notes')" title="Ghi chú" wire:navigate>
                         {{ __('dashboard.Notes') }}
                     </flux:navlist.item>
 
@@ -33,34 +33,48 @@
 
                 <flux:navlist.group :heading="__('Management')" class="grid">
 
-                    <flux:navlist.item icon="map-pin-house" :href="route('management.locations')"
-                        :current="request()->routeIs('management.locations')" wire:navigate>
+                    <flux:navlist.item icon="map-pin-house" :href="route('admin.management.locations')"
+                        :current="request()->routeIs('admin.management.locations')" wire:navigate>
                         {{ __('dashboard.location') }}
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="calendar" :href="route('management.seasons')"
-                        :current="request()->routeIs('management.seasons')" wire:navigate>
+                    <flux:navlist.item icon="calendar" :href="route('admin.management.seasons')"
+                        :current="request()->routeIs('admin.management.seasons')" wire:navigate>
                         Học kỳ
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="book-marked" :href="route('management.programs')"
-                        :current="request()->routeIs('management.programs')" wire:navigate>
+                    <flux:navlist.item icon="book-marked" :href="route('admin.management.programs')"
+                        :current="request()->routeIs('admin.management.programs')" wire:navigate>
                         Chương trình học
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="book-open" :href="route('management.subjects')"
-                        :current="request()->routeIs('management.subjects')" wire:navigate>
+                    <flux:navlist.item icon="book-open" :href="route('admin.management.subjects')"
+                        :current="request()->routeIs('admin.management.subjects')" wire:navigate>
                         Môn học
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="academic-cap" :href="route('management.courses')"
-                        :current="request()->routeIs('management.courses')" wire:navigate>
+                    <flux:navlist.item icon="academic-cap" :href="route('admin.management.courses')"
+                        :current="request()->routeIs('admin.management.courses')" wire:navigate>
                         Khoá học
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="book-open-text" :href="route('management.curricula')"
-                        :current="request()->routeIs('management.curricula')" wire:navigate>
+                    <flux:navlist.item icon="book-open-text" :href="route('admin.management.curricula')"
+                        :current="request()->routeIs('admin.management.curricula')" wire:navigate>
                         Giáo trình
+                    </flux:navlist.item>
+
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Access')" class="grid">
+
+                    <flux:navlist.item icon="user-lock" :href="route('admin.access.roles')"
+                        :current="request()->routeIs('admin.access.roles')" wire:navigate>
+                        Chức vụ
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="shield-check" :href="route('admin.access.permissions')"
+                        :current="request()->routeIs('admin.access.permissions')" wire:navigate>
+                        Quyền
                     </flux:navlist.item>
 
                 </flux:navlist.group>
@@ -87,7 +101,7 @@
                     <flux:menu.separator />
 
                     <flux:menu.radio.group>
-                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
+                        <flux:menu.item :href="route('admin.settings.profile')" icon="cog" wire:navigate>
                             Cài đặt</flux:menu.item>
                     </flux:menu.radio.group>
 
@@ -128,7 +142,7 @@
                         <flux:menu.separator />
 
                         <flux:menu.radio.group>
-                            <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>
+                            <flux:menu.item :href="route('admin.settings.profile')" icon="cog" wire:navigate>
                                 Cài đặt</flux:menu.item>
                         </flux:menu.radio.group>
 
@@ -149,7 +163,7 @@
             <main class="flex-grow p-4">
                 {{ $slot }}
             </main>
-            
+
             {{-- Alert Messages --}}
             <x-alert-toastr />
 

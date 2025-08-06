@@ -7,16 +7,13 @@ use Livewire\Attributes\Title;
 
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
+use App\Repositories\Contracts\CourseRepositoryInterface;
 
 #[Title('Khoá học')]
 class Courses extends Component
 {
     use WithPagination, WithoutUrlPagination;
 
-    public function updateCourseOrdering(array $orderedIds)
-    {
-        //$courseRepository = app(CourseRepositoryInterface::class)->updateCourseOrdering($orderedIds);
-    }
 
     public function addCourse()
     {
@@ -25,8 +22,7 @@ class Courses extends Component
 
     public function render()
     {
-        $courses = [];
-        //$courses = app(CourseRepositoryInterface::class)->getAll(5);
+        $courses = app(CourseRepositoryInterface::class)->getAll(5);
         return view('livewire.back.management.course.courses',[
             'courses' => $courses,
         ]);

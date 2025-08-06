@@ -16,9 +16,6 @@
 
     <livewire:back.management.season.actions-season />
 
-    {{-- alert toastr --}}
-    <x-alert-toastr />
-
     {{-- Main content area --}}
     <div class="mt-6">
         <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('role_permission', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // Tên chức vụ
-            $table->string('description'); // Mô tả chức vụ
-            $table->enum('type', ['system', 'custom'])->default('custom');
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('role_id')->constrained()->onDelete('cascade');
+            $table->foreignId('permission_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            
+            $table->unique(['role_id', 'permission_id']);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_permission');
     }
 };

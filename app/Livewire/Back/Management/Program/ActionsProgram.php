@@ -36,7 +36,7 @@ class ActionsProgram extends Component
         $this->reset(['name', 'description', 'english_name', 'programId']);
         session()->flash('success', 'Thêm chương trình học thành công.');
         Flux::modal('modal-program')->close();
-        $this->redirectRoute('management.programs', navigate: true);
+        $this->redirectRoute('admin.management.programs', navigate: true);
     }
 
     #[On('edit-program')]
@@ -61,7 +61,7 @@ class ActionsProgram extends Component
         ]);
         session()->flash('success', 'Cập nhật chương trình học thành công.');
         Flux::modal('modal-program')->close();
-        $this->redirectRoute('management.programs', navigate: true);
+        $this->redirectRoute('admin.management.programs', navigate: true);
     }
 
     #[On('delete-program')]
@@ -76,7 +76,7 @@ class ActionsProgram extends Component
         app(ProgramRepositoryInterface::class)->delete($this->programId);
         session()->flash('success', 'Xoá chương trình học thành công.');
         $this->reset(['programId']);
-        $this->redirectRoute('management.programs', navigate: true);
+        $this->redirectRoute('admin.management.programs', navigate: true);
         Flux::modal('delete-program')->close();
     }
 

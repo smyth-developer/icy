@@ -9,17 +9,12 @@
             </flux:breadcrumbs>
         </div>
 
-        <flux:modal.trigger name="create-location">
-            <flux:button icon="plus-circle" class="cursor-pointer">Thêm cơ sở</flux:button>
-        </flux:modal.trigger>
+        <flux:button icon="plus-circle" class="cursor-pointer" wire:click="addLocation">Thêm cơ sở</flux:button>
     </div>
 
     <flux:separator variant="subtle" />
 
-    <x-alert-toastr />
-
-    <livewire:back.management.location.create-location />
-    <livewire:back.management.location.edit-location />
+    <livewire:back.management.location.actions-location />
 
     {{-- Main content area --}}
     <div class="mt-6">
@@ -56,7 +51,7 @@
                                         </flux:button>
                                         <flux:button size="sm" variant="danger" icon="trash"
                                             wire:click="deleteLocation({{ $location->id }})" class="cursor-pointer">
-                                            Xóa
+                                            Xoá
                                         </flux:button>
                                     </div>
                                 </td>
@@ -82,28 +77,5 @@
             @endif
         </div>
     </div>
-
-    <flux:modal name="delete-location" class="min-w-[22rem]">
-        <div class="space-y-6">
-            <div>
-                <flux:heading class="font-bold" size="lg">Xoá cơ sở?</flux:heading>
-                <flux:text class="mt-2">
-                    <p>Bạn có muốn xoá cơ sở này không?</p>
-                    <p>Hành động này không thể hoàn tác.</p>
-                </flux:text>
-            </div>
-
-            <div class="flex gap-2">
-                <flux:spacer />
-
-                <flux:modal.close>
-                    <flux:button variant="ghost">Huỷ</flux:button>
-                </flux:modal.close>
-
-                <flux:button type="submit" class="cursor-pointer" variant="danger" wire:click='deleteLocationConfirm'>Xoá
-                </flux:button>
-            </div>
-        </div>
-    </flux:modal>
 
 </div>

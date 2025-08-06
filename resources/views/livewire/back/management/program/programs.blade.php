@@ -15,8 +15,6 @@
 
     <flux:separator variant="subtle" />
 
-
-
     <livewire:back.management.program.actions-program />
 
     {{-- Main content area --}}

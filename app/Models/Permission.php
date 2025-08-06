@@ -12,6 +12,10 @@ class Permission extends Model
         'isShow',
     ];
 
+    protected $casts = [
+        'isShow' => 'boolean',
+    ];
+
     /**
      * Get the roles associated with the permission.
      */
