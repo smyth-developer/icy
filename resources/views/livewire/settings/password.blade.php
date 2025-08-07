@@ -1,4 +1,4 @@
-<section class="w-full">
+<section class="max-w-3xl">
     @include('partials.settings-heading')
 
     <x-settings.layout :heading="__('Cập nhật mật khẩu')" :subheading="__('Đảm bảo tài khoản của bạn sử dụng mật khẩu dài và ngẫu nhiên để đảm bảo an toàn')">

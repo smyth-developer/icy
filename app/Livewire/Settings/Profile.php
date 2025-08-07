@@ -16,6 +16,10 @@ class Profile extends Component
 
     public string $email = '';
 
+    public string $phone = '';
+
+    public string $address = '';
+
     /**
      * Mount the component.
      */
@@ -23,6 +27,8 @@ class Profile extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->phone = Auth::user()->detail->phone;
+        $this->address = Auth::user()->detail->address;
     }
 
     /**
@@ -34,7 +40,8 @@ class Profile extends Component
 
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-
+            'phone' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',

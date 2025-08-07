@@ -12,6 +12,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cookie;
 
 #[Layout('components.layouts.auth')]
 #[Title('Đăng nhập')]
@@ -51,6 +53,14 @@ class Login extends Component
 
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
+
+        $currentSessionId = session()->getId();
+        DB::table('sessions')
+            ->where('user_id', Auth::user()->id)
+            ->where('id', '!=', $currentSessionId)
+            ->delete();
+
+        Cookie::queue('remember_web_' . sha1(config('app.key')), Cookie::get('remember_web_' . sha1(config('app.key'))), 60 * 24 * 7);
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }

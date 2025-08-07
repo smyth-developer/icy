@@ -15,7 +15,7 @@
             @endif
 
             <div class="form-group">
-                <flux:input label="Tên vai trò" placeholder="Nhập tên vai trò..." wire:model='name' />
+                <flux:input label="Tên vai trò" placeholder="Nhập tên vai trò..." autofocus wire:model='name' />
             </div>
 
             <div class="form-group">

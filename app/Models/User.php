@@ -60,16 +60,25 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * The attributes add information of user.
+     */
     public function detail()
     {
         return $this->hasOne(UserDetail::class);
     }
 
+    /**
+     * The attributes add location of user.
+     */
     public function locations()
     {
         return $this->belongsToMany(Location::class, 'location_user');
     }
 
+    /**
+     * The attributes add role of user.
+     */ 
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'role_user');
