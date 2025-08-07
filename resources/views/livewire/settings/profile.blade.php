@@ -136,23 +136,22 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                        <!-- Success Message -->
-                        <x-action-message class="text-emerald-600 dark:text-emerald-400 font-medium flex items-center justify-center bg-emerald-50 dark:bg-emerald-900/20 px-4 py-2 rounded-lg mb-4" on="profile-updated">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                            {{ __('Đã lưu thành công!') }}
-                        </x-action-message>
-
                         <!-- Submit Button -->
                         <div class="flex justify-center">
                             <flux:button variant="primary" 
                                        type="submit"
                                        icon="check"
-                                       class="!bg-gradient-to-r !from-pink-500 !to-rose-500 hover:!from-pink-600 hover:!to-rose-600 !border-0 !shadow-lg hover:!shadow-xl hover:!shadow-pink-500/25 !transition-all !duration-300 hover:!scale-105 !rounded-2xl">
+                                       class="!bg-gradient-to-r !from-pink-500 !to-rose-500 hover:!from-pink-600 hover:!to-rose-600 !border-0 !shadow-lg hover:!shadow-xl hover:!shadow-pink-500/25 !transition-all !duration-300 hover:!scale-105 !rounded-2xl mb-4">
                                 {{ __('Lưu thay đổi') }}
                             </flux:button>
                         </div>
+                        <!-- Success Message -->
+                        <x-action-message class="text-emerald-600 dark:text-emerald-400 font-medium flex items-center justify-center bg-emerald-50 dark:bg-emerald-900/20 px-4 py-2 rounded-lg" on="profile-updated">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            {{ __('Đã lưu thành công!') }}
+                        </x-action-message>
                     </div>
                 </form>
             </div>

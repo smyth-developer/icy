@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('must_change_password')->default(true); 
             $table->timestamp('last_password_change_at')->nullable(); 
             $table->timestamp('first_login_at')->nullable();
+            $table->timestamp('last_login_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->softDeletes();

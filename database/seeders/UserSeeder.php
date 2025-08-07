@@ -130,13 +130,71 @@ class UserSeeder extends Seeder
             app(UserRepositoryInterface::class)->create($item);
         }
 
-        UserDetail::updateOrCreate(
+        $userDetails = [
             [
                 'user_id' => 1,
                 'phone' => '0868191110',
                 'address' => 'Thường Tân',
                 'avatar' => 'ICE00001-67ecb59fdfad6.png',
-            ]
-        );
+            ],
+            [
+                'user_id' => 2,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 3,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 4,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 5,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [   
+                'user_id' => 6,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 7,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [   
+                'user_id' => 8,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 9,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+            [
+                'user_id' => 10,
+                'phone' => '',
+                'address' => '',
+                'avatar' => '',
+            ],
+        ];
+
+        foreach ($userDetails as $item){
+            UserDetail::updateOrCreate($item);
+        }
     }
 }

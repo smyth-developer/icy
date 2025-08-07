@@ -1,7 +1,7 @@
 {{-- Credit: Lucide (https://lucide.dev) --}}
 
 @props([
-    'variant' => 'outline', // Các biến thể: outline, mini, micro
+    'variant' => 'outline', // Các biến thể: outline, mini, micro, large
 ])
 
 @php
@@ -11,9 +11,10 @@
 
     $classes = Flux::classes('shrink-0')->add(
         match ($variant) {
-            'outline' => '[:where(&)]:size-6',
-            'mini' => '[:where(&)]:size-5',
-            'micro' => '[:where(&)]:size-4',
+            'outline' => '[:where(&)]:size-6',  // Kích thước mặc định
+            'mini' => '[:where(&)]:size-5',     
+            'micro' => '[:where(&)]:size-4',    
+            'large' => '[:where(&)]:size-16',    // Variant mới cho kích thước lớn (32px)
             default => '[:where(&)]:size-6',
         },
     );
@@ -22,6 +23,7 @@
         'outline' => 2,
         'mini' => 2.25,
         'micro' => 2.5,
+        'large' => 1.75,  // Stroke width nhỏ hơn cho icon lớn
         default => 2,
     };
 @endphp

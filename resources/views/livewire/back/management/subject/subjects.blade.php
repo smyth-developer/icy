@@ -113,14 +113,14 @@
                                             </td>
                                         </tr>
                                     @empty
-                                        <tr>
-                                            <td colspan="4"
-                                                class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                                                <div class="flex flex-col items-center">
-                                                    <div class="text-sm">Không có dữ liệu.</div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                            <div class="flex flex-col items-center">
+                                                <flux:icon.book-open class="w-8 h-8 text-gray-400 dark:text-gray-600 mb-2" />
+                                                <div class="text-sm">Không có môn học nào</div>
+                                            </div>
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>

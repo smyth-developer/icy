@@ -13,6 +13,7 @@ use App\Livewire\Back\Access\Role\Roles;
 use App\Livewire\Back\Access\Permission\Permissions;
 
 use App\Livewire\Back\Personnel\Employee\Staff;
+use App\Livewire\Back\Personnel\Student\Students;
 
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -56,6 +57,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('personnel')->name('personnel.')->group(function () {
             Route::get('staff', Staff::class)->name('staff');
+
+            Route::get('students', Students::class)->name('students');
         });
 
         Route::redirect('settings', 'settings/profile');

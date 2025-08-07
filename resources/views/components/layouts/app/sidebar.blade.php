@@ -16,8 +16,8 @@
                 <x-app-logo />
             </a>
 
-            <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
+            <flux:navlist variant="outline" class="[&_[data-flux-icon]]:!size-5">
+                <flux:navlist.group :heading="__('General')" class="grid">
 
                     <flux:navlist.item icon="home" :href="route('dashboard')"
                         :current="request()->routeIs('dashboard')" wire:navigate>
@@ -84,6 +84,11 @@
                     <flux:navlist.item icon="user-group" :href="route('admin.personnel.staff')"
                         :current="request()->routeIs('admin.personnel.staff')" wire:navigate>
                         Nhân viên
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.students')"
+                        :current="request()->routeIs('admin.personnel.students')" wire:navigate>
+                        Học sinh
                     </flux:navlist.item>
 
                 </flux:navlist.group>
