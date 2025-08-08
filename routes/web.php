@@ -1,7 +1,5 @@
 <?php
 
-use App\Livewire\Notes;
-
 use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Management\Season\Seasons;
 use App\Livewire\Back\Management\Program\Programs;
@@ -35,7 +33,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::prefix('management')->name('management.')->group(function () {
 
-            Route::get('notes', Notes::class)->name('notes');
 
             Route::get('locations', Locations::class)->name('locations');
 

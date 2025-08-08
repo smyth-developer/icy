@@ -24,11 +24,6 @@
                         {{ __('dashboard.Dashboard') }}
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="notebook-pen" :href="route('admin.management.notes')"
-                        :current="request()->routeIs('admin.management.notes')" title="Ghi chú" wire:navigate>
-                        {{ __('dashboard.Notes') }}
-                    </flux:navlist.item>
-
                 </flux:navlist.group>
 
                 <flux:navlist.group :heading="__('Management')" class="grid">

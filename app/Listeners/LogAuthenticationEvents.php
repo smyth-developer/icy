@@ -38,7 +38,7 @@ class LogAuthenticationEvents
         
         $this->authLogService->logBlockedLogin(
             $identifier,
-            'Account locked due to too many failed attempts',
+            'Tài khoản đã bị khóa do quá nhiều lần đăng nhập thất bại',
             $request
         );
     }

@@ -78,7 +78,7 @@ class AuthenticationLogService
             'ip_address' => $session->ip_address ?? null,
             'user_agent' => $session->user_agent ?? null,
             'device' => $this->getDeviceType($session->user_agent ?? null),
-            'failure_reason' => 'Forced logout - new login from another device',
+            'failure_reason' => 'Đăng xuất tự động - đăng nhập từ thiết bị khác',
             'login_at' => now(),
             'logout_at' => now(),
         ]);
