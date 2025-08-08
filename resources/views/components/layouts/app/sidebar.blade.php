@@ -88,7 +88,7 @@
 
                     <flux:navlist.item icon="user-plus" :href="route('admin.personnel.students')"
                         :current="request()->routeIs('admin.personnel.students')" wire:navigate>
-                        Học sinh
+                        Học viên
                     </flux:navlist.item>
 
                 </flux:navlist.group>

@@ -66,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('settings/profile', Profile::class)->name('settings.profile');
         Route::get('settings/password', Password::class)->name('settings.password');
         Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+        Route::get('settings/authentication-logs', \App\Livewire\Settings\AuthenticationLogs::class)->name('settings.authentication-logs');
     });
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\LogAuthenticationEvents;
 use App\Repositories\Contracts\LocationRepositoryInterface;
 use App\Repositories\Contracts\NoteRepositoryInterface;
 use App\Repositories\Contracts\RoleRepositoryInterface;
@@ -22,8 +23,11 @@ use App\Repositories\Eloquent\SubjectRepository;
 use App\Repositories\Eloquent\CourseRepository;
 use App\Repositories\Eloquent\PermissionRepository;
 
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\Lockout;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
@@ -58,5 +62,8 @@ class AppServiceProvider extends ServiceProvider
             Session::flash('status', 'Bạn cần đăng nhập để tiếp tục');
             return route('login');
         });
+
+        // Register authentication event listeners
+        Event::subscribe(LogAuthenticationEvents::class);
     }
 }

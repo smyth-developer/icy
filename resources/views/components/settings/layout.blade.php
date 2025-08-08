@@ -4,6 +4,7 @@
             <flux:navlist.item :href="route('admin.settings.profile')" :current="request()->routeIs('admin.settings.profile')" wire:navigate>Hồ sơ</flux:navlist.item>
             <flux:navlist.item :href="route('admin.settings.password')" :current="request()->routeIs('admin.settings.password')" wire:navigate>Mật khẩu</flux:navlist.item>
             <flux:navlist.item :href="route('admin.settings.appearance')" :current="request()->routeIs('admin.settings.appearance')" wire:navigate>Giao diện</flux:navlist.item>
+            <flux:navlist.item :href="route('admin.settings.authentication-logs')" :current="request()->routeIs('admin.settings.authentication-logs')" wire:navigate>Nhật ký đăng nhập</flux:navlist.item>
         </flux:navlist>
     </div>
 

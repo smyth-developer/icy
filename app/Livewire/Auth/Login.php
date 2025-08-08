@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Services\AuthenticationLogService;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
@@ -27,6 +28,13 @@ class Login extends Component
 
     public bool $remember = false;
 
+    protected AuthenticationLogService $authLogService;
+
+    public function boot(AuthenticationLogService $authLogService)
+    {
+        $this->authLogService = $authLogService;
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -46,6 +54,13 @@ class Login extends Component
         if (! Auth::attempt([$login_id => $this->login_id, 'password' => $this->password], $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
+            // Log failed login attempt
+            $this->authLogService->logFailedLogin(
+                $this->login_id,
+                'Invalid credentials',
+                request()
+            );
+
             throw ValidationException::withMessages([
                 'login_id' => ('Thông tin đăng nhập không chính xác.'),
             ]);
@@ -54,7 +69,23 @@ class Login extends Component
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
+        // Log successful login
+        $this->authLogService->logSuccessfulLogin(Auth::user(), request());
+
         $currentSessionId = session()->getId();
+        
+        // Get other sessions before deleting them to log forced logouts
+        $otherSessions = DB::table('sessions')
+            ->where('user_id', Auth::user()->id)
+            ->where('id', '!=', $currentSessionId)
+            ->get();
+
+        // Log forced logout for each other session
+        foreach ($otherSessions as $session) {
+            $this->authLogService->logForcedLogout(Auth::user(), $session);
+        }
+
+        // Delete other sessions (force logout other devices)
         DB::table('sessions')
             ->where('user_id', Auth::user()->id)
             ->where('id', '!=', $currentSessionId)
@@ -75,6 +106,13 @@ class Login extends Component
         }
 
         event(new Lockout(request()));
+
+        // Log blocked login attempt
+        $this->authLogService->logBlockedLogin(
+            $this->login_id,
+            'Rate limited - too many attempts',
+            request()
+        );
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 

@@ -5,7 +5,7 @@ namespace App\Livewire\Back\Personnel\Student;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 
-#[Title('Học sinh')]
+#[Title('Học viên')]
 class Students extends Component
 {
     public function render()

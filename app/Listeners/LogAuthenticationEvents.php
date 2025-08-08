@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Listeners;
+
+use App\Services\AuthenticationLogService;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Events\Dispatcher;
+
+class LogAuthenticationEvents
+{
+    protected AuthenticationLogService $authLogService;
+
+    public function __construct(AuthenticationLogService $authLogService)
+    {
+        $this->authLogService = $authLogService;
+    }
+
+    /**
+     * Handle user logout events.
+     */
+    public function handleLogout(Logout $event): void
+    {
+        if ($event->user) {
+            $this->authLogService->logLogout($event->user);
+        }
+    }
+
+    /**
+     * Handle user lockout events.
+     */
+    public function handleLockout(Lockout $event): void
+    {
+        $request = $event->request;
+        $identifier = $request->input('email') ?? $request->input('username') ?? $request->input('login_id') ?? 'unknown';
+        
+        $this->authLogService->logBlockedLogin(
+            $identifier,
+            'Account locked due to too many failed attempts',
+            $request
+        );
+    }
+
+    /**
+     * Register the listeners for the subscriber.
+     */
+    public function subscribe(Dispatcher $events): array
+    {
+        return [
+            Logout::class => 'handleLogout',
+            Lockout::class => 'handleLockout',
+        ];
+    }
+}
