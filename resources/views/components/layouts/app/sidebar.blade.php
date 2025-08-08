@@ -184,10 +184,12 @@
 
             {{-- Footer --}}
             @include('components.layouts.app.footer')
+            {{-- @include('components.layouts.app.dial') --}}
         </div>
     </div>
     @stack('scripts')
     @fluxScripts
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
 
 
