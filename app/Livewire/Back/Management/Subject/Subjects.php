@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\On;
 use App\Repositories\Contracts\SubjectRepositoryInterface;
-use App\Repositories\Contracts\ProgramRepositoryInterface;
 use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
 use App\Models\Subject;

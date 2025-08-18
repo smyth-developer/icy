@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class UserDetail extends Model
 {
@@ -15,15 +16,28 @@ class UserDetail extends Model
 
     protected $fillable = [
         'user_id',
+        'birthday',
         'address',
         'phone',
         'avatar',
     ];
 
+    public function getBirthdayAttribute($value)
+    {
+        return $value ? Carbon::parse($value)->format('Y-m-d') : '';
+    }
+
+    protected $casts = [
+        'birthday' => 'date',
+    ];
+
     public function getAvatarAttribute($value)
     {
-        return $value ? asset('/images/avatars/' . $value) : asset('/images/avatars/default-avatar.png');
+        return $value
+            ? asset('storage/images/avatars/' . $value) // file upload bởi user
+            : asset('storage/images/avatars/default-avatar.png'); // file mặc định nằm ở public/images/avatars/
     }
+
 
     public function user()
     {

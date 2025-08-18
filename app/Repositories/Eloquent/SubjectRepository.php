@@ -24,10 +24,17 @@ class SubjectRepository implements SubjectRepositoryInterface
         return $data;
     }
 
-    public function getAll(int $perPage = 10): LengthAwarePaginator
+    public function getAll(?int $perPage = null)
     {
-        return Subject::orderBy('ordering', 'asc')->paginate($perPage);
+        $query = Subject::with('program')
+            ->select('subjects.*')
+            ->join('programs', 'programs.id', '=', 'subjects.program_id')
+            ->orderBy('programs.ordering')
+            ->orderBy('subjects.ordering');
+
+        return $perPage ? $query->paginate($perPage) : $query->get();
     }
+
 
     public function create(array $data, $programId)
     {

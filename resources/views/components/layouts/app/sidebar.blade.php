@@ -21,16 +21,18 @@
 
                     <flux:navlist.item icon="home" :href="route('dashboard')"
                         :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('dashboard.Dashboard') }}
+                        Bảng điều khiển
                     </flux:navlist.item>
 
                 </flux:navlist.group>
+
+                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
                 <flux:navlist.group :heading="__('Management')" class="grid">
 
                     <flux:navlist.item icon="map-pin-house" :href="route('admin.management.locations')"
                         :current="request()->routeIs('admin.management.locations')" wire:navigate>
-                        {{ __('dashboard.location') }}
+                        Cơ sở
                     </flux:navlist.item>
 
                     <flux:navlist.item icon="calendar" :href="route('admin.management.seasons')"
@@ -50,7 +52,12 @@
 
                     <flux:navlist.item icon="academic-cap" :href="route('admin.management.courses')"
                         :current="request()->routeIs('admin.management.courses')" wire:navigate>
-                        Khoá học
+                        Lớp học
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="list-bullet" :href="route('admin.management.syllabi')"
+                        :current="request()->routeIs('admin.management.syllabi')" wire:navigate>
+                        Syllabus
                     </flux:navlist.item>
 
                     <flux:navlist.item icon="book-open-text" :href="route('admin.management.curricula')"
@@ -59,6 +66,24 @@
                     </flux:navlist.item>
 
                 </flux:navlist.group>
+
+                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+
+                <flux:navlist.group :heading="__('Arrangement')" class="grid">
+
+                    <flux:navlist.item icon="adjustments-horizontal"
+                        :current="request()->routeIs('')" wire:navigate>
+                        Xếp lớp học
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="calendar-days"
+                        :current="request()->routeIs('')" wire:navigate>
+                       Xếp lịch học
+                    </flux:navlist.item>
+
+                </flux:navlist.group>
+
+                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
                 <flux:navlist.group :heading="__('Access')" class="grid">
 
@@ -74,16 +99,23 @@
 
                 </flux:navlist.group>
 
-                <flux:navlist.group :heading="__('Employee')" class="grid">
+                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
-                    <flux:navlist.item icon="user-group" :href="route('admin.personnel.staff')"
+                <flux:navlist.group :heading="__('Human resources')" class="grid">
+
+                    <flux:navlist.item icon="users" :href="route('admin.personnel.staff')"
                         :current="request()->routeIs('admin.personnel.staff')" wire:navigate>
                         Nhân viên
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.students')"
+                    <flux:navlist.item icon="user-group" :href="route('admin.personnel.students')"
                         :current="request()->routeIs('admin.personnel.students')" wire:navigate>
                         Học viên
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.student-registration')"
+                        :current="request()->routeIs('admin.personnel.student-registration')" wire:navigate>
+                        Đăng ký học viên
                     </flux:navlist.item>
 
                 </flux:navlist.group>
@@ -185,6 +217,7 @@
     @stack('scripts')
     @fluxScripts
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <audio id="sound-success" preload="auto" src="{{ asset('storage/audio/success.mp3') }}"></audio>
 </body>
 
 

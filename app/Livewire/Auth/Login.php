@@ -36,6 +36,14 @@ class Login extends Component
     }
 
     /**
+     * Kiểm tra có nên log hay không dựa trên môi trường
+     */
+    protected function shouldLog(): bool
+    {
+        return app()->environment() !== 'local';
+    }
+
+    /**
      * Handle an incoming authentication request.
      */
     public function login(): void
@@ -55,11 +63,13 @@ class Login extends Component
             RateLimiter::hit($this->throttleKey());
 
             // Log failed login attempt
-            $this->authLogService->logFailedLogin(
-                $this->login_id,
-                'Invalid credentials',
-                request()
-            );
+            if ($this->shouldLog()) {
+                $this->authLogService->logFailedLogin(
+                    $this->login_id,
+                    'Invalid credentials',
+                    request()
+                );
+            }
 
             throw ValidationException::withMessages([
                 'login_id' => ('Thông tin đăng nhập không chính xác.'),
@@ -70,7 +80,9 @@ class Login extends Component
         Session::regenerate();
 
         // Log successful login
-        $this->authLogService->logSuccessfulLogin(Auth::user(), request());
+        if ($this->shouldLog()) {
+            $this->authLogService->logSuccessfulLogin(Auth::user(), request());
+        }
 
         $currentSessionId = session()->getId();
         
@@ -81,8 +93,10 @@ class Login extends Component
             ->get();
 
         // Log forced logout for each other session
-        foreach ($otherSessions as $session) {
-            $this->authLogService->logForcedLogout(Auth::user(), $session);
+        if ($this->shouldLog()) {
+            foreach ($otherSessions as $session) {
+                $this->authLogService->logForcedLogout(Auth::user(), $session);
+            }
         }
 
         // Delete other sessions (force logout other devices)
@@ -108,11 +122,13 @@ class Login extends Component
         event(new Lockout(request()));
 
         // Log blocked login attempt
-        $this->authLogService->logBlockedLogin(
-            $this->login_id,
-            'Rate limited - too many attempts',
-            request()
-        );
+        if ($this->shouldLog()) {
+            $this->authLogService->logBlockedLogin(
+                $this->login_id,
+                'Rate limited - too many attempts',
+                request()
+            );
+        }
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 

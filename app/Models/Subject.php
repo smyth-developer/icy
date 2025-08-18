@@ -12,4 +12,9 @@ class Subject extends Model
     {
         return $this->belongsTo(Program::class, 'program_id');
     }
+
+    public function syllabi()
+    {
+        return $this->hasMany(Syllabus::class);
+    }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique(); // Tên chức vụ
             $table->string('description'); // Mô tả chức vụ
             $table->enum('type', ['system', 'custom'])->default('custom');
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
     }

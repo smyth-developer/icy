@@ -24,6 +24,6 @@ class Location extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'location_user')->withPivot('created_at', 'updated_at');
+        return $this->belongsToMany(User::class, 'location_user');
     }
 }

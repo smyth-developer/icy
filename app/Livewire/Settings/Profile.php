@@ -14,6 +14,10 @@ class Profile extends Component
 {
     public string $name = '';
 
+    public string $birthday = '';
+
+    public $username = '';
+
     public string $email = '';
 
     public string $phone = '';
@@ -26,9 +30,11 @@ class Profile extends Component
     public function mount(): void
     {
         $this->name = Auth::user()->name;
+        $this->username = Auth::user()->username;
         $this->email = Auth::user()->email;
         $this->phone = Auth::user()->detail->phone;
         $this->address = Auth::user()->detail->address;
+        $this->birthday = Auth::user()->detail->birthday;
     }
 
     /**
@@ -36,11 +42,15 @@ class Profile extends Component
      */
     public function updateProfileInformation(): void
     {
+        /** @var User $user */
         $user = Auth::user();
     
+
+
         $validated = $this->validate([
-            'phone' => ['regex:/^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-9]|9[0-9])[0-9]{7}$/'],
-            'address' => ['string', 'max:255'],
+            'phone' => ['nullable', 'regex:/^(0|\+84)(3[2-9]|5[6|8|9]|7[0|6-9]|8[1-9]|9[0-9])[0-9]{7}$/'],
+            'birthday' => ['nullable', 'date'],
+            'address' => ['nullable', 'string', 'max:255'],
             'email' => [
                 'required',
                 'string',
@@ -51,6 +61,7 @@ class Profile extends Component
             ],
         ], [
             'phone.regex' => 'Số điện thoại không hợp lệ',
+            'birthday.date' => 'Ngày sinh không hợp lệ',
             'email.unique' => 'Email đã tồn tại',
             'email.email' => 'Email không hợp lệ',
             'email.max' => 'Email không được vượt quá 255 ký tự',
@@ -60,6 +71,8 @@ class Profile extends Component
             'address.string' => 'Địa chỉ phải là một chuỗi',
             'address.max' => 'Địa chỉ không được vượt quá 255 ký tự',
         ]);
+
+        sleep(1);
     
         $user->fill([
             'email' => $validated['email'],
@@ -75,6 +88,7 @@ class Profile extends Component
             ['user_id' => $user->id],
             [
                 'phone' => $validated['phone'],
+                'birthday' => $validated['birthday'],
                 'address' => $validated['address'],
             ]
         );
@@ -89,6 +103,7 @@ class Profile extends Component
      */
     public function resendVerificationNotification(): void
     {
+        /** @var User $user */
         $user = Auth::user();
 
         if ($user->hasVerifiedEmail()) {

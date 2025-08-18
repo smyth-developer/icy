@@ -20,7 +20,7 @@
     <div x-data="{ show: true }"
          x-cloak
          x-show="show"
-         x-init="setTimeout(() => show = false, 3000)"
+         x-init="setTimeout(() => show = false, 3000); (() => { const el = document.getElementById('sound-success'); if (el) { try { el.cloneNode(true).play(); } catch(e){} } else { try { new Audio('{{ asset('storage/audio/success.mp3') }}').play(); } catch(e){} } })()"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"

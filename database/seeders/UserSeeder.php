@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Manager Center HCM',
@@ -57,6 +58,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Receptionist TB',
@@ -68,6 +70,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Receptionist HCM',
@@ -79,6 +82,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Teacher TB',
@@ -90,6 +94,7 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Teacher HCM',
@@ -101,28 +106,31 @@ class UserSeeder extends Seeder
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Student TB',
                 'email' => 'studenttb@ice.edu.com',
                 'username' => 'studenttb',
                 'account_code' => 'ICE00008',
-                'status' => 'active',
+                'status' => 'pending',
                 'password' => bcrypt('12345'),
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ],
             [
                 'name' => 'Student HCM',
                 'email' => 'studenthcm@ice.edu.com',
                 'username' => 'studenthcm',
                 'account_code' => 'ICE00009',
-                'status' => 'active',
+                'status' => 'pending',
                 'password' => bcrypt('12345'),
                 'must_change_password' => 0,
                 'first_login_at' => now(),
                 'last_password_change_at' => now(),
+                'email_verified_at' => now(),
             ]            
         ];
 

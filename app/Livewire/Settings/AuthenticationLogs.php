@@ -58,7 +58,7 @@ class AuthenticationLogs extends Component
             })
             ->orderBy('login_at', 'desc');
 
-        $logs = $query->paginate(15);
+        $logs = $query->paginate(10);
 
         // Get statistics
         $stats = [

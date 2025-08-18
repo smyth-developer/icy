@@ -69,6 +69,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * The attributes add parent of user.
+     */
+    public function parent()
+    {
+        return $this->hasOne(UserParent::class);
+    }
+
+    /**
      * The attributes add location of user.
      */
     public function locations()

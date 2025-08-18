@@ -11,6 +11,7 @@ use Illuminate\Events\Dispatcher;
 
 class LogAuthenticationEvents
 {
+    
     protected AuthenticationLogService $authLogService;
 
     public function __construct(AuthenticationLogService $authLogService)
@@ -19,11 +20,19 @@ class LogAuthenticationEvents
     }
 
     /**
+     * Kiểm tra có nên log hay không dựa trên môi trường
+     */
+    protected function shouldLog(): bool
+    {
+        return app()->environment() !== 'local';
+    }
+
+    /**
      * Handle user logout events.
      */
     public function handleLogout(Logout $event): void
     {
-        if ($event->user) {
+        if ($event->user && $this->shouldLog()) {
             $this->authLogService->logLogout($event->user);
         }
     }
@@ -33,6 +42,10 @@ class LogAuthenticationEvents
      */
     public function handleLockout(Lockout $event): void
     {
+        if (!$this->shouldLog()) {
+            return;
+        }
+
         $request = $event->request;
         $identifier = $request->input('email') ?? $request->input('username') ?? $request->input('login_id') ?? 'unknown';
         
@@ -53,4 +66,5 @@ class LogAuthenticationEvents
             Lockout::class => 'handleLockout',
         ];
     }
+
 }
