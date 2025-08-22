@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-4 sm:gap-6">
     <?php if (isset($component)) { $__componentOriginale5d2f2831f58fdbe96ad6d7cbd41a7dd = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale5d2f2831f58fdbe96ad6d7cbd41a7dd = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.auth-header','data' => ['title' => __('Đăng nhập hệ thống'),'description' => __('Sử dụng Username và Email để đăng nhập.')]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -42,18 +42,18 @@
 <?php unset($__componentOriginal7c1bf3a9346f208f66ee83b06b607fb5); ?>
 <?php endif; ?>
 
-    <form wire:submit="login" class="flex flex-col gap-6 ">
+    <form wire:submit="login" class="flex flex-col gap-4 sm:gap-6">
         <!-- Email Address -->
         <?php if (isset($component)) { $__componentOriginal26c546557cdc09040c8dd00b2090afd0 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal26c546557cdc09040c8dd00b2090afd0 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::input.index','data' => ['wire:model' => 'login_id','label' => __('Địa chỉ Email / Username'),'type' => 'text','required' => true,'placeholder' => 'email@example.com / Username','labelClass' => 'text-pink-500']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::input.index','data' => ['wire:model' => 'login_id','label' => __('Địa chỉ Email / Username'),'type' => 'text','required' => true,'placeholder' => 'email@example.com / Username','labelClass' => 'text-pink-500','autofocus' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['wire:model' => 'login_id','label' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(__('Địa chỉ Email / Username')),'type' => 'text','required' => true,'placeholder' => 'email@example.com / Username','labelClass' => 'text-pink-500']); ?>
+<?php $component->withAttributes(['wire:model' => 'login_id','label' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(__('Địa chỉ Email / Username')),'type' => 'text','required' => true,'placeholder' => 'email@example.com / Username','labelClass' => 'text-pink-500','autofocus' => true]); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal26c546557cdc09040c8dd00b2090afd0)): ?>
@@ -91,14 +91,14 @@
             <!--[if BLOCK]><![endif]--><?php if(Route::has('password.request')): ?>
                 <?php if (isset($component)) { $__componentOriginal54ddb5b70b37b1e1cf0f2f95e4c53477 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal54ddb5b70b37b1e1cf0f2f95e4c53477 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::link','data' => ['class' => 'absolute end-0 top-0 text-sm','href' => route('password.request'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::link','data' => ['class' => 'absolute end-0 top-0 text-xs sm:text-sm','href' => route('password.request'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::link'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['class' => 'absolute end-0 top-0 text-sm','href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('password.request')),'wire:navigate' => true]); ?>
+<?php $component->withAttributes(['class' => 'absolute end-0 top-0 text-xs sm:text-sm','href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('password.request')),'wire:navigate' => true]); ?>
                     <?php echo e(__('Quên mật khẩu?')); ?>
 
                  <?php echo $__env->renderComponent(); ?>
@@ -136,17 +136,17 @@
 <?php unset($__componentOriginal9384bd05e996fcc8c16dc84e6bbc1c8f); ?>
 <?php endif; ?>
 
-        <div class="flex items-center justify-end">
+        <div class="flex items-center justify-end pt-2">
             <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['variant' => 'primary','color' => 'pink','type' => 'submit','class' => 'w-full cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['variant' => 'primary','color' => 'pink','type' => 'submit','class' => 'w-full cursor-pointer text-sm sm:text-base']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['variant' => 'primary','color' => 'pink','type' => 'submit','class' => 'w-full cursor-pointer']); ?><?php echo e(__('Đăng nhập')); ?> <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['variant' => 'primary','color' => 'pink','type' => 'submit','class' => 'w-full cursor-pointer text-sm sm:text-base']); ?><?php echo e(__('Đăng nhập')); ?> <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
 <?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>

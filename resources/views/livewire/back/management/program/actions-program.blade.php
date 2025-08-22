@@ -15,7 +15,7 @@
 
             <div class="flex gap-2">
                 <div class="form-group w-3/5" >
-                    <flux:input wire:model='name' autocomplete="off" clearable label="Tên chương trình"></flux:input>
+                    <flux:input wire:model='name' autocomplete="off" clearable label="Tên chương trình" autofocus></flux:input>
                 </div>
                 <div class="form-group w-2/5">
                     <flux:input wire:model='english_name' autocomplete="off" clearable label="Tên tiếng anh">

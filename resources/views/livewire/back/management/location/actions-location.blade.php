@@ -9,7 +9,7 @@
                 <flux:text class="mt-2">{{ $isEditLocationMode ? 'Chỉnh sửa thông tin chi nhánh.' : 'Thông tin cho chi nhánh mới.' }}</flux:text>
             </div>
             <div class="form-group">
-                <flux:input label="Tên cơ sở" wire:model='name' placeholder="Điền tên cơ sở mới" />
+                <flux:input label="Tên cơ sở" wire:model='name' placeholder="Điền tên cơ sở mới" autofocus/>
             </div>
             <div class="form-group">
                 <flux:textarea label="Địa chỉ cơ sở" wire:model='address' placeholder="Điền địa chỉ cơ sở" />

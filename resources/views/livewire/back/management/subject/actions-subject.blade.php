@@ -18,7 +18,7 @@
                     <flux:label>Tên môn học</flux:label>
                     <flux:input.group>
                         <flux:input.group.prefix>ICY</flux:input.group.prefix>
-                        <flux:input wire:model='name' placeholder="Nhập Tên môn học (ICY)" />
+                        <flux:input wire:model='name' placeholder="Nhập Tên môn học (ICY)" autofocus/>
                     </flux:input.group>
                 </div>
 
