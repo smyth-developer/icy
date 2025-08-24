@@ -61,6 +61,7 @@ class StudentRegistrationRepository implements StudentRegistrationRepositoryInte
     public function createStudent(array $data)
     {
         $data = $this->prepareStudentData($data);
+
         return User::create($data);
     }
 

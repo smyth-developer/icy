@@ -18,26 +18,11 @@ class UserRules
                 'regex:/^[\p{L}\s]+$/u', // Chỉ cho phép chữ cái và khoảng trắng
             ],
             'email' => [
-                'required',
+                'nullable',
                 'string',
                 'email',
                 'max:255',
                 'unique:users,email' . ($id ? ",$id" : ''),
-            ],
-            'username' => [
-                'required',
-                'string',
-                'min:3',
-                'max:50',
-                'unique:users,username' . ($id ? ",$id" : ''),
-                'regex:/^[a-zA-Z0-9_]+$/', // Chỉ cho phép chữ cái, số và dấu gạch dưới
-            ],
-            'account_code' => [
-                'nullable',
-                'string',
-                'max:20',
-                'unique:users,account_code' . ($id ? ",$id" : ''),
-                'regex:/^[A-Z0-9]+$/', // Chỉ cho phép chữ hoa và số
             ],
             'password' => [
                 $id ? 'nullable' : 'required', // Bắt buộc khi tạo mới, tùy chọn khi cập nhật
@@ -58,7 +43,7 @@ class UserRules
             'birthday' => [
                 'nullable',
                 'date',
-                'before:today',
+                'before_or_equal:' . now()->format('Y-m-d'),
                 'after:1960-01-01',
             ],
             'id_card' => [
@@ -151,20 +136,9 @@ class UserRules
             'name.max' => 'Họ và tên không được vượt quá 255 ký tự.',
             'name.regex' => 'Họ và tên chỉ được chứa chữ cái và khoảng trắng.',
             
-            'email.required' => 'Email là bắt buộc.',
             'email.email' => 'Email không đúng định dạng.',
             'email.max' => 'Email không được vượt quá 255 ký tự.',
             'email.unique' => 'Email này đã được sử dụng.',
-            
-            'username.required' => 'Tên đăng nhập là bắt buộc.',
-            'username.min' => 'Tên đăng nhập phải có ít nhất 3 ký tự.',
-            'username.max' => 'Tên đăng nhập không được vượt quá 50 ký tự.',
-            'username.unique' => 'Tên đăng nhập này đã được sử dụng.',
-            'username.regex' => 'Tên đăng nhập chỉ được chứa chữ cái, số và dấu gạch dưới.',
-            
-            'account_code.max' => 'Mã tài khoản không được vượt quá 20 ký tự.',
-            'account_code.unique' => 'Mã tài khoản này đã được sử dụng.',
-            'account_code.regex' => 'Mã tài khoản chỉ được chứa chữ hoa và số.',
             
             'password.required' => 'Mật khẩu là bắt buộc.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',

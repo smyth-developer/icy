@@ -16,6 +16,7 @@ use App\Livewire\Back\Personnel\Student\Students;
 use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
 
 use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Notification;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\AuthenticationLogs;
@@ -27,7 +28,7 @@ Route::get('/', function () {
 });
 
 Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified', 'preventBackHistory'])
+    ->middleware(['auth', 'preventBackHistory'])
     ->name('dashboard');
 
 Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.')->group(function () {
@@ -70,6 +71,7 @@ Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+    Route::get('settings/notification', Notification::class)->name('settings.notification');
     Route::get('settings/authentication-logs', AuthenticationLogs::class)->name('settings.authentication-logs');
 });
 

@@ -165,7 +165,7 @@
             <flux:header class="lg:hidden">
                 <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
                 <flux:spacer />
-                <flux:dropdown position="top" align="end">
+                <flux:dropdown  class="cursor-pointer" position="top" align="end">
                     <flux:profile avatar="{{ auth()->user()->detail?->avatar }}" icon-trailing="chevron-down" />
 
                     <flux:menu>
@@ -193,7 +193,7 @@
                         <form method="POST" action="{{ route('logout') }}" class="w-full">
                             @csrf
                             <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle"
-                                class="w-full">
+                                class="w-full ">
                                 Đăng xuất
                             </flux:menu.item>
                         </form>

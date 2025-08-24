@@ -163,7 +163,7 @@
 <?php endif; ?>
             </div>
 
-            <!--[if BLOCK]><![endif]--><?php if(auth()->user()->locations()->count() > 0): ?>
+            <!--[if BLOCK]><![endif]--><?php if(auth()->user()->locations()->count() > 1): ?>
                 <div class="space-y-6">
                     <div class="form-group">
                         <?php if (isset($component)) { $__componentOriginala467913f9ff34913553be64599ec6e92 = $component; } ?>

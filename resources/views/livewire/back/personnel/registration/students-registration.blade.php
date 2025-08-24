@@ -11,7 +11,7 @@
             </flux:breadcrumbs>
         </div>
 
-        <flux:button wire:click="addStudentRegistration" icon="plus-circle" class="cursor-pointer">Thêm học viên</flux:button>
+        <flux:button wire:click="addStudentRegistration()" icon="plus-circle" class="cursor-pointer">Thêm học viên</flux:button>
     </div>
 
     <flux:separator variant="subtle" />
@@ -36,7 +36,7 @@
                         @forelse ($students as $index => $student)
                             <tr wire:key="student-{{ $student->id }}" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
                                 <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center font-medium">
-                                    {{ $index + 1 }}
+                                    {{ $loop->iteration }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                     <div class="flex items-center gap-3">
@@ -45,7 +45,7 @@
                                              alt="{{ $student->name }}">
                                         <div>
                                             <div class="font-medium">{{ $student->name }}</div>
-                                            <div class="text-xs text-gray-500 dark:text-gray-400">ID: {{ $student->id }}</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400">ID: {{ $student->account_code }}</div>
                                         </div>
                                     </div>
                                 </td>
@@ -82,6 +82,11 @@
                                         <flux:button size="sm" variant="primary" icon="pencil"
                                             wire:click="editStudentRegistration({{ $student->id }})" class="cursor-pointer">
                                             Sửa thông tin
+                                        </flux:button>
+
+                                        <flux:button size="sm" variant="danger" icon="trash"
+                                            wire:click="deleteStudentRegistration({{ $student->id }})" class="cursor-pointer">
+                                            Xóa
                                         </flux:button>
                                     </div>
                                 </td>

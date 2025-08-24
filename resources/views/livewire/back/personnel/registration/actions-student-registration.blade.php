@@ -80,7 +80,7 @@
                 </flux:heading>
             </div>
 
-            @if (auth()->user()->locations()->count() > 0)
+            @if (auth()->user()->locations()->count() > 1)
                 <div class="space-y-6">
                     <div class="form-group">
                         <flux:select wire:model='location_id' label="🏢 Cơ sở" placeholder="Chọn cơ sở"

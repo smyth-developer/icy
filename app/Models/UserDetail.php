@@ -24,7 +24,7 @@ class UserDetail extends Model
 
     public function getBirthdayAttribute($value)
     {
-        return $value ? Carbon::parse($value)->format('Y-m-d') : '';
+        return $value ? Carbon::parse($value)->setTimezone(config('app.timezone'))->format('Y-m-d') : '';
     }
 
     protected $casts = [

@@ -4,13 +4,7 @@
         <?php echo $__env->make('partials.head', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
         <style>
             .auth-bg {
-                background: #000 url('/storage/images/sites/mobie.png') no-repeat center center / cover;
-                min-height: 100svh;
-            }
-            @media (min-width: 640px) {
-                .auth-bg {
-                    background-image: url('/storage/images/sites/tablet.png');
-                }
+                background: #000 url('/storage/images/sites/mobie.png') no-repeat center center / cover;               
             }
             @media (min-width: 1024px) {
                 .auth-bg {

@@ -17,7 +17,8 @@ class UserRepository implements UserRepositoryInterface
     {
         //Kiểm tra người dùng đã có tài khoản hoặc username chưa
         if (User::where('email', $data['email'])->orWhere('username', $data['username'])->exists()) {
-            throw new Exception('Email hoặc Username đã được sử dụng.');
+            return false;
+            session()->flash('error', 'Email hoặc Username đã được sử dụng.');
         }
 
         //Tạo tài khoản người dùng

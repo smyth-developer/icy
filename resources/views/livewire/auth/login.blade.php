@@ -29,7 +29,7 @@
             />
 
             @if (Route::has('password.request'))
-                <flux:link class="absolute end-0 top-0 text-xs sm:text-sm" :href="route('password.request')" wire:navigate>
+                <flux:link class="absolute end-0 top-0 text-xs sm:text-sm dark:text-white" :href="route('password.request')" wire:navigate>
                     {{ __('Quên mật khẩu?') }}
                 </flux:link>
             @endif

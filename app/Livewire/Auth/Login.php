@@ -71,6 +71,8 @@ class Login extends Component
                 );
             }
 
+            $this->password = "";
+
             throw ValidationException::withMessages([
                 'login_id' => ('Thông tin đăng nhập không chính xác.'),
             ]);

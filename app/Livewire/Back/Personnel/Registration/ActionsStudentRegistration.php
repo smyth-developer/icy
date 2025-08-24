@@ -2,15 +2,17 @@
 
 namespace App\Livewire\Back\Personnel\Registration;
 
+use Flux\Flux;
+use App\Models\Role;
+use App\Models\User;
 use Livewire\Component;
+use App\Models\Location;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
-use Flux\Flux;
-use App\Models\User;
-use App\Support\Validation\UserRules;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\File;
 use App\Support\User\UserHelper;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use App\Support\Validation\UserRules;
 use App\Repositories\Contracts\StudentRegistrationRepositoryInterface;
 
 class ActionsStudentRegistration extends Component
@@ -25,6 +27,9 @@ class ActionsStudentRegistration extends Component
 
     // UserDetail fields  
     public $phone, $address, $birthday, $avatar;
+
+    // Location fields
+    public $location_id;
 
     // File upload
     public $avatarFile;
@@ -80,6 +85,7 @@ class ActionsStudentRegistration extends Component
             'status' => 'pending',
         ]);
 
+
         // Create user detail
         $user->detail()->create([
             'phone' => $this->phone,
@@ -90,9 +96,15 @@ class ActionsStudentRegistration extends Component
         ]);
 
         // Assign student role
-        $studentRole = \App\Models\Role::where('name', 'student')->first();
+        $studentRole = Role::where('name', 'student')->first();
         if ($studentRole) {
             $user->roles()->attach($studentRole->id);
+        }
+
+        // Assign location
+        if(!$this->location_id) {
+            $location = app(StudentRegistrationRepositoryInterface::class)->getCurrentUserLocations()->first();
+            $user->locations()->attach($location->id);
         }
 
         session()->flash('success', 'Học viên đã được thêm thành công.');
@@ -210,6 +222,7 @@ class ActionsStudentRegistration extends Component
     public function updateUsername()
     {
         $this->username = UserHelper::randomUsername($this->name);
+        $this->name = ucwords(trim($this->name));
     }
 
     public function render()
