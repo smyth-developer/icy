@@ -59,7 +59,7 @@
 <?php endif; ?>
         </div>
 
-        <form wire:submit='<?php echo e($isEditStudentMode ? 'updateStudent' : 'createStudent'); ?>' class="px-8 py-6 space-y-8">
+        <form wire:submit.prevent='<?php echo e($isEditStudentMode ? 'updateStudent' : 'createStudent'); ?>' class="px-8 py-6 space-y-8">
             <!--[if BLOCK]><![endif]--><?php if($isEditStudentMode): ?>
                 <input type="hidden" wire:model='studentId' />
             <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
@@ -135,6 +135,20 @@
 <?php unset($__componentOriginal26c546557cdc09040c8dd00b2090afd0); ?>
 <?php endif; ?>
                 </div>
+
+                <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['avatarFile'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <div class="text-red-500 text-sm mt-2">
+                        <?php echo e($message); ?>
+
+                    </div>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
             </div>
 
             

@@ -6,7 +6,6 @@ use Flux\Flux;
 use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
-use App\Models\Location;
 use Livewire\Attributes\On;
 use Livewire\WithFileUploads;
 use App\Support\User\UserHelper;
@@ -38,10 +37,10 @@ class ActionsStudentRegistration extends Component
     {
         // Get base user rules
         $userRules = UserRules::rules($this->studentId);
-        
-        // Get user detail rules
-        $detailRules = UserRules::detailRules();
-        
+
+        // Get user detail rules (pass current student id to handle unique rules)
+        $detailRules = UserRules::detailRules($this->studentId);
+
 
         return array_merge($userRules, $detailRules);
     }
@@ -91,7 +90,7 @@ class ActionsStudentRegistration extends Component
             'phone' => $this->phone,
             'id_card' => $this->id_card,
             'address' => $this->address,
-            'birthday' => $this->birthday,
+            'birthday' => $this->birthday ?: null,
             'avatar' => $filename,
         ]);
 
@@ -102,13 +101,18 @@ class ActionsStudentRegistration extends Component
         }
 
         // Assign location
-        if(!$this->location_id) {
+        $selectedLocationId = $this->location_id;
+        if (!$selectedLocationId) {
             $location = app(StudentRegistrationRepositoryInterface::class)->getCurrentUserLocations()->first();
-            $user->locations()->attach($location->id);
+            $selectedLocationId = $location?->id;
+        }
+
+        if ($selectedLocationId) {
+            $user->locations()->syncWithoutDetaching([$selectedLocationId]);
         }
 
         session()->flash('success', 'Học viên đã được thêm thành công.');
-        $this->reset(['studentId', 'name', 'email', 'username', 'password', 'account_code', 'phone', 'address', 'birthday', 'avatar', 'avatarFile']);
+        $this->reset(['studentId', 'name', 'email', 'username', 'password', 'account_code', 'phone', 'address', 'birthday', 'avatar', 'avatarFile', 'location_id', 'id_card']);
         Flux::modal('modal-student')->close();
 
         $this->redirectRoute('admin.personnel.student-registration', navigate: true);
@@ -130,6 +134,8 @@ class ActionsStudentRegistration extends Component
             $this->address = $student->detail?->address;
             $this->birthday = $student->detail?->birthday;
             $this->avatar = $student->detail?->avatar;
+            $this->id_card = $student->detail?->id_card;
+            $this->location_id = $student->locations->first()?->id;
         }
 
         $this->isEditStudentMode = true;
@@ -138,6 +144,8 @@ class ActionsStudentRegistration extends Component
 
     public function updateStudent()
     {
+
+
         $this->validate();
 
         $user = User::find($this->studentId);
@@ -146,12 +154,13 @@ class ActionsStudentRegistration extends Component
             return;
         }
 
-        $filename = $user->detail?->avatar; // Giữ avatar cũ mặc định
+        // Lấy tên file avatar gốc (không qua accessor trả về URL)
+        $filename = $user->detail?->getRawOriginal('avatar');
 
         if ($this->avatarFile) {
             // Delete old avatar if exists
             if ($filename) {
-                $path = public_path('images/avatars/' . $filename);
+                $path = public_path('storage/images/avatars/' . $filename);
                 if (File::exists($path)) {
                     File::delete($path);
                 }
@@ -175,6 +184,7 @@ class ActionsStudentRegistration extends Component
         }
 
         $user->update($userData);
+        
 
         // Update user detail
         $user->detail()->updateOrCreate(
@@ -182,8 +192,8 @@ class ActionsStudentRegistration extends Component
             [
                 'phone' => $this->phone,
                 'address' => $this->address,
-                'birthday' => $this->birthday,
-                'avatar' => $filename, // sẽ luôn giữ avatar cũ nếu không upload mới
+                'birthday' => $this->birthday ?: null,
+                'avatar' => $filename, // lưu tên file, giữ avatar cũ nếu không upload mới
             ]
         );
 

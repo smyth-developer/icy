@@ -113,9 +113,14 @@
                         Học viên
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.student-registration')"
+                    <flux:navlist.item icon="user-pen" :href="route('admin.personnel.student-registration')"
                         :current="request()->routeIs('admin.personnel.student-registration')" wire:navigate>
                         Đăng ký học viên
+                    </flux:navlist.item>
+
+                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.staff-registration')"
+                        :current="request()->routeIs('admin.personnel.staff-registration')" wire:navigate>
+                        Đăng ký nhân viên
                     </flux:navlist.item>
 
                 </flux:navlist.group>

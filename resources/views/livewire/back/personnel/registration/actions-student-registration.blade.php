@@ -12,7 +12,7 @@
             </flux:text>
         </div>
 
-        <form wire:submit='{{ $isEditStudentMode ? 'updateStudent' : 'createStudent' }}' class="px-8 py-6 space-y-8">
+        <form wire:submit.prevent='{{ $isEditStudentMode ? 'updateStudent' : 'createStudent' }}' class="px-8 py-6 space-y-8">
             @if ($isEditStudentMode)
                 <input type="hidden" wire:model='studentId' />
             @endif
@@ -70,6 +70,12 @@
                     <flux:input type="file" wire:model="avatarFile" accept="image/*" label="📸 Ảnh đại diện"
                         class="w-full rounded-xl border-2 border-dashed border-blue-300 hover:border-blue-500 transition-colors duration-300 bg-white/50" />
                 </div>
+
+                @error('avatarFile')
+                    <div class="text-red-500 text-sm mt-2">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
             {{-- Personal Information --}}

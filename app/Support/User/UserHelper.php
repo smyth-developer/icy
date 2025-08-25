@@ -34,13 +34,12 @@ class UserHelper
 
     public static function randomAccountCode(): string
     {
-        $number = User::count() + 1;
+        $number = User::lockForUpdate()->count() + 1;
 
         do {
             $account_code = "ICY" . str_pad($number, 5, '0', STR_PAD_LEFT);
             $number++; // Nếu trùng, tăng thêm 1
         } while (User::where('account_code', $account_code)->exists());
-
         return $account_code;
     }
 

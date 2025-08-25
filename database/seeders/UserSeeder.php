@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\UserDetail;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Repositories\Contracts\UserRepositoryInterface;
 

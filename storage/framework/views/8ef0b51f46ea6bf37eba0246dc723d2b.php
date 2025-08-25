@@ -23,18 +23,7 @@ $value = session()->get($__sessionArgs[0]); ?>
     <div x-data="{ show: true }"
          x-cloak
          x-show="show"
-         x-init="setTimeout(() => show = false, 3000); (() => { 
-             // Kiểm tra cài đặt âm thanh từ session
-             const soundEnabled = <?php echo e(session('notification_sound_enabled', true) ? 'true' : 'false'); ?>;
-             if (soundEnabled) {
-                 const el = document.getElementById('sound-success'); 
-                 if (el) { 
-                     try { el.cloneNode(true).play(); } catch(e){} 
-                 } else { 
-                     try { new Audio('<?php echo e(asset('storage/audio/success.mp3')); ?>').play(); } catch(e){} 
-                 } 
-             }
-         })()"
+         x-init="setTimeout(() => show = false, 3000); (() => { const el = document.getElementById('sound-success'); if (el) { try { el.cloneNode(true).play(); } catch(e){} } else { try { new Audio('<?php echo e(asset('storage/audio/success.mp3')); ?>').play(); } catch(e){} } })()"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-2"
          x-transition:enter-end="opacity-100 translate-y-0"

@@ -50,7 +50,8 @@ class UserRules
                 'nullable',
                 'string',
                 'max:12',
-                'unique:user_details,id_card' . ($id ? ",$id" : ''),
+                // Nếu cập nhật, bỏ qua bản ghi có user_id = $id
+                'unique:user_details,id_card' . ($id ? ",$id,user_id" : ''),
                 'regex:/^[0-9]+$/', // Chỉ cho phép số
             ],
             'address' => [
@@ -63,7 +64,7 @@ class UserRules
                 'string',
                 'regex:/^(\+84|0)[0-9]{9,10}$/', // Định dạng số điện thoại Việt Nam
             ],
-            'avatar' => [
+            'avatarFile' => [
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
@@ -159,9 +160,9 @@ class UserRules
             
             'phone.regex' => 'Số điện thoại không đúng định dạng (VD: 0123456789 hoặc +84123456789).',
             
-            'avatar.image' => 'Avatar phải là hình ảnh.',
-            'avatar.mimes' => 'Avatar phải có định dạng: jpeg, png, jpg, gif.',
-            'avatar.max' => 'Avatar không được vượt quá 2MB.',
+            'avatarFile.image' => 'Avatar phải là hình ảnh.',
+            'avatarFile.mimes' => 'Avatar phải có định dạng: jpeg, png, jpg, gif.',
+            'avatarFile.max' => 'Avatar không được vượt quá 2MB.',
         ];
     }
 }
