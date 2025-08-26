@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             ProgramSeeder::class,
             SubjectSeeder::class,
+            BankSeeder::class,
         ]);
 
         DB::table('location_user')->insert([

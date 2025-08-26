@@ -1,27 +1,39 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
+// Settings
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
-use Illuminate\Support\Facades\Route;
 use App\Livewire\Settings\Notification;
-use App\Livewire\Back\Access\Role\Roles;
 use App\Livewire\Settings\AuthenticationLogs;
 
-use App\Livewire\Back\Personnel\Employee\Staff;
-use App\Livewire\Back\Management\Course\Courses;
-
-use App\Livewire\Back\Management\Season\Seasons;
-use App\Livewire\Back\Personnel\Student\Students;
-use App\Livewire\Back\Management\Program\Programs;
-
-use App\Livewire\Back\Management\Subject\Subjects;
-use App\Livewire\Back\Management\Syllabus\Syllabi;
+// Access
 use App\Livewire\Back\Access\Permission\Permissions;
+use App\Livewire\Back\Access\Role\Roles;
+
+// Management
 use App\Livewire\Back\Management\Location\Locations;
+use App\Livewire\Back\Management\Season\Seasons;
+use App\Livewire\Back\Management\Program\Programs;
+use App\Livewire\Back\Management\Subject\Subjects;
+use App\Livewire\Back\Management\Course\Courses;
+use App\Livewire\Back\Management\Syllabus\Syllabi;
 use App\Livewire\Back\Management\curriculum\Curricula;
+
+// Finance
+use App\Livewire\Back\Finance\Bank\AccountsBank;
+
+// Personnel
 use App\Livewire\Back\Personnel\Registration\StaffsRegistration;
 use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
+use App\Livewire\Back\Personnel\Employee\Staff;
+use App\Livewire\Back\Personnel\Student\Students;
+
+use App\Http\Controllers\SepayWebhookController;
+
+Route::post('/webhook/sepay', [SepayWebhookController::class, 'handle'])->name('webhook.sepay');
 
 
 Route::get('/', function () {
@@ -67,6 +79,10 @@ Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.
         Route::get('students', Students::class)->name('students');
 
         Route::get('student-registration', StudentsRegistration::class)->name('student-registration');
+    });
+
+    Route::prefix('finance')->name('finance.')->group(function () {
+        Route::get('bank-accounts', AccountsBank::class)->name('bank-accounts');
     });
 
     Route::redirect('settings', 'settings/profile');

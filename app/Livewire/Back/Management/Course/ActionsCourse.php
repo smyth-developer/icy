@@ -3,7 +3,7 @@
 namespace App\Livewire\Back\Management\Course;
 use Livewire\Attributes\On;
 use App\Support\Validation\CourseRules;
-use App\Repositories\Contracts\CourseRepositoryInterface;
+
 use Flux\Flux;
 
 use Livewire\Component;

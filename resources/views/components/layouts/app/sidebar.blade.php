@@ -69,6 +69,15 @@
 
                 <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
+                <flux:navlist.group :heading="__('Finance')" class="grid">
+                    <flux:navlist.item icon="banknotes" :href="route('admin.finance.bank-accounts')"
+                        :current="request()->routeIs('admin.finance.bank-accounts')" wire:navigate>
+                        Tài khoản ngân hàng
+                    </flux:navlist.item>
+                </flux:navlist.group>
+
+                <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
+
                 <flux:navlist.group :heading="__('Arrangement')" class="grid">
 
                     <flux:navlist.item icon="adjustments-horizontal"

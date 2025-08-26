@@ -12,7 +12,7 @@ use App\Support\User\UserHelper;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Support\Validation\UserRules;
-use App\Repositories\Contracts\StudentRegistrationRepositoryInterface;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 
 class ActionsStudentRegistration extends Component
 {
@@ -75,7 +75,7 @@ class ActionsStudentRegistration extends Component
         }
 
         // Create user
-        $user = app(StudentRegistrationRepositoryInterface::class)->createStudent([
+        $user = app(StudentRepositoryInterface::class)->createStudent([
             'name' => $this->name,
             'email' => $this->email,
             'username' => $this->username,
@@ -103,7 +103,7 @@ class ActionsStudentRegistration extends Component
         // Assign location
         $selectedLocationId = $this->location_id;
         if (!$selectedLocationId) {
-            $location = app(StudentRegistrationRepositoryInterface::class)->getCurrentUserLocations()->first();
+            $location = app(StudentRepositoryInterface::class)->getCurrentStudentLocations()->first();
             $selectedLocationId = $location?->id;
         }
 

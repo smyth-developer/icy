@@ -21,6 +21,12 @@ class RoleSeeder extends Seeder
                 'created_by' => '1',
             ],
             [
+                'name' => 'Accountant',
+                'description' => 'Accountant manage the financial transactions of the center',
+                'type' => 'System',
+                'created_by' => '1',
+            ],
+            [
                 'name' => 'Center Manager',
                 'description' => 'Manages center operations with administrative access',
                 'type' => 'System',

@@ -4,7 +4,7 @@ namespace App\Livewire\Back\Personnel\Registration;
 
 use Livewire\Component;
 use Livewire\Attributes\Title;
-use App\Repositories\Contracts\StudentRegistrationRepositoryInterface;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 use App\Models\User;
 
 #[Title('Đăng ký học viên')]
@@ -13,7 +13,7 @@ class StudentsRegistration extends Component
 
     public function render()
     {
-        $students = app(StudentRegistrationRepositoryInterface::class)->getAllStudentsPendingOfLocation();
+        $students = app(StudentRepositoryInterface::class)->getAllStudentsPendingOfLocation();
         return view('livewire.back.personnel.registration.students-registration', [
             'students' => $students,
         ]);

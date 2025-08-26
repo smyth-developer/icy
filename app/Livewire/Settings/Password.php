@@ -20,6 +20,54 @@ class Password extends Component
     public string $password_confirmation = '';
 
     /**
+     * Check if password has lowercase letter
+     */
+    public function hasLowercase(): bool
+    {
+        return preg_match('/[a-z]/', $this->password);
+    }
+
+    /**
+     * Check if password has uppercase letter
+     */
+    public function hasUppercase(): bool
+    {
+        return preg_match('/[A-Z]/', $this->password);
+    }
+
+    /**
+     * Check if password has number
+     */
+    public function hasNumber(): bool
+    {
+        return preg_match('/\d/', $this->password);
+    }
+
+    /**
+     * Check if password has special character
+     */
+    public function hasSpecialChar(): bool
+    {
+        return preg_match('/[@$!%*?&]/', $this->password);
+    }
+
+    /**
+     * Check if password meets minimum length
+     */
+    public function hasMinLength(): bool
+    {
+        return strlen($this->password) >= 8;
+    }
+
+    /**
+     * Check if passwords match
+     */
+    public function passwordsMatch(): bool
+    {
+        return $this->password === $this->password_confirmation && !empty($this->password);
+    }
+
+    /**
      * Update the password for the currently authenticated user.
      */
     public function updatePassword(): void

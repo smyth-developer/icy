@@ -2,9 +2,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use Exception;
 
 class UserRepository implements UserRepositoryInterface
 {

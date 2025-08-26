@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 use Livewire\WithoutUrlPagination;
 use App\Repositories\Contracts\CourseRepositoryInterface;
 
-#[Title('Khoá học')]
+#[Title('Lớp học')]
 class Courses extends Component
 {
     use WithPagination, WithoutUrlPagination;
