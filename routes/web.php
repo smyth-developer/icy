@@ -31,11 +31,6 @@ use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
 use App\Livewire\Back\Personnel\Employee\Staff;
 use App\Livewire\Back\Personnel\Student\Students;
 
-use App\Http\Controllers\SepayWebhookController;
-
-Route::post('/webhook/sepay', [SepayWebhookController::class, 'handle'])->name('webhook.sepay');
-
-
 Route::get('/', function () {
     return redirect()->route('login');
 });

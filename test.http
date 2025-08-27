@@ -1,8 +1,0 @@
-POST http://localhost:8000/webhook/sepay
-Content-Type: application/json
-
-{
-  "transaction_id": "123456",
-  "amount": 100000,
-  "status": "success"
-}
