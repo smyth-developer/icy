@@ -29,7 +29,6 @@ class StudentRepository implements StudentRepositoryInterface
         if ($locations->isEmpty()) {
             return collect();
         }
-
         $studentOfLocations = User::with(['locations', 'roles'])
             ->whereHas('locations', function ($query) use ($locations) {
                 $query->whereIn('locations.id', $locations->pluck('id'));
@@ -45,7 +44,6 @@ class StudentRepository implements StudentRepositoryInterface
                     $user->roles->pluck('id')->first(),
                 ];
             });
-
         return $studentOfLocations;
     }
 

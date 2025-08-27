@@ -22,8 +22,8 @@ class BankSeeder extends Seeder
             ],
             [
                 'bank_name' => 'MBBANK',
-                'account_number' => '1222233',
-                'account_name' => 'CONG TY TNHH GIAO DUC VIEN SANG TAO',
+                'account_number' => '00866683539',
+                'account_name' => 'NGUYEN THI THUY VY',
                 'status' => 'active',
                 'description' => 'Bank account for the PERSONNEL',
             ],

@@ -5,7 +5,6 @@ namespace App\Livewire\Back\Personnel\Registration;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use App\Repositories\Contracts\StudentRepositoryInterface;
-use App\Models\User;
 
 #[Title('Đăng ký học viên')]
 class StudentsRegistration extends Component
@@ -17,6 +16,11 @@ class StudentsRegistration extends Component
         return view('livewire.back.personnel.registration.students-registration', [
             'students' => $students,
         ]);
+    }
+
+    public function mount()
+    {
+        $this->dispatch('reloadPage');
     }
 
     public function addStudentRegistration()

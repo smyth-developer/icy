@@ -80,14 +80,12 @@
 
                 <flux:navlist.group :heading="__('Arrangement')" class="grid">
 
-                    <flux:navlist.item icon="adjustments-horizontal"
-                        :current="request()->routeIs('')" wire:navigate>
+                    <flux:navlist.item icon="adjustments-horizontal" :current="request()->routeIs('')" wire:navigate>
                         Xếp lớp học
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="calendar-days"
-                        :current="request()->routeIs('')" wire:navigate>
-                       Xếp lịch học
+                    <flux:navlist.item icon="calendar-days" :current="request()->routeIs('')" wire:navigate>
+                        Xếp lịch học
                     </flux:navlist.item>
 
                 </flux:navlist.group>
@@ -117,6 +115,11 @@
                         Nhân viên
                     </flux:navlist.item>
 
+                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.staff-registration')"
+                        :current="request()->routeIs('admin.personnel.staff-registration')" wire:navigate>
+                        Đăng ký nhân viên
+                    </flux:navlist.item>
+
                     <flux:navlist.item icon="user-group" :href="route('admin.personnel.students')"
                         :current="request()->routeIs('admin.personnel.students')" wire:navigate>
                         Học viên
@@ -125,11 +128,6 @@
                     <flux:navlist.item icon="user-pen" :href="route('admin.personnel.student-registration')"
                         :current="request()->routeIs('admin.personnel.student-registration')" wire:navigate>
                         Đăng ký học viên
-                    </flux:navlist.item>
-
-                    <flux:navlist.item icon="user-plus" :href="route('admin.personnel.staff-registration')"
-                        :current="request()->routeIs('admin.personnel.staff-registration')" wire:navigate>
-                        Đăng ký nhân viên
                     </flux:navlist.item>
 
                 </flux:navlist.group>
@@ -179,7 +177,7 @@
             <flux:header class="lg:hidden">
                 <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
                 <flux:spacer />
-                <flux:dropdown  class="cursor-pointer" position="top" align="end">
+                <flux:dropdown class="cursor-pointer" position="top" align="end">
                     <flux:profile avatar="{{ auth()->user()->detail?->avatar }}" icon-trailing="chevron-down" />
 
                     <flux:menu>

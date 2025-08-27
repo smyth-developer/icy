@@ -20,6 +20,7 @@ class ActionsStudentRegistration extends Component
 
     public $studentId;
     public $isEditStudentMode = false;
+    public $hasWebcam = false; // Thêm thuộc tính kiểm tra webcam
 
     // User fields
     public $name, $email, $username, $password, $account_code, $id_card;
@@ -32,6 +33,26 @@ class ActionsStudentRegistration extends Component
 
     // File upload
     public $avatarFile;
+
+    public function mount()
+    {
+        // Kiểm tra webcam khi component được mount
+        $this->checkWebcamAvailability();
+    }
+
+    public function checkWebcamAvailability()
+    {
+        // Kiểm tra xem có thể truy cập webcam không
+        if (request()->isMethod('get')) {
+            $this->hasWebcam = true; // Mặc định true, sẽ được cập nhật bởi JavaScript
+        }
+    }
+
+    public function checkWebcamStatus()
+    {
+        // Phương thức này sẽ được gọi từ JavaScript để cập nhật trạng thái webcam
+        $this->dispatch('check-webcam-status');
+    }
 
     public function rules()
     {
@@ -58,7 +79,11 @@ class ActionsStudentRegistration extends Component
         $this->account_code = UserHelper::randomAccountCode();
         $this->isEditStudentMode = false;
         $this->password = UserHelper::randomPassword(10);
+        // Không cần thiết lập avatar mặc định vì accessor sẽ xử lý
+        $this->avatar = null;
+        $this->checkWebcamStatus();
         Flux::modal('modal-student')->show();
+
     }
 
     public function createStudent()
@@ -67,11 +92,28 @@ class ActionsStudentRegistration extends Component
         $this->validate();
 
         // Handle avatar upload
-        $filename = $this->avatar ?? null;
+        $filename = null;
+        
         if ($this->avatarFile) {
+            // Handle file upload
             $extension = $this->avatarFile->getClientOriginalExtension();
             $filename = $this->account_code . '-' . uniqid() . '.' . $extension;
             $this->avatarFile->storeAs('images/avatars', $filename, 'public');
+        } elseif ($this->avatar && str_starts_with($this->avatar, 'data:image')) {
+            // Handle webcam image (data URL) - save as file
+            $imageData = str_replace('data:image/png;base64,', '', $this->avatar);
+            $imageData = str_replace(' ', '+', $imageData);
+            $image = base64_decode($imageData);
+            
+            $filename = $this->account_code . '-' . uniqid() . '.png';
+            $path = storage_path('app/public/images/avatars/' . $filename);
+            
+            // Ensure directory exists
+            if (!File::exists(dirname($path))) {
+                File::makeDirectory(dirname($path), 0755, true);
+            }
+            
+            file_put_contents($path, $image);
         }
 
         // Create user
@@ -83,7 +125,6 @@ class ActionsStudentRegistration extends Component
             'password' => Hash::make($this->password),
             'status' => 'pending',
         ]);
-
 
         // Create user detail
         $user->detail()->create([
@@ -115,7 +156,7 @@ class ActionsStudentRegistration extends Component
         $this->reset(['studentId', 'name', 'email', 'username', 'password', 'account_code', 'phone', 'address', 'birthday', 'avatar', 'avatarFile', 'location_id', 'id_card']);
         Flux::modal('modal-student')->close();
 
-        $this->redirectRoute('admin.personnel.student-registration', navigate: true);
+        $this->redirectRoute('admin.personnel.student-registration', navigate: false);
     }
 
     #[On('edit-student')]
@@ -133,19 +174,20 @@ class ActionsStudentRegistration extends Component
             $this->phone = $student->detail?->phone;
             $this->address = $student->detail?->address;
             $this->birthday = $student->detail?->birthday;
-            $this->avatar = $student->detail?->avatar;
+            // Lấy tên file gốc từ database (không qua accessor)
+            $this->avatar = $student->detail?->getRawOriginal('avatar');
             $this->id_card = $student->detail?->id_card;
             $this->location_id = $student->locations->first()?->id;
         }
 
         $this->isEditStudentMode = true;
         Flux::modal('modal-student')->show();
+        // Kiểm tra trạng thái webcam khi mở modal
+        $this->checkWebcamStatus();
     }
 
     public function updateStudent()
     {
-
-
         $this->validate();
 
         $user = User::find($this->studentId);
@@ -160,7 +202,7 @@ class ActionsStudentRegistration extends Component
         if ($this->avatarFile) {
             // Delete old avatar if exists
             if ($filename) {
-                $path = public_path('storage/images/avatars/' . $filename);
+                $path = storage_path('app/public/images/avatars/' . $filename);
                 if (File::exists($path)) {
                     File::delete($path);
                 }
@@ -169,6 +211,29 @@ class ActionsStudentRegistration extends Component
             $extension = $this->avatarFile->getClientOriginalExtension();
             $filename = $user->account_code . '-' . uniqid() . '.' . $extension;
             $this->avatarFile->storeAs('images/avatars', $filename, 'public');
+        } elseif ($this->avatar && str_starts_with($this->avatar, 'data:image')) {
+            // Handle webcam image (data URL) - save as file
+            // Delete old avatar if exists
+            if ($filename) {
+                $path = storage_path('app/public/images/avatars/' . $filename);
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+            }
+            
+            $imageData = str_replace('data:image/png;base64,', '', $this->avatar);
+            $imageData = str_replace(' ', '+', $imageData);
+            $image = base64_decode($imageData);
+            
+            $filename = $user->account_code . '-' . uniqid() . '.png';
+            $path = storage_path('app/public/images/avatars/' . $filename);
+            
+            // Ensure directory exists
+            if (!File::exists(dirname($path))) {
+                File::makeDirectory(dirname($path), 0755, true);
+            }
+            
+            file_put_contents($path, $image);
         }
 
         // Update user
@@ -185,7 +250,6 @@ class ActionsStudentRegistration extends Component
 
         $user->update($userData);
         
-
         // Update user detail
         $user->detail()->updateOrCreate(
             ['user_id' => $user->id],
@@ -198,8 +262,11 @@ class ActionsStudentRegistration extends Component
         );
 
         session()->flash('success', 'Học viên đã được cập nhật thành công.');
+        // Reset avatar và avatarFile để có thể chụp ảnh mới từ webcam trong lần edit tiếp theo
+        $this->avatar = null;
+        $this->avatarFile = null;
         Flux::modal('modal-student')->close();
-        $this->redirectRoute('admin.personnel.student-registration', navigate: true);
+        $this->redirectRoute('admin.personnel.student-registration', navigate: false);
     }
 
     #[On('delete-student')]
@@ -226,7 +293,7 @@ class ActionsStudentRegistration extends Component
 
         session()->flash('success', 'Học viên đã được xóa thành công.');
         Flux::modal('delete-student')->close();
-        $this->redirectRoute('admin.personnel.student-registration', navigate: true);
+        $this->redirectRoute('admin.personnel.student-registration', navigate: false);
     }
 
     public function updateUsername()

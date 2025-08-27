@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('curricula', function (Blueprint $table) {
             $table->id();
-            $table->integer('ordering')->default(1000);
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('program_id')->constrained('programs');
+            $table->string('name');
             $table->string('lecture_pdf')->nullable();
+
             $table->timestamps();
         });
     }

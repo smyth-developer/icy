@@ -12,7 +12,8 @@
             </flux:text>
         </div>
 
-        <form wire:submit.prevent='{{ $isEditStudentMode ? 'updateStudent' : 'createStudent' }}' class="px-8 py-6 space-y-8">
+        <form wire:submit.prevent='{{ $isEditStudentMode ? 'updateStudent' : 'createStudent' }}'
+            class="px-8 py-6 space-y-8">
             @if ($isEditStudentMode)
                 <input type="hidden" wire:model='studentId' />
             @endif
@@ -20,61 +21,57 @@
             {{-- Avatar Upload Section --}}
             <div
                 class="flex flex-col items-center space-y-6 py-6 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-gray-200 dark:border-gray-600">
-                <div class="relative group">
-                    @if ($avatarFile)
-                        <div class="relative">
-                            <img src="{{ $avatarFile->temporaryUrl() }}" alt="Preview"
-                                class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-2xl ring-4 ring-blue-500/30">
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent">
-                            </div>
-                            <div class="absolute bottom-2 right-2 bg-green-500 text-white rounded-full p-2 shadow-lg">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    @elseif ($avatar)
-                        <div class="relative">
-                            <img src="{{ $avatar }}" alt="Current Avatar"
-                                class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-2xl ring-4 ring-purple-500/30">
-                            <div class="absolute inset-0 rounded-full bg-gradient-to-t from-black/10 to-transparent">
-                            </div>
-                        </div>
-                    @else
-                        <div
-                            class="w-32 h-32 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-600 dark:to-gray-700 border-4 border-white shadow-2xl ring-4 ring-gray-300/30 flex items-center justify-center group-hover:ring-blue-500/50 transition-all duration-300">
-                            <svg class="w-12 h-12 text-gray-400 dark:text-gray-300" fill="currentColor"
-                                viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
+
+                {{-- Vòng tròn avatar --}}
+                <div class="relative group w-32 h-32 transition-all duration-500 ease-in-out" id="avatarContainer">
+                    {{-- Preview avatar chính --}}
+                    <img id="avatarPreview"
+                        src="{{ $avatarFile ? $avatarFile->temporaryUrl() : ($avatar && str_starts_with($avatar, 'data:image') ? $avatar : ($avatar ? asset('storage/images/avatars/' . $avatar) : asset('storage/images/avatars/default-avatar.png'))) }}"
+                        alt="Avatar"
+                        class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-2xl ring-4 transition-all duration-500 ease-in-out
+            {{ $avatarFile ? 'ring-blue-500/30' : ($avatar && str_starts_with($avatar, 'data:image') ? 'ring-green-500/30' : ($avatar ? 'ring-purple-500/30' : 'ring-gray-300/30')) }}">
+
+                    {{-- Nút mở webcam (overlay góc phải) - chỉ hiện khi có webcam --}}
+                    @if ($hasWebcam)
+                        <button type="button" id="openWebcam"
+                            class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300">
+                            📸
+                        </button>
                     @endif
 
-                    <!-- Upload overlay -->
-                    <div
-                        class="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
+                    {{-- Webcam overlay --}}
+                    <div id="webcamOverlay"
+                        class="absolute inset-0 hidden bg-black/80 rounded-full flex flex-col items-center justify-center z-10 transition-all duration-500 ease-in-out">
+                        <video id="video" autoplay
+                            class="w-32 h-32 object-cover rounded-full transition-all duration-500 ease-in-out"></video>
                     </div>
                 </div>
 
+                {{-- Webcam Controls - Ẩn mặc định, hiện khi webcam active --}}
+                <div id="webcamControls" class="hidden space-y-3 transition-all duration-500 ease-in-out">
+                    <div class="flex space-x-3">
+                        {{-- Nút chụp --}}
+                        <button type="button" id="capture"
+                            class="bg-green-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 font-medium">
+                            📸 Chụp ảnh
+                        </button>
+
+                        {{-- Nút đóng webcam --}}
+                        <button type="button" id="closeWebcam"
+                            class="bg-red-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 font-medium">
+                            ❌ Đóng webcam
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Upload file --}}
                 <div class="w-full max-w-sm">
-                    <flux:input type="file" wire:model="avatarFile" accept="image/*" label="📸 Ảnh đại diện"
+                    <flux:input type="file" wire:model="avatarFile" accept="image/*" label="📁 Chọn ảnh từ máy tính"
                         class="w-full rounded-xl border-2 border-dashed border-blue-300 hover:border-blue-500 transition-colors duration-300 bg-white/50" />
                 </div>
 
                 @error('avatarFile')
-                    <div class="text-red-500 text-sm mt-2">
-                        {{ $message }}
-                    </div>
+                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -262,3 +259,227 @@
         </div>
     </flux:modal>
 </div>
+
+@push('scripts')
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('video');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const avatarPreview = document.getElementById('avatarPreview');
+            const webcamOverlay = document.getElementById('webcamOverlay');
+            const captureBtn = document.getElementById('capture');
+            const webcamControls = document.getElementById('webcamControls');
+            let stream;
+
+            // Function to attach/re-attach the webcam button listener
+            function attachWebcamButtonListener() {
+                const openBtn = document.getElementById('openWebcam');
+                if (openBtn) {
+                    // Remove existing listener to prevent duplicates
+                    openBtn.removeEventListener('click', openBtn._webcamListenerAttached);
+
+                    // Create new listener
+                    const listener = async () => {
+                        // Issue 1: Hide the button when clicked
+                        openBtn.style.display = 'none';
+
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({
+                                video: true
+                            });
+                            video.srcObject = stream;
+                            webcamOverlay.classList.remove('hidden');
+                            webcamControls.classList.remove('hidden'); // Show controls
+
+                            // Expand the avatar container and preview
+                            const avatarContainer = document.getElementById('avatarContainer');
+                            const avatarPreview = document.getElementById('avatarPreview');
+                            const videoElement = document.getElementById('video');
+
+                            if (avatarContainer && avatarPreview && videoElement) {
+                                // Expand to larger size
+                                avatarContainer.classList.remove('w-32', 'h-32');
+                                avatarContainer.classList.add('w-64', 'h-64');
+
+                                avatarPreview.classList.remove('w-32', 'h-32');
+                                avatarPreview.classList.add('w-64', 'h-64');
+
+                                videoElement.classList.remove('w-32', 'h-32');
+                                videoElement.classList.add('w-64', 'h-64');
+                            }
+
+                        } catch (error) {
+                            console.log('Không thể truy cập webcam:', error);
+                            alert('Không thể truy cập webcam. Vui lòng kiểm tra quyền truy cập.');
+                            // Show button again if webcam access fails
+                            openBtn.style.display = 'block';
+                        }
+                    };
+
+                    openBtn.addEventListener('click', listener);
+                    openBtn._webcamListenerAttached = listener; // Store reference for removal
+                }
+            }
+
+            // Function to reset avatar size to original
+            function resetAvatarSize() {
+                const avatarContainer = document.getElementById('avatarContainer');
+                const avatarPreview = document.getElementById('avatarPreview');
+                const videoElement = document.getElementById('video');
+
+                if (avatarContainer && avatarPreview && videoElement) {
+                    // Reset to original size
+                    avatarContainer.classList.remove('w-64', 'h-64');
+                    avatarContainer.classList.add('w-32', 'h-32');
+
+                    avatarPreview.classList.remove('w-64', 'h-64');
+                    avatarPreview.classList.add('w-32', 'h-32');
+
+                    videoElement.classList.remove('w-64', 'h-64');
+                    videoElement.classList.add('w-32', 'h-32');
+                }
+            }
+
+            // Helper function to find Livewire component
+            function findLivewireComponent() {
+                // Tìm component cha (students-registration) chứa wire:id
+                let element = document.querySelector('[wire\\:id]');
+                if (!element) {
+                    // Nếu không tìm thấy, tìm element cha gần nhất có wire:id
+                    element = document.closest('[wire\\:id]') || document.querySelector('[wire\\:id]');
+                }
+
+                if (element) {
+                    const wireId = element.getAttribute('wire\\:id');
+                    console.log('🔍 Found Livewire component with ID:', wireId);
+                    return Livewire.find(wireId);
+                }
+
+                console.log('🔍 No Livewire component found');
+                return null;
+            }
+
+            // Kiểm tra webcam availability
+            async function checkWebcamAvailability() {
+                console.log('🔍 Starting webcam availability check...');
+                try {
+                    const devices = await navigator.mediaDevices.enumerateDevices();
+                    const videoDevices = devices.filter(device => device.kind === 'videoinput');
+                    console.log('🔍 Found video devices:', videoDevices.length);
+
+                    if (videoDevices.length > 0) {
+                        // Có webcam, cập nhật Livewire component
+                        console.log('🔍 Webcam found, setting hasWebcam = true');
+                        // Sử dụng helper function để tìm component
+                        const livewireComponent = findLivewireComponent();
+                        if (livewireComponent) {
+                            livewireComponent.set('hasWebcam', true);
+                        }
+                    } else {
+                        // Không có webcam, cập nhật Livewire component
+                        console.log('🔍 No webcam found, setting hasWebcam = false');
+                        const livewireComponent = findLivewireComponent();
+                        if (livewireComponent) {
+                            livewireComponent.set('hasWebcam', false);
+                        }
+                    }
+                } catch (error) {
+                    console.log('🔍 Error checking webcam:', error);
+                    const livewireComponent = findLivewireComponent();
+                    if (livewireComponent) {
+                        livewireComponent.set('hasWebcam', false);
+                    }
+                }
+            }
+
+            // Lắng nghe sự kiện kiểm tra webcam từ Livewire
+            Livewire.on('check-webcam-status', async () => {
+                console.log('🔍 Livewire event: check-webcam-status triggered');
+                await checkWebcamAvailability();
+                console.log('🔍 Webcam availability check completed');
+                // After checking webcam and Livewire updates the DOM, re-attach the listener
+                setTimeout(() => {
+                    console.log('🔍 Attaching webcam button listener...');
+                    attachWebcamButtonListener();
+                    // Debug: Check if button exists after attachment
+                    const openBtn = document.getElementById('openWebcam');
+                    console.log('🔍 Webcam button found:', openBtn ? 'YES' : 'NO');
+                    if (openBtn) {
+                        console.log('🔍 Button display style:', openBtn.style.display);
+                        console.log('🔍 Button classes:', openBtn.className);
+                    }
+                }, 200); // Increased delay to ensure DOM is fully updated
+            });
+
+            // Kiểm tra webcam khi trang load
+            checkWebcamAvailability();
+            // Attach initial listener
+            attachWebcamButtonListener();
+
+            // Bật webcam
+            // (Event listener is now handled by attachWebcamButtonListener)
+
+            // Chụp ảnh
+            captureBtn?.addEventListener('click', () => {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0);
+                const data = canvas.toDataURL('image/png');
+
+                // Thay preview ngay
+                avatarPreview.src = data;
+
+                // Gửi về Livewire
+                const livewireComponent = findLivewireComponent();
+                if (livewireComponent) {
+                    livewireComponent.set('avatar', data);
+                }
+
+                // Tắt webcam
+                stream.getTracks().forEach(track => track.stop());
+                webcamOverlay.classList.add('hidden');
+                webcamControls.classList.add('hidden'); // Hide controls after capture
+
+                // Reset avatar size to original
+                resetAvatarSize();
+
+                // Show the webcam button again after capture
+                const openBtn = document.getElementById('openWebcam');
+                if (openBtn) {
+                    const livewireComponent = findLivewireComponent();
+                    if (livewireComponent && livewireComponent.get('hasWebcam')) {
+                        openBtn.style.display = 'block';
+                    }
+                }
+            });
+
+            // Add close webcam functionality
+            const closeWebcamBtn = document.getElementById('closeWebcam');
+            if (closeWebcamBtn) {
+                closeWebcamBtn.addEventListener('click', () => {
+                    webcamOverlay.classList.add('hidden');
+                    webcamControls.classList.add('hidden'); // Hide controls when closing webcam
+                    if (stream) {
+                        stream.getTracks().forEach(track => track.stop());
+                    }
+
+                    // Reset avatar size to original
+                    resetAvatarSize();
+
+                    // Show the webcam button again
+                    const openBtn = document.getElementById('openWebcam');
+                    if (openBtn) {
+                        const livewireComponent = findLivewireComponent();
+                        if (livewireComponent && livewireComponent.get('hasWebcam')) {
+                            openBtn.style.display = 'block';
+                        }
+                    }
+                });
+            }
+        });
+        Livewire.on('reloadPage', () => {
+            location.reload();
+        });
+    </script>
+@endpush
