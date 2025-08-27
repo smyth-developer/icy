@@ -1,6 +1,25 @@
 <div
     class="flex aspect-square size-8 items-center justify-center rounded-md bg-transparent ring-1 ring-pink-500 dark:ring-white dark:bg-zinc-800 ">
-    <img src="<?php echo e(asset('favicon.svg')); ?>" alt="Logo" class="w-6 h-6" width="24" height="24" decoding="async" />
+    <?php if (isset($component)) { $__componentOriginal159d6670770cb479b1921cea6416c26c = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal159d6670770cb479b1921cea6416c26c = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.app-logo-icon','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('app-logo-icon'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal159d6670770cb479b1921cea6416c26c)): ?>
+<?php $attributes = $__attributesOriginal159d6670770cb479b1921cea6416c26c; ?>
+<?php unset($__attributesOriginal159d6670770cb479b1921cea6416c26c); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal159d6670770cb479b1921cea6416c26c)): ?>
+<?php $component = $__componentOriginal159d6670770cb479b1921cea6416c26c; ?>
+<?php unset($__componentOriginal159d6670770cb479b1921cea6416c26c); ?>
+<?php endif; ?>
     
 </div>
 <div class="ms-1 grid flex-1 text-start text-sm">

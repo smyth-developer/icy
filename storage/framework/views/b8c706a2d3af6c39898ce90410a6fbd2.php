@@ -61,9 +61,9 @@
 
         <form wire:submit.prevent='<?php echo e($isEditStudentMode ? 'updateStudent' : 'createStudent'); ?>'
             class="px-8 py-6 space-y-8">
-            <!--[if BLOCK]><![endif]--><?php if($isEditStudentMode): ?>
+            <?php if($isEditStudentMode): ?>
                 <input type="hidden" wire:model='studentId' />
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            <?php endif; ?>
 
             
             <div
@@ -79,12 +79,12 @@
             <?php echo e($avatarFile ? 'ring-blue-500/30' : ($avatar && str_starts_with($avatar, 'data:image') ? 'ring-green-500/30' : ($avatar ? 'ring-purple-500/30' : 'ring-gray-300/30'))); ?>">
 
                     
-                    <!--[if BLOCK]><![endif]--><?php if($hasWebcam): ?>
+                    <?php if($hasWebcam): ?>
                         <button type="button" id="openWebcam"
                             class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300">
                             📸
                         </button>
-                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                    <?php endif; ?>
 
                     
                     <div id="webcamOverlay"
@@ -135,7 +135,7 @@
 <?php endif; ?>
                 </div>
 
-                <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['avatarFile'];
+                <?php $__errorArgs = ['avatarFile'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -144,7 +144,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
+unset($__errorArgs, $__bag); ?>
             </div>
 
             
@@ -173,7 +173,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 <?php endif; ?>
             </div>
 
-            <!--[if BLOCK]><![endif]--><?php if(auth()->user()->locations()->count() > 1): ?>
+            <?php if(auth()->user()->locations()->count() > 1): ?>
                 <div class="space-y-6">
                     <div class="form-group">
                         <?php if (isset($component)) { $__componentOriginala467913f9ff34913553be64599ec6e92 = $component; } ?>
@@ -206,7 +206,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 <?php $component = $__componentOriginalc7395a5f1f6c2e275d1dc4ea0be0c745; ?>
 <?php unset($__componentOriginalc7395a5f1f6c2e275d1dc4ea0be0c745); ?>
 <?php endif; ?>
-                            <!--[if BLOCK]><![endif]--><?php $__currentLoopData = auth()->user()->locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = auth()->user()->locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php if (isset($component)) { $__componentOriginalc7395a5f1f6c2e275d1dc4ea0be0c745 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc7395a5f1f6c2e275d1dc4ea0be0c745 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::select.option.index','data' => ['value' => $location->id,'label' => ''.e($location->name).'']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -227,7 +227,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 <?php $component = $__componentOriginalc7395a5f1f6c2e275d1dc4ea0be0c745; ?>
 <?php unset($__componentOriginalc7395a5f1f6c2e275d1dc4ea0be0c745); ?>
 <?php endif; ?>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                          <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginala467913f9ff34913553be64599ec6e92)): ?>
@@ -240,7 +240,7 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
 <?php endif; ?>
                     </div>
                 </div>
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            <?php endif; ?>
 
             <div class="space-y-6">
                 

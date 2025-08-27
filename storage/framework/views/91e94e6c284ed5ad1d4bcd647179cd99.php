@@ -154,7 +154,7 @@ if (isset($__slots)) unset($__slots);
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                        <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <?php $__empty_1 = true; $__currentLoopData = $locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr wire:key="location-<?php echo e($location->id); ?>" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
                                     <?php echo e($location->name); ?>
@@ -245,17 +245,17 @@ if (isset($__slots)) unset($__slots);
                                     </div>
                                 </td>
                             </tr>
-                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
             
-            <!--[if BLOCK]><![endif]--><?php if($locations->hasPages()): ?>
+            <?php if($locations->hasPages()): ?>
                 <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                     <?php echo e($locations->links()); ?>
 
                 </div>
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            <?php endif; ?>
         </div>
     </div>
 

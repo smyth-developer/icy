@@ -157,7 +157,7 @@ if (isset($__slots)) unset($__slots);
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                        <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <?php $__empty_1 = true; $__currentLoopData = $students; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $student): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr wire:key="student-<?php echo e($student->id); ?>" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
                                 <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center font-medium">
                                     <?php echo e($loop->iteration); ?>
@@ -185,8 +185,8 @@ if (isset($__slots)) unset($__slots);
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                    <!--[if BLOCK]><![endif]--><?php if($student->locations->count() > 0): ?>
-                                        <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $student->locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($student->locations->count() > 0): ?>
+                                        <?php $__currentLoopData = $student->locations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $location): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <?php if (isset($component)) { $__componentOriginal4cc377eda9b63b796b6668ee7832d023 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal4cc377eda9b63b796b6668ee7832d023 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::badge.index','data' => ['color' => 'blue','size' => 'sm','class' => 'mb-1']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -209,11 +209,11 @@ if (isset($__slots)) unset($__slots);
 <?php $component = $__componentOriginal4cc377eda9b63b796b6668ee7832d023; ?>
 <?php unset($__componentOriginal4cc377eda9b63b796b6668ee7832d023); ?>
 <?php endif; ?>
-                                            <!--[if BLOCK]><![endif]--><?php if(!$loop->last): ?> <br> <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                            <?php if(!$loop->last): ?> <br> <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <?php else: ?>
                                         <span class="text-gray-500 dark:text-gray-400 text-xs">Chưa có cơ sở</span>
-                                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                    <?php endif; ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300 text-center hidden sm:table-cell">
                                     <div>
@@ -304,7 +304,7 @@ if (isset($__slots)) unset($__slots);
                                     </div>
                                 </td>
                             </tr>
-                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

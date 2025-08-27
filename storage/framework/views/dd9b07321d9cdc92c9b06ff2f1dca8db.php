@@ -59,11 +59,11 @@
                 <div class="space-y-1">
                     <div class="flex items-center gap-2">
                         <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->hasMinLength() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                            <!--[if BLOCK]><![endif]--><?php if($this->hasMinLength()): ?>
+                            <?php if($this->hasMinLength()): ?>
                                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm <?php echo e($this->hasMinLength() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                             <?php echo e(__('Ít nhất 8 ký tự')); ?>
@@ -72,11 +72,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->hasLowercase() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                            <!--[if BLOCK]><![endif]--><?php if($this->hasLowercase()): ?>
+                            <?php if($this->hasLowercase()): ?>
                                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm <?php echo e($this->hasLowercase() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                             <?php echo e(__('Ít nhất 1 chữ thường (a-z)')); ?>
@@ -85,11 +85,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->hasUppercase() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                            <!--[if BLOCK]><![endif]--><?php if($this->hasUppercase()): ?>
+                            <?php if($this->hasUppercase()): ?>
                                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm <?php echo e($this->hasUppercase() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                             <?php echo e(__('Ít nhất 1 chữ hoa (A-Z)')); ?>
@@ -98,11 +98,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->hasNumber() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                            <!--[if BLOCK]><![endif]--><?php if($this->hasNumber()): ?>
+                            <?php if($this->hasNumber()): ?>
                                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm <?php echo e($this->hasNumber() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                             <?php echo e(__('Ít nhất 1 số (0-9)')); ?>
@@ -111,11 +111,11 @@
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->hasSpecialChar() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                            <!--[if BLOCK]><![endif]--><?php if($this->hasSpecialChar()): ?>
+                            <?php if($this->hasSpecialChar()): ?>
                                 <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                 </svg>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </div>
                         <span class="text-sm <?php echo e($this->hasSpecialChar() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                             <?php echo e(__('Ít nhất 1 ký tự đặc biệt (@$!%*?&)')); ?>
@@ -149,11 +149,11 @@
             <!-- Password Match Indicator -->
             <div class="flex items-center gap-2">
                 <div class="w-4 h-4 rounded-full border-2 flex items-center justify-center <?php echo e($this->passwordsMatch() ? 'bg-green-500 border-green-500' : 'border-gray-300 dark:border-gray-600'); ?>">
-                    <!--[if BLOCK]><![endif]--><?php if($this->passwordsMatch()): ?>
+                    <?php if($this->passwordsMatch()): ?>
                         <svg class="w-2.5 h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                         </svg>
-                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                    <?php endif; ?>
                 </div>
                 <span class="text-sm <?php echo e($this->passwordsMatch() ? 'text-green-600 dark:text-green-400' : 'text-gray-600 dark:text-gray-400'); ?>">
                     <?php echo e(__('Mật khẩu khớp')); ?>

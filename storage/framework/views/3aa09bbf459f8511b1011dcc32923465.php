@@ -221,10 +221,10 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-                        <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $logs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <?php $__empty_1 = true; $__currentLoopData = $logs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <!--[if BLOCK]><![endif]--><?php switch($log->status):
+                                    <?php switch($log->status):
                                         case ('success'): ?>
                                             <span
                                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
@@ -272,17 +272,17 @@
                                                 Đăng xuất
                                             </span>
                                         <?php break; ?>
-                                    <?php endswitch; ?><!--[if ENDBLOCK]><![endif]-->
+                                    <?php endswitch; ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
                                     <div>
                                         <div class="font-medium"><?php echo e($log->login_at->format('d/m/Y H:i:s')); ?></div>
-                                        <!--[if BLOCK]><![endif]--><?php if($log->logout_at): ?>
+                                        <?php if($log->logout_at): ?>
                                             <div class="text-xs text-gray-500 dark:text-gray-400">
                                                 Đăng xuất: <?php echo e($log->logout_at->format('H:i:s')); ?>
 
                                             </div>
-                                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                        <?php endif; ?>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-300">
@@ -296,8 +296,8 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
-                                    <!--[if BLOCK]><![endif]--><?php if($log->failure_reason): ?>
-                                        <!--[if BLOCK]><![endif]--><?php if(str_contains($log->failure_reason, 'Forced logout')): ?>
+                                    <?php if($log->failure_reason): ?>
+                                        <?php if(str_contains($log->failure_reason, 'Forced logout')): ?>
                                             <span class="text-orange-600 dark:text-orange-400 flex items-center">
                                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                     <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
@@ -306,12 +306,12 @@
                                             </span>
                                         <?php else: ?>
                                             <span class="text-red-600 dark:text-red-400"><?php echo e($log->failure_reason); ?></span>
-                                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                        <?php endif; ?>
                                     <?php elseif($log->location): ?>
                                         <span class="text-gray-600 dark:text-gray-400"><?php echo e($log->location); ?></span>
                                     <?php else: ?>
                                         <span class="text-gray-400">-</span>
-                                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -328,18 +328,18 @@
                                             tại.</p>
                                     </td>
                                 </tr>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
 
                 <!-- Pagination -->
-                <!--[if BLOCK]><![endif]--><?php if($logs->hasPages()): ?>
+                <?php if($logs->hasPages()): ?>
                     <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
                         <?php echo e($logs->links()); ?>
 
                     </div>
-                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                <?php endif; ?>
             </div>
          <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>

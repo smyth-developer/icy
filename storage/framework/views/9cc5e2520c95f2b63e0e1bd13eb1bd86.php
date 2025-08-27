@@ -32,10 +32,10 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars); ?>
 
-<!--[if BLOCK]><![endif]--><?php if($status): ?>
+<?php if($status): ?>
     <div <?php echo e($attributes->merge(['class' => 'font-medium text-sm text-green-600'])); ?>>
         <?php echo e($status); ?>
 
     </div>
-<?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+<?php endif; ?>
 <?php /**PATH /Users/smyth/Herd/icy/resources/views/components/auth-session-status.blade.php ENDPATH**/ ?>

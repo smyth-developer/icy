@@ -169,7 +169,7 @@ if (isset($__slots)) unset($__slots);
                             </tr>
                         </thead>
                         <tbody id="sortable-program" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                            <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <?php $__empty_1 = true; $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                 <tr wire:key="program-<?php echo e($program->id); ?>" data-id="<?php echo e($program->id); ?>"
                                     class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 cursor-move drag-handle">
                                     <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center">
@@ -265,17 +265,17 @@ if (isset($__slots)) unset($__slots);
                                         </div>
                                     </td>
                                 </tr>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
                 
-                <!--[if BLOCK]><![endif]--><?php if($programs->hasPages()): ?>
+                <?php if($programs->hasPages()): ?>
                     <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                         <?php echo e($programs->links()); ?>
 
                     </div>
-                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                <?php endif; ?>
             </div>
         </div>
     </div>

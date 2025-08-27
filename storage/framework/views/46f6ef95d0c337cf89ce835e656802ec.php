@@ -144,9 +144,9 @@ if (isset($__slots)) unset($__slots);
                         class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                     >
                         <option value="">Tất cả môn học</option>
-                        <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <option value="<?php echo e($subject->id); ?>"><?php echo e($subject->name); ?> (<?php echo e($subject->code); ?>)</option>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
                 </div>
                 
@@ -195,7 +195,7 @@ if (isset($__slots)) unset($__slots);
                     </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                    <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $syllabi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $syllabus): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                    <?php $__empty_1 = true; $__currentLoopData = $syllabi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $syllabus): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
                             <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center font-medium">
                                 <?php echo e($syllabus->ordering); ?>
@@ -210,10 +210,10 @@ if (isset($__slots)) unset($__slots);
                                     <span class="text-xs text-gray-500 dark:text-gray-400">
                                         <?php echo e($syllabus->subject->code); ?>
 
-                                        <!--[if BLOCK]><![endif]--><?php if($syllabus->subject->program): ?>
+                                        <?php if($syllabus->subject->program): ?>
                                             - <?php echo e($syllabus->subject->program->name); ?>
 
-                                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                        <?php endif; ?>
                                     </span>
                                 </div>
                             </td>
@@ -329,18 +329,18 @@ if (isset($__slots)) unset($__slots);
                                 </div>
                             </td>
                         </tr>
-                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
         
         <!-- Pagination -->
-        <!--[if BLOCK]><![endif]--><?php if($syllabi->hasPages()): ?>
+        <?php if($syllabi->hasPages()): ?>
             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
                 <?php echo e($syllabi->links()); ?>
 
             </div>
-        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+        <?php endif; ?>
     </div>
 
     <!-- Summary -->
@@ -349,7 +349,7 @@ if (isset($__slots)) unset($__slots);
     </div>
 
     <!-- Flash Messages -->
-    <!--[if BLOCK]><![endif]--><?php if(session()->has('message')): ?>
+    <?php if(session()->has('message')): ?>
         <div class="fixed top-4 right-4 z-50">
             <div class="bg-green-100 dark:bg-green-900/20 border border-green-400 dark:border-green-500 text-green-700 dark:text-green-400 px-4 py-3 rounded relative" role="alert">
                 <span class="block sm:inline"><?php echo e(session('message')); ?></span>
@@ -361,6 +361,6 @@ if (isset($__slots)) unset($__slots);
                 </span>
             </div>
         </div>
-    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+    <?php endif; ?>
 </div>
 <?php /**PATH /Users/smyth/Herd/icy/resources/views/livewire/back/management/syllabus/syllabi.blade.php ENDPATH**/ ?>

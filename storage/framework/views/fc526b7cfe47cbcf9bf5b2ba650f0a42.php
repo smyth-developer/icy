@@ -88,7 +88,7 @@
 <?php unset($__componentOriginal26c546557cdc09040c8dd00b2090afd0); ?>
 <?php endif; ?>
 
-            <!--[if BLOCK]><![endif]--><?php if(Route::has('password.request')): ?>
+            <?php if(Route::has('password.request')): ?>
                 <?php if (isset($component)) { $__componentOriginal54ddb5b70b37b1e1cf0f2f95e4c53477 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal54ddb5b70b37b1e1cf0f2f95e4c53477 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::link','data' => ['class' => 'absolute end-0 top-0 text-xs sm:text-sm dark:text-white','href' => route('password.request'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -111,7 +111,7 @@
 <?php $component = $__componentOriginal54ddb5b70b37b1e1cf0f2f95e4c53477; ?>
 <?php unset($__componentOriginal54ddb5b70b37b1e1cf0f2f95e4c53477); ?>
 <?php endif; ?>
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            <?php endif; ?>
         </div>
 
         <!-- Remember Me -->

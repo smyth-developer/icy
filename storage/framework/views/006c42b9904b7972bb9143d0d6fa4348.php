@@ -40,12 +40,12 @@
 
                             </h2>
 
-                            <!--[if BLOCK]><![endif]--><?php if(auth()->user()->hasVerifiedEmail()): ?>
+                            <?php if(auth()->user()->hasVerifiedEmail()): ?>
                                 <p class="text-gray-600 dark:text-gray-400 mb-4">
                                     <?php echo e(auth()->user()->email); ?>
 
                                 </p>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
 
                             <?php if(auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && auth()->user()->hasVerifiedEmail()): ?>
                                 <div
@@ -103,7 +103,7 @@
 <?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
 <?php endif; ?>
 
-                                            <!--[if BLOCK]><![endif]--><?php if(session('status') === 'verification-link-sent'): ?>
+                                            <?php if(session('status') === 'verification-link-sent'): ?>
                                                 <div
                                                     class="mt-4 p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700 rounded-lg">
                                                     <div class="flex items-center">
@@ -119,11 +119,11 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                            <?php endif; ?>
 
                         </div>
                     </div>

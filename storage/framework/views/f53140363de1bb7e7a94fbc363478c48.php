@@ -80,9 +80,9 @@
 <?php endif; ?>
             </div>
 
-            <!--[if BLOCK]><![endif]--><?php if($isEditing): ?>
+            <?php if($isEditing): ?>
                 <input type="text" wire:model='syllabusId' hidden />
-            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            <?php endif; ?>
 
             <div class="form-group">
                 <?php if (isset($component)) { $__componentOriginala467913f9ff34913553be64599ec6e92 = $component; } ?>
@@ -96,11 +96,11 @@
 <?php endif; ?>
 <?php $component->withAttributes(['wire:model' => 'subject_id','label' => 'Môn học','placeholder' => 'Chọn môn học']); ?>
                     <option value="">Chọn môn học</option>
-                    <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($subject->id); ?>">
                             <?php echo e($subject->name); ?> (<?php echo e($subject->code); ?>)
                         </option>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginala467913f9ff34913553be64599ec6e92)): ?>

@@ -165,7 +165,7 @@ if (isset($__slots)) unset($__slots);
                         </div>
                         <div class="p-2">
                             <ul class="space-y-1">
-                                <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <?php $__empty_1 = true; $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <li wire:key="program-<?php echo e($program->id); ?>">
                                         <button wire:click="selectProgram(<?php echo e($program->id); ?>)"
                                             class="w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-200 <?php echo e((int) $selectedProgramId === (int) $program->id ? 'bg-pink-100 dark:bg-pink-500/20 text-pink-600 dark:text-pink-400 font-medium' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'); ?>">
@@ -178,7 +178,7 @@ if (isset($__slots)) unset($__slots);
                                         <div class="px-3 py-2 text-sm text-gray-500 dark:text-gray-400">Không có chương
                                             trình nào.</div>
                                     </li>
-                                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -210,7 +210,7 @@ if (isset($__slots)) unset($__slots);
                                 <tbody id="sortable-subject"
                                     class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800"
                                     wire:key="tbody-<?php echo e($selectedProgramId); ?>">
-                                    <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <?php $__empty_1 = true; $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                         <tr wire:key="subject-<?php echo e($subject->id); ?>" data-id="<?php echo e($subject->id); ?>"
                                             class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 cursor-move drag-handle">
                                             <td
@@ -300,18 +300,18 @@ if (isset($__slots)) unset($__slots);
                                                 </div>
                                             </td>
                                         </tr>
-                                    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
 
-                        <!--[if BLOCK]><![endif]--><?php if($subjects->hasPages()): ?>
+                        <?php if($subjects->hasPages()): ?>
                             <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800"
                                 wire:key="pagination-<?php echo e($selectedProgramId); ?>">
                                 <?php echo e($subjects->links()); ?>
 
                             </div>
-                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
