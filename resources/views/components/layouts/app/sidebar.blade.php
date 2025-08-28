@@ -230,6 +230,8 @@
     @fluxScripts
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <audio id="sound-success" preload="auto" src="{{ asset('storage/audio/success.mp3') }}"></audio>
+    <audio id="sound-error" preload="auto" src="{{ asset('storage/audio/error.mp3') }}"></audio>
+    <audio id="sound-banking-success" preload="auto" src="{{ asset('storage/audio/banking-success.mp3') }}"></audio>
 </body>
 
 

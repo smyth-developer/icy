@@ -116,8 +116,12 @@ class ActionsSeason extends Component
 
     public function deleteSeasonConfirm()
     {
-        app(SeasonRepositoryInterface::class)->delete($this->seasonId);
-        session()->flash('success', 'Học kỳ đã được xóa thành công.');
+        $delete = app(SeasonRepositoryInterface::class)->delete($this->seasonId);
+        if ($delete) {
+            session()->flash('success', 'Học kỳ đã được xóa thành công.');
+        } else {
+            session()->flash('error', 'Học kỳ đã được xóa thành công.');
+        }
         Flux::modal('delete-season')->close();
         $this->redirectRoute('admin.management.seasons', navigate: true);
     }

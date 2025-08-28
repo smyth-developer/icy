@@ -73,8 +73,13 @@ class ActionsProgram extends Component
 
     public function deleteProgramConfirm()
     {
-        app(ProgramRepositoryInterface::class)->delete($this->programId);
-        session()->flash('success', 'Xoá chương trình học thành công.');
+        $delete = app(ProgramRepositoryInterface::class)->delete($this->programId);
+        if ($delete) {
+            session()->flash('success', 'Xoá chương trình học thành công.');
+        } else {
+            session()->flash('error', 'Xoá chương trình học thất bại.');
+        }
+
         $this->reset(['programId']);
         $this->redirectRoute('admin.management.programs', navigate: true);
         Flux::modal('delete-program')->close();

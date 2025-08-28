@@ -63,11 +63,17 @@ class ActionsLocation extends Component
     public function updateLocation()
     {
         $this->validate();
-        app(LocationRepositoryInterface::class)->update($this->locationId, [
+        $update =app(LocationRepositoryInterface::class)->update($this->locationId, [
             'name' => $this->name,
             'address' => $this->address,
         ]);
-        session()->flash('success', 'Cập nhật cơ sở thành công.');
+        
+        if ($update) {
+            session()->flash('success', 'Cập nhật cơ sở thành công.');
+        } else {
+            session()->flash('error', 'Cập nhật cơ sở thất bại.');
+        }
+
         Flux::modal('modal-location')->close();
         $this->redirectRoute('admin.management.locations', navigate: true);
     }
@@ -81,8 +87,10 @@ class ActionsLocation extends Component
 
     public function deleteLocationConfirm()
     {
-        app(LocationRepositoryInterface::class)->delete($this->locationId);
-        session()->flash('success', 'Xoá cơ sở thành công.');
+        $delete = app(LocationRepositoryInterface::class)->delete($this->locationId);
+        if ($delete) {
+            session()->flash('success', 'Xoá cơ sở thành công.');
+        }
         Flux::modal('delete-location')->close();
         $this->redirectRoute('admin.management.locations', navigate: true);
     }

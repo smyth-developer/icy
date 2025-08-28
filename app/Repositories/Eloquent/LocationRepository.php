@@ -6,6 +6,7 @@ use App\Repositories\Contracts\LocationRepositoryInterface;
 use App\Models\Location;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LocationRepository implements LocationRepositoryInterface
 {
@@ -51,13 +52,22 @@ class LocationRepository implements LocationRepositoryInterface
 
     public function delete(int $id)
     {
-        //check if location has users
-        if (Location::find($id)->users->count() > 0) {
-            session()->flash('error', 'Cơ sở này vẫn còn nhân viên');
-            return;
-        }
+        return DB::transaction(function () use ($id) {
+            //check if location has users
+            if (Location::find($id)->users->count() > 0) {
+                session()->flash('error', 'Cơ sở này vẫn còn nhân viên');
+                return false;
+            }
 
-        return $this->getLocationById($id)->delete();
+            $deleted = $this->getLocationById($id)->delete();
+            
+            // Clear cache after deletion
+            if (isset($this->locationCache[$id])) {
+                unset($this->locationCache[$id]);
+            }
+            
+            return $deleted;
+        });
     }
 
     public function showName(string $name): string
