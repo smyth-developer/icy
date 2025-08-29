@@ -18,7 +18,7 @@ class Courses extends Component
     public function addCourse()
     {
         $this->dispatch('add-course');
-    }
+    }  
 
     public function render()
     {

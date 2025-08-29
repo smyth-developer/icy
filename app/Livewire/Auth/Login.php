@@ -87,7 +87,7 @@ class Login extends Component
         }
 
         $currentSessionId = session()->getId();
-        
+
         // Get other sessions before deleting them to log forced logouts
         $otherSessions = DB::table('sessions')
             ->where('user_id', Auth::user()->id)
@@ -108,6 +108,19 @@ class Login extends Component
             ->delete();
 
         Cookie::queue('remember_web_' . sha1(config('app.key')), Cookie::get('remember_web_' . sha1(config('app.key'))), 60 * 24 * 7);
+
+        $user = Auth::user();
+
+        $detail = $user->detail()->first(); // giả sử quan hệ 1-1
+        $data = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'username' => $user->username,
+            'avatar' => $detail->avatar ?? '/default-avatar.png',
+        ];
+
+        Cookie::queue('last_user', encrypt(json_encode($data)), 60 * 24 * 7);
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
     }
@@ -147,6 +160,25 @@ class Login extends Component
      */
     protected function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->login_id).'|'.request()->ip());
+        return Str::transliterate(Str::lower($this->login_id) . '|' . request()->ip());
+    }
+
+    public function mount()
+    {
+        if (empty($this->login_id) && Cookie::has('last_user')) {
+            try {
+                $lastUser = json_decode(decrypt(Cookie::get('last_user')), true);
+                $this->login_id = $lastUser['email'] ?? $lastUser['username'];
+            } catch (\Exception $e) {
+                // ignore nếu cookie lỗi
+            }
+        }
+    }
+
+    public function clearLastUser()
+    {
+        Cookie::queue(Cookie::forget('last_user'));
+        $this->login_id = '';
+        $this->redirectIntended(default: route('login', absolute: false), navigate: true);  
     }
 }

@@ -22,6 +22,11 @@ class Location extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'location_user');

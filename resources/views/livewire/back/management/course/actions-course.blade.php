@@ -8,6 +8,13 @@
                 </flux:text>
             </div>
 
+            <div class="form-group">
+                <flux:select wire:model="location_id" placeholder="Chọn cơ sở" label="Cơ sở">
+                    <flux:select.option value="">Chọn cơ sở</flux:select.option>
+                    <flux:select.option value="">Chọn cơ sở</flux:select.option>
+                </flux:select>
+            </div>
+
 
 
             <div class="flex">

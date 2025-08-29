@@ -2,14 +2,14 @@
 
     <div class="flex items-center justify-between mb-6">
         <div>
-            <flux:heading size="xl" level="1">{{ __('Khoá học') }}</flux:heading>
+            <flux:heading size="xl" level="1">{{ __('Lớp học') }}</flux:heading>
             <flux:breadcrumbs class="mt-2">
                 <flux:breadcrumbs.item href="{{ route('dashboard') }}">Bảng điều khiển</flux:breadcrumbs.item>
-                <flux:breadcrumbs.item>Khoá học</flux:breadcrumbs.item>
+                <flux:breadcrumbs.item>Lớp học</flux:breadcrumbs.item>
             </flux:breadcrumbs>
         </div>
 
-        <flux:button wire:click="addCourse" icon="plus-circle" class="cursor-pointer">Thêm khoá học</flux:button>
+        <flux:button wire:click="addCourse" icon="plus-circle" class="cursor-pointer">Thêm Lớp học</flux:button>
     </div>
 
     <flux:separator variant="subtle" />
@@ -24,7 +24,7 @@
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
                             <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">STT</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Khoá học</th>
+                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Lớp học</th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden sm:table-cell">Mô tả</th>
                             <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
                         </tr>
@@ -59,7 +59,7 @@
                                 <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
                                     <div class="flex flex-col items-center">
                                         <flux:icon.academic-cap class="w-8 h-8 text-gray-400 dark:text-gray-600 mb-2" />
-                                        <div class="text-sm">Không có khoá học nào</div>
+                                        <div class="text-sm">Không có Lớp học nào</div>
                                     </div>
                                 </td>
                             </tr>

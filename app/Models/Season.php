@@ -49,4 +49,9 @@ class Season extends Model
             default    => 'Không rõ',
         };
     }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }
