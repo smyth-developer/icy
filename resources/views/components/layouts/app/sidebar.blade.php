@@ -74,6 +74,11 @@
                         :current="request()->routeIs('admin.finance.bank-accounts')" wire:navigate>
                         Tài khoản ngân hàng
                     </flux:navlist.item>
+
+                    <flux:navlist.item icon="credit-card" :href="route('admin.finance.tuitions')"
+                        :current="request()->routeIs('admin.finance.tuitions')" wire:navigate>
+                        Đóng học phí
+                    </flux:navlist.item>
                 </flux:navlist.group>
 
                 <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">

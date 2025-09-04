@@ -12,9 +12,15 @@ class Bank extends Model
 
     protected $fillable = [
         'bank_name',
+        'bank_code',
         'account_number',
         'account_name',
         'status',
         'description',
     ];
+
+    public function tuitions()
+    {
+        return $this->hasMany(Tuition::class);
+    }
 }

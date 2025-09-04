@@ -17,9 +17,13 @@ class UserDetail extends Model
     protected $fillable = [
         'user_id',
         'birthday',
+        'id_card',
         'address',
         'phone',
         'avatar',
+        'gender',
+        'guardian_name',
+        'guardian_phone',
     ];
 
     public function getBirthdayAttribute($value)
@@ -27,8 +31,14 @@ class UserDetail extends Model
         return $value ? Carbon::parse($value)->setTimezone(config('app.timezone'))->format('Y-m-d') : '';
     }
 
+    public function gender($value)
+    {
+        return $value ? 'Nữ' : 'Nam';
+    }
+
     protected $casts = [
         'birthday' => 'date',
+        'gender' => 'boolean',
     ];
 
     public function getAvatarAttribute($value)

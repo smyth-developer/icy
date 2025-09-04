@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Repositories\Contracts\StudentRepositoryInterface;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 
 class StudentRepository implements StudentRepositoryInterface
 {
@@ -14,18 +14,9 @@ class StudentRepository implements StudentRepositoryInterface
         return $data;
     }
 
-    public function getCurrentStudentLocations()
-    {
-        $user = Auth::user();
-        if (!$user) {
-            return collect();
-        }
-        return $user->locations;
-    }
-
     public function getAllStudentsPendingOfLocation()
     {
-        $locations = $this->getCurrentStudentLocations();
+        $locations = app(UserRepositoryInterface::class)->getCurrentUserLocations();
         if ($locations->isEmpty()) {
             return collect();
         }
@@ -55,6 +46,8 @@ class StudentRepository implements StudentRepositoryInterface
     public function createStudent(array $data)
     {
         $data = $this->prepareStudentData($data);
+
+        dd($data);
         return User::create($data);
     }
 }

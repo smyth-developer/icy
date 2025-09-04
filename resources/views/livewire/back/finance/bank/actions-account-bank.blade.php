@@ -14,7 +14,7 @@
                     <flux:input label="Số tài khoản" wire:model='account_number' placeholder="Nhập số tài khoản" />
                 </div>
                 <div class="md:col-span-2">
-                    <flux:input label="Ngân hàng" wire:model='bank_name' placeholder="VD: Vietcombank" list="bank-suggestions" />
+                    <flux:input label="Ngân hàng" wire:model='bank_name'  placeholder="VD: Vietcombank" list="bank-suggestions" />
                     <datalist id="bank-suggestions">
                         @foreach($listBank as $bank)
                             <option value="{{ $bank }}"></option>

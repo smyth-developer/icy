@@ -1,6 +1,7 @@
 <div>
     {{-- Create and Update Student Modal --}}
-    <flux:modal :dismissible="false" name="modal-student" class="min-w-[50rem] max-h-[90vh] overflow-y-auto">
+    <flux:modal :dismissible="false" name="modal-student"
+        class="w-full max-w-[90vw] md:max-w-[720px] lg:max-w-[800px] max-h-[90vh] overflow-y-auto">
 
         <!-- Header -->
         <div class="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
@@ -18,66 +19,9 @@
                 <input type="hidden" wire:model='studentId' />
             @endif
 
-            {{-- Avatar Upload Section --}}
-            <div
-                class="flex flex-col items-center space-y-6 py-6 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-gray-200 dark:border-gray-600">
-
-                {{-- Vòng tròn avatar --}}
-                <div class="relative group w-32 h-32 transition-all duration-500 ease-in-out" id="avatarContainer">
-                    {{-- Preview avatar chính --}}
-                    <img id="avatarPreview"
-                        src="{{ $avatarFile ? $avatarFile->temporaryUrl() : ($avatar && str_starts_with($avatar, 'data:image') ? $avatar : ($avatar ? asset('storage/images/avatars/' . $avatar) : asset('storage/images/avatars/default-avatar.png'))) }}"
-                        alt="Avatar"
-                        class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-2xl ring-4 transition-all duration-500 ease-in-out
-            {{ $avatarFile ? 'ring-blue-500/30' : ($avatar && str_starts_with($avatar, 'data:image') ? 'ring-green-500/30' : ($avatar ? 'ring-purple-500/30' : 'ring-gray-300/30')) }}">
-
-                    {{-- Nút mở webcam (overlay góc phải) - chỉ hiện khi có webcam --}}
-                    @if ($hasWebcam)
-                        <button type="button" id="openWebcam"
-                            class="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600 transition-all duration-300">
-                            📸
-                        </button>
-                    @endif
-
-                    {{-- Webcam overlay --}}
-                    <div id="webcamOverlay"
-                        class="absolute inset-0 hidden bg-black/80 rounded-full flex flex-col items-center justify-center z-10 transition-all duration-500 ease-in-out">
-                        <video id="video" autoplay
-                            class="w-32 h-32 object-cover rounded-full transition-all duration-500 ease-in-out"></video>
-                    </div>
-                </div>
-
-                {{-- Webcam Controls - Ẩn mặc định, hiện khi webcam active --}}
-                <div id="webcamControls" class="hidden space-y-3 transition-all duration-500 ease-in-out">
-                    <div class="flex space-x-3">
-                        {{-- Nút chụp --}}
-                        <button type="button" id="capture"
-                            class="bg-green-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 font-medium">
-                            📸 Chụp ảnh
-                        </button>
-
-                        {{-- Nút đóng webcam --}}
-                        <button type="button" id="closeWebcam"
-                            class="bg-red-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 font-medium">
-                            ❌ Đóng webcam
-                        </button>
-                    </div>
-                </div>
-
-                {{-- Upload file --}}
-                <div class="w-full max-w-sm">
-                    <flux:input type="file" wire:model="avatarFile" accept="image/*" label="📁 Chọn ảnh từ máy tính"
-                        class="w-full rounded-xl border-2 border-dashed border-blue-300 hover:border-blue-500 transition-colors duration-300 bg-white/50" />
-                </div>
-
-                @error('avatarFile')
-                    <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
-                @enderror
-            </div>
-
             {{-- Personal Information --}}
 
-            <div class="mb-6 text-center">
+            <div class="mb-4 text-center">
                 <flux:heading size="md" class="text-gray-800 dark:text-gray-200 font-semibold">
                     Thông tin cá nhân
                 </flux:heading>
@@ -97,28 +41,29 @@
                 </div>
             @endif
 
-            <div class="space-y-6">
+            <div class="space-y-2">
                 {{-- Name and Username --}}
-                <div class="grid grid-cols-5 gap-4">
-                    <div class="col-span-3 form-group">
-                        <flux:input wire:model='name' label="👨‍🎓 Họ và tên" placeholder="Nhập họ và tên đầy đủ"
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="form-group md:col-span-3">
+                        <flux:input wire:model='name' label="👨‍🎓 Họ và tên 🚩" placeholder="Nhập họ và tên đầy đủ"
                             wire:change='updateUsername'
-                            class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300" />
+                            class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300"
+                            autofocus />
                     </div>
-                    <div class="col-span-2 form-group">
+                    <div class="form-group md:col-span-2">
                         <flux:input wire:model='username' label="🔑 Tên đăng nhập" placeholder="username" disabled
                             class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300" />
                     </div>
                 </div>
 
                 {{-- Email and Account Code --}}
-                <div class="grid grid-cols-5 gap-4">
-                    <div class="col-span-3 form-group">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="form-group md:col-span-3">
                         <flux:input type="email" wire:model='email' label="📧 Email" placeholder="example@email.com"
                             class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300" />
                     </div>
 
-                    <div class="col-span-2 form-group">
+                    <div class="form-group md:col-span-2">
                         <flux:input wire:model='id_card' label="🏷️ CCCD/CMND" placeholder="Nhập số CCCD/CMND"
                             class="rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300" />
                     </div>
@@ -126,43 +71,61 @@
                 </div>
 
 
-
-                {{-- Password fields --}}
-                <div
-                    class="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4 border border-yellow-200 dark:border-gray-600">
-                    <div class="flex items-center mb-3">
-                        <span class="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-                            {{ $isEditStudentMode ? 'Thay đổi mật khẩu (tùy chọn)' : 'Thiết lập mật khẩu' }}
-                        </span>
-                    </div>
-
-
-                    <div class="form-group">
-                        <flux:input type="password" icon="key" wire:model='password' value="{{ $password }}"
-                            readonly viewable copyable />
-                    </div>
-
-                </div>
-
-
                 {{-- Phone and Birthday --}}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="form-group">
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+
+                    {{-- Gender (UI only) --}}
+                    <div class="form-group md:col-span-2">
+                        <label for="gender_female"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Giới tính</label>
+                        <div class="flex items-center space-x-2">
+                            <input name="gender" wire:model='gender' type="checkbox"
+                                class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded" />
+                            <span class="text-gray-700 dark:text-gray-300">Nữ</span>
+                        </div>
+                        <p class="mt-1 text-xs text-gray-500 dark:text-red-500">Bỏ chọn nếu là nam.</p>
+                    </div>
+                    <div class="form-group md:col-span-2">
                         <flux:input type="tel" wire:model='phone' label="📱 Số điện thoại" placeholder="0123456789"
                             class="rounded-xl border-gray-300 focus:border-green-500 focus:ring-green-500 transition-all duration-300" />
                     </div>
-                    <div class="form-group">
+                    <div class="form-group md:col-span-2">
                         <flux:input type="date" wire:model='birthday' label="🎂 Ngày sinh"
                             max="{{ now()->format('Y-m-d') }}"
                             class="rounded-xl border-gray-300 focus:border-purple-500 focus:ring-purple-500 transition-all duration-300" />
                     </div>
+
                 </div>
+
+
 
                 {{-- Address --}}
                 <div class="form-group">
                     <flux:input wire:model='address' label="🏠 Địa chỉ" placeholder="Nhập địa chỉ chi tiết"
                         class="rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 transition-all duration-300" />
                 </div>
+
+                <flux:separator class="my-4" />
+
+                {{-- Parent Information --}}
+                <div class="mb-4 text-center">
+                    <flux:heading size="md" class="text-gray-800 dark:text-gray-200 font-semibold">
+                        Thông tin người giám hộ
+                    </flux:heading>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-group">
+                        <flux:input wire:model='guardian_name' wire:change='updateGuardian'
+                            label="Họ và tên người giám hộ 🚩" placeholder="Nhập tên"
+                            class="rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 transition-all duration-300" />
+                    </div>
+                    <div class="form-group">
+                        <flux:input wire:model='guardian_phone' label="📱 Số điện thoại 🚩" placeholder="0123456789"
+                            class="rounded-xl border-gray-300 focus:border-red-500 focus:ring-red-500 transition-all duration-300" />
+                    </div>
+                </div>
+
             </div>
 
 
@@ -182,6 +145,15 @@
                         {{ $isEditStudentMode ? '✅ Cập nhật' : '➕ Thêm mới' }}
                     </flux:button>
                 </div>
+            </div>
+
+            <div class="flex items-center pt-6 border-t border-gray-200 dark:border-gray-700">
+                <span class="inline-flex items-center px-4 py-2 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 rounded-xl text-sm font-medium shadow-sm">
+                    <svg class="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V7h2v2z"/>
+                    </svg>
+                    Các trường có dấu <span class="font-bold text-red-500 mx-1">🚩</span> là bắt buộc.
+                </span>
             </div>
         </form>
 
@@ -261,225 +233,5 @@
 </div>
 
 @push('scripts')
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('video');
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const avatarPreview = document.getElementById('avatarPreview');
-            const webcamOverlay = document.getElementById('webcamOverlay');
-            const captureBtn = document.getElementById('capture');
-            const webcamControls = document.getElementById('webcamControls');
-            let stream;
-
-            // Function to attach/re-attach the webcam button listener
-            function attachWebcamButtonListener() {
-                const openBtn = document.getElementById('openWebcam');
-                if (openBtn) {
-                    // Remove existing listener to prevent duplicates
-                    openBtn.removeEventListener('click', openBtn._webcamListenerAttached);
-
-                    // Create new listener
-                    const listener = async () => {
-                        // Issue 1: Hide the button when clicked
-                        openBtn.style.display = 'none';
-
-                        try {
-                            stream = await navigator.mediaDevices.getUserMedia({
-                                video: true
-                            });
-                            video.srcObject = stream;
-                            webcamOverlay.classList.remove('hidden');
-                            webcamControls.classList.remove('hidden'); // Show controls
-
-                            // Expand the avatar container and preview
-                            const avatarContainer = document.getElementById('avatarContainer');
-                            const avatarPreview = document.getElementById('avatarPreview');
-                            const videoElement = document.getElementById('video');
-
-                            if (avatarContainer && avatarPreview && videoElement) {
-                                // Expand to larger size
-                                avatarContainer.classList.remove('w-32', 'h-32');
-                                avatarContainer.classList.add('w-64', 'h-64');
-
-                                avatarPreview.classList.remove('w-32', 'h-32');
-                                avatarPreview.classList.add('w-64', 'h-64');
-
-                                videoElement.classList.remove('w-32', 'h-32');
-                                videoElement.classList.add('w-64', 'h-64');
-                            }
-
-                        } catch (error) {
-                            console.log('Không thể truy cập webcam:', error);
-                            alert('Không thể truy cập webcam. Vui lòng kiểm tra quyền truy cập.');
-                            // Show button again if webcam access fails
-                            openBtn.style.display = 'block';
-                        }
-                    };
-
-                    openBtn.addEventListener('click', listener);
-                    openBtn._webcamListenerAttached = listener; // Store reference for removal
-                }
-            }
-
-            // Function to reset avatar size to original
-            function resetAvatarSize() {
-                const avatarContainer = document.getElementById('avatarContainer');
-                const avatarPreview = document.getElementById('avatarPreview');
-                const videoElement = document.getElementById('video');
-
-                if (avatarContainer && avatarPreview && videoElement) {
-                    // Reset to original size
-                    avatarContainer.classList.remove('w-64', 'h-64');
-                    avatarContainer.classList.add('w-32', 'h-32');
-
-                    avatarPreview.classList.remove('w-64', 'h-64');
-                    avatarPreview.classList.add('w-32', 'h-32');
-
-                    videoElement.classList.remove('w-64', 'h-64');
-                    videoElement.classList.add('w-32', 'h-32');
-                }
-            }
-
-            // Helper function to find Livewire component
-            function findLivewireComponent() {
-                // Tìm component cha (students-registration) chứa wire:id
-                let element = document.querySelector('[wire\\:id]');
-                if (!element) {
-                    // Nếu không tìm thấy, tìm element cha gần nhất có wire:id
-                    element = document.closest('[wire\\:id]') || document.querySelector('[wire\\:id]');
-                }
-
-                if (element) {
-                    const wireId = element.getAttribute('wire\\:id');
-                    console.log('🔍 Found Livewire component with ID:', wireId);
-                    return Livewire.find(wireId);
-                }
-
-                console.log('🔍 No Livewire component found');
-                return null;
-            }
-
-            // Kiểm tra webcam availability
-            async function checkWebcamAvailability() {
-                console.log('🔍 Starting webcam availability check...');
-                try {
-                    const devices = await navigator.mediaDevices.enumerateDevices();
-                    const videoDevices = devices.filter(device => device.kind === 'videoinput');
-                    console.log('🔍 Found video devices:', videoDevices.length);
-
-                    if (videoDevices.length > 0) {
-                        // Có webcam, cập nhật Livewire component
-                        console.log('🔍 Webcam found, setting hasWebcam = true');
-                        // Sử dụng helper function để tìm component
-                        const livewireComponent = findLivewireComponent();
-                        if (livewireComponent) {
-                            livewireComponent.set('hasWebcam', true);
-                        }
-                    } else {
-                        // Không có webcam, cập nhật Livewire component
-                        console.log('🔍 No webcam found, setting hasWebcam = false');
-                        const livewireComponent = findLivewireComponent();
-                        if (livewireComponent) {
-                            livewireComponent.set('hasWebcam', false);
-                        }
-                    }
-                } catch (error) {
-                    console.log('🔍 Error checking webcam:', error);
-                    const livewireComponent = findLivewireComponent();
-                    if (livewireComponent) {
-                        livewireComponent.set('hasWebcam', false);
-                    }
-                }
-            }
-
-            // Lắng nghe sự kiện kiểm tra webcam từ Livewire
-            Livewire.on('check-webcam-status', async () => {
-                console.log('🔍 Livewire event: check-webcam-status triggered');
-                await checkWebcamAvailability();
-                console.log('🔍 Webcam availability check completed');
-                // After checking webcam and Livewire updates the DOM, re-attach the listener
-                setTimeout(() => {
-                    console.log('🔍 Attaching webcam button listener...');
-                    attachWebcamButtonListener();
-                    // Debug: Check if button exists after attachment
-                    const openBtn = document.getElementById('openWebcam');
-                    console.log('🔍 Webcam button found:', openBtn ? 'YES' : 'NO');
-                    if (openBtn) {
-                        console.log('🔍 Button display style:', openBtn.style.display);
-                        console.log('🔍 Button classes:', openBtn.className);
-                    }
-                }, 200); // Increased delay to ensure DOM is fully updated
-            });
-
-            // Kiểm tra webcam khi trang load
-            checkWebcamAvailability();
-            // Attach initial listener
-            attachWebcamButtonListener();
-
-            // Bật webcam
-            // (Event listener is now handled by attachWebcamButtonListener)
-
-            // Chụp ảnh
-            captureBtn?.addEventListener('click', () => {
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                ctx.drawImage(video, 0, 0);
-                const data = canvas.toDataURL('image/png');
-
-                // Thay preview ngay
-                avatarPreview.src = data;
-
-                // Gửi về Livewire
-                const livewireComponent = findLivewireComponent();
-                if (livewireComponent) {
-                    livewireComponent.set('avatar', data);
-                }
-
-                // Tắt webcam
-                stream.getTracks().forEach(track => track.stop());
-                webcamOverlay.classList.add('hidden');
-                webcamControls.classList.add('hidden'); // Hide controls after capture
-
-                // Reset avatar size to original
-                resetAvatarSize();
-
-                // Show the webcam button again after capture
-                const openBtn = document.getElementById('openWebcam');
-                if (openBtn) {
-                    const livewireComponent = findLivewireComponent();
-                    if (livewireComponent && livewireComponent.get('hasWebcam')) {
-                        openBtn.style.display = 'block';
-                    }
-                }
-            });
-
-            // Add close webcam functionality
-            const closeWebcamBtn = document.getElementById('closeWebcam');
-            if (closeWebcamBtn) {
-                closeWebcamBtn.addEventListener('click', () => {
-                    webcamOverlay.classList.add('hidden');
-                    webcamControls.classList.add('hidden'); // Hide controls when closing webcam
-                    if (stream) {
-                        stream.getTracks().forEach(track => track.stop());
-                    }
-
-                    // Reset avatar size to original
-                    resetAvatarSize();
-
-                    // Show the webcam button again
-                    const openBtn = document.getElementById('openWebcam');
-                    if (openBtn) {
-                        const livewireComponent = findLivewireComponent();
-                        if (livewireComponent && livewireComponent.get('hasWebcam')) {
-                            openBtn.style.display = 'block';
-                        }
-                    }
-                });
-            }
-        });
-        Livewire.on('reloadPage', () => {
-            location.reload();
-        });
-    </script>
+    <script></script>
 @endpush

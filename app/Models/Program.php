@@ -12,4 +12,9 @@ class Program extends Model
     {
         return $this->hasMany(Subject::class);
     }
+
+    public function tuitions()
+    {
+        return $this->hasMany(Tuition::class);
+    }
 }

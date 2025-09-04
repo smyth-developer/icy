@@ -14,6 +14,7 @@ class BankRepository implements BankRepositoryInterface
     {
         return [
             'bank_name' => strtoupper(trim($data['bank_name'])),
+            'bank_code' => BankHelper::getBankCode($data['bank_name']),
             'account_name' => BankHelper::nonAccent($data['account_name']),
             'account_number' => $data['account_number'],
             'status' => $data['status'],
@@ -21,7 +22,7 @@ class BankRepository implements BankRepositoryInterface
         ];
     }
 
-    public function paginate(int $perPage = 10): LengthAwarePaginator
+    public function getAll(int $perPage = 10): LengthAwarePaginator
     {
         return Bank::query()->latest()->paginate($perPage);
     }

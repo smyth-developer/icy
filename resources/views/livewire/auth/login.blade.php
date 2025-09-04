@@ -20,7 +20,7 @@
 
             <form wire:submit="login" class="flex flex-col gap-4 sm:gap-6">
                 <input type="hidden" wire:model="login_id" value="{{ $lastUser['email'] ?? $lastUser['username'] }}">
-
+                <x-auth-session-status class="text-center" :status="session('status')" />
                 <!-- Password -->
                 <flux:input wire:model="password" :label="__('Password')" type="password" required
                     autocomplete="current-password" :placeholder="__('Mật khẩu')" viewable />
@@ -37,6 +37,7 @@
     @else
     <x-auth-header :title="__('Đăng nhập hệ thống')" :description="__('Sử dụng Username và Email để đăng nhập.')" />
         <!-- Form login gốc -->
+        <x-auth-session-status class="text-center" :status="session('status')" />
         <form wire:submit="login" class="flex flex-col gap-4 sm:gap-6">
             <flux:input wire:model="login_id" :label="__('Địa chỉ Email / Username')" type="text" required
                 placeholder="email@example.com / Username" autofocus />

@@ -36,6 +36,7 @@ use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -63,6 +64,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Fix MySQL key length issue for utf8mb4
+        Schema::defaultStringLength(191);
+
         RedirectIfAuthenticated::redirectUsing(function () {
             return route('dashboard');
         });

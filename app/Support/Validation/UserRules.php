@@ -24,13 +24,6 @@ class UserRules
                 'max:255',
                 'unique:users,email' . ($id ? ",$id" : ''),
             ],
-            'password' => [
-                $id ? 'nullable' : 'required', // Bắt buộc khi tạo mới, tùy chọn khi cập nhật
-                'string',
-                'min:8',
-                'max:255',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/', // Ít nhất 1 chữ thường, 1 chữ hoa, 1 số, 1 ký tự đặc biệt
-            ],
         ];
     }
 
@@ -64,63 +57,25 @@ class UserRules
                 'string',
                 'regex:/^(\+84|0)[0-9]{9,10}$/', // Định dạng số điện thoại Việt Nam
             ],
+            'gender' => [
+                'nullable',
+                'boolean',
+            ],
+            'guardian_name' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'guardian_phone' => [
+                'nullable',
+                'string',
+                'regex:/^(\+84|0)[0-9]{9,10}$/',
+            ],
             'avatarFile' => [
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048', // Tối đa 2MB
-            ],
-        ];
-    }
-
-    /**
-     * Định nghĩa các quy tắc xác thực khi cập nhật profile
-     */
-    public static function profileRules($id): array
-    {
-        return array_merge(
-            [
-                'name' => [
-                    'required',
-                    'string',
-                    'min:2',
-                    'max:255',
-                    'regex:/^[\p{L}\s]+$/u',
-                ],
-                'email' => [
-                    'required',
-                    'string',
-                    'email',
-                    'max:255',
-                    'unique:users,email,' . $id,
-                ],
-            ],
-            self::detailRules()
-        );
-    }
-
-    /**
-     * Định nghĩa các quy tắc xác thực khi đổi mật khẩu
-     */
-    public static function changePasswordRules(): array
-    {
-        return [
-            'current_password' => [
-                'required',
-                'string',
-                'current_password',
-            ],
-            'password' => [
-                'required',
-                'string',
-                'min:8',
-                'max:255',
-                'different:current_password',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/',
-            ],
-            'password_confirmation' => [
-                'required',
-                'same:password',
             ],
         ];
     }
@@ -141,24 +96,24 @@ class UserRules
             'email.max' => 'Email không được vượt quá 255 ký tự.',
             'email.unique' => 'Email này đã được sử dụng.',
             
-            'password.required' => 'Mật khẩu là bắt buộc.',
-            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'password.max' => 'Mật khẩu không được vượt quá 255 ký tự.',
-            'password.regex' => 'Mật khẩu phải chứa ít nhất 1 chữ thường, 1 chữ hoa, 1 số và 1 ký tự đặc biệt.',
-            'password.different' => 'Mật khẩu mới phải khác mật khẩu hiện tại.',
-            
-            'current_password.required' => 'Mật khẩu hiện tại là bắt buộc.',
-            'current_password.current_password' => 'Mật khẩu hiện tại không đúng.',
-            
             // UserDetail validation messages
             'birthday.date' => 'Ngày sinh không đúng định dạng.',
             'birthday.before' => 'Ngày sinh phải trước ngày hôm nay.',
             'birthday.after' => 'Ngày sinh không hợp lệ.',
+
+            'id_card.string' => 'CMND/CCCD phải là chuỗi.',
+            'id_card.max' => 'CMND/CCCD không được vượt quá 12 ký tự.',
+            'id_card.unique' => 'CMND/CCCD này đã được sử dụng.',
+            'id_card.regex' => 'CMND/CCCD chỉ được chứa số.',
             
             'address.string' => 'Địa chỉ phải là chuỗi.',
             'address.max' => 'Địa chỉ không được vượt quá 500 ký tự.',
             
             'phone.regex' => 'Số điện thoại không đúng định dạng (VD: 0123456789 hoặc +84123456789).',
+
+            'guardian_name.max' => 'Họ và tên người giám hộ không được vượt quá 255 ký tự.',
+
+            'guardian_phone.regex' => 'Số điện thoại người giám hộ không đúng định dạng (VD: 0123456789 hoặc +84123456789).',
             
             'avatarFile.image' => 'Avatar phải là hình ảnh.',
             'avatarFile.mimes' => 'Avatar phải có định dạng: jpeg, png, jpg, gif.',

@@ -141,26 +141,49 @@ if (isset($__slots)) unset($__slots);
 ?>
 
     <div class="mt-6">
-        <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
+        <div
+            class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
                     <thead class="bg-gray-50 dark:bg-gray-800">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Ngân hàng</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Số tài khoản</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Chủ tài khoản</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Trạng thái</th>
-                            <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Ngân hàng</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Mã ngân hàng</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Số tài khoản</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Chủ tài khoản</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Trạng thái</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Thao tác</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
                         <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $banks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                            <tr wire:key="bank-<?php echo e($bank->id); ?>" class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium"><?php echo e($bank->bank_name); ?></td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300"><?php echo e($bank->account_number); ?></td>
-                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300"><?php echo e($bank->account_name); ?></td>
+                            <tr wire:key="bank-<?php echo e($bank->id); ?>"
+                                class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
+                                    <?php echo e($bank->bank_name); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
+                                    <?php echo e($bank->bank_code); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
+                                    <?php echo e($bank->account_number); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300"><?php echo e($bank->account_name); ?>
+
+                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                                    <span class="px-2 py-1 rounded-full text-xs <?php echo e($bank->status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700 dark:bg-gray-800/60 dark:text-gray-300'); ?>">
+                                    <span
+                                        class="px-2 py-1 rounded-full text-xs <?php echo e($bank->status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700 dark:bg-gray-800/60 dark:text-gray-300'); ?>">
                                         <?php echo e($bank->status === 'active' ? 'Hoạt động' : 'Ngưng'); ?>
 
                                     </span>
@@ -176,7 +199,8 @@ if (isset($__slots)) unset($__slots);
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Sửa <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Sửa
+                                         <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
 <?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
@@ -195,7 +219,8 @@ if (isset($__slots)) unset($__slots);
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Xoá <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Xoá
+                                         <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
 <?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>

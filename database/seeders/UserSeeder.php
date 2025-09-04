@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Database\Seeder;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -134,66 +135,116 @@ class UserSeeder extends Seeder
         ];
 
         foreach ($users as $item){
-            app(UserRepositoryInterface::class)->create($item);
+            User::create($item);
         }
 
         $userDetails = [
             [
                 'user_id' => 1,
-                'phone' => '0868191110',
+                'phone' => '',
                 'address' => 'Thường Tân',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'avatar' => 'ICY00001-67ecb59fdfad6.png',
             ],
             [
                 'user_id' => 2,
                 'phone' => '',
                 'address' => '',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 3,
                 'phone' => '',
                 'address' => '',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 4,
                 'phone' => '',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 5,
                 'phone' => '',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [   
                 'user_id' => 6,
                 'phone' => '',
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 7,
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [   
                 'user_id' => 8,
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 9,
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'phone' => '',
                 'address' => '',
                 'avatar' => '',
             ],
             [
                 'user_id' => 10,
+                'birthday' => null,
+                'id_card' => null,
+                'gender' => 1,
+                'guardian_name' => '',
+                'guardian_phone' => '',
                 'phone' => '',
                 'address' => '',
                 'avatar' => '',

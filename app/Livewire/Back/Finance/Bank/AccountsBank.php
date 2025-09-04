@@ -5,13 +5,14 @@ namespace App\Livewire\Back\Finance\Bank;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-use App\Repositories\Contracts\BankRepositoryInterface;
 use Livewire\Attributes\Title;
+use App\Repositories\Contracts\BankRepositoryInterface;
 
 #[Title('Tài khoản ngân hàng')]
 class AccountsBank extends Component
 {
     use WithPagination;
+    public $qrString;
 
     public function addBank()
     {
@@ -30,7 +31,9 @@ class AccountsBank extends Component
 
     public function render()
     {
-        $banks = app(BankRepositoryInterface::class)->paginate(10);
-        return view('livewire.back.finance.bank.accounts-bank', compact('banks'));
+        $banks = app(BankRepositoryInterface::class)->getAll(10);
+        return view('livewire.back.finance.bank.accounts-bank', [
+            'banks' => $banks,
+        ]);
     }
 }

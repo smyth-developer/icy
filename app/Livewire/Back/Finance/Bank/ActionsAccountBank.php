@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Back\Finance\Bank;
 
+use Flux\Flux;
 use Livewire\Component;
 use Livewire\Attributes\On;
-use Flux\Flux;
+use App\Support\Bank\BankHelper;
 use App\Support\Validation\BankRules;
 use App\Repositories\Contracts\BankRepositoryInterface;
-use Illuminate\Support\Facades\Http;
 
 class ActionsAccountBank extends Component
 {
@@ -100,10 +100,10 @@ class ActionsAccountBank extends Component
         Flux::modal('delete-bank')->close();
         $this->redirectRoute('admin.finance.bank-accounts', navigate: true);
     }
+
     public function render()
     {
-        $response = Http::get('https://api.vietqr.io/v2/banks');
-        $banks = $response->json()['data'];
+        $banks = BankHelper::getBanks();
         $listBank = collect($banks)->pluck('shortName')->toArray();
         
         return view('livewire.back.finance.bank.actions-account-bank',[

@@ -15,6 +15,7 @@ class BankSeeder extends Seeder
         $banks = [
             [
                 'bank_name' => 'VIB',
+                'bank_code' => '970441',
                 'account_number' => '866683539',
                 'account_name' => 'CONG TY TNHH GIAO DUC VIEN SANG TAO',
                 'status' => 'active',
@@ -22,6 +23,7 @@ class BankSeeder extends Seeder
             ],
             [
                 'bank_name' => 'MBBANK',
+                'bank_code' => '970422',
                 'account_number' => '00866683539',
                 'account_name' => 'NGUYEN THI THUY VY',
                 'status' => 'active',
