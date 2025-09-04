@@ -19,26 +19,26 @@ class StaffsRegistration extends Component
 
     public function addStaffRegistration()
     {
-        $this->dispatch('add-staff');
+        $this->dispatch('add-staff-registration');
     }
 
     public function editStaffRegistration($staffId)
     {
-        $this->dispatch('edit-staff', $staffId);
+        $this->dispatch('edit-staff-registration', $staffId);
     }
 
     public function viewStaffRegistration($staffId)
     {
-        $this->dispatch('view-staff', $staffId);
+        $this->dispatch('view-staff-registration', $staffId);
     }
 
     public function deleteStaffRegistration($staffId)
     {
-        $this->dispatch('delete-staff', $staffId);
+        $this->dispatch('delete-staff-registration', $staffId);
     }
 
     public function approveStaffRegistration($staffId)
     {
-        $this->dispatch('approve-staff', $staffId);
+        $this->dispatch('approve-staff-registration', $staffId);
     }
 }

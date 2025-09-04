@@ -37,9 +37,14 @@ class Staff extends Component
         ]);
     }
 
-    public function editStaffRegistration($staffId)
+    public function editStaff($staffId)
     {
         $this->dispatch('edit-staff', $staffId);
+    }
+
+    public function deleteStaff($staffId)
+    {
+        $this->dispatch('delete-staff', $staffId);
     }
 
     public function render()
@@ -51,7 +56,7 @@ class Staff extends Component
         ];
         $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters($filters);
         $locations = app(UserRepositoryInterface::class)->getCurrentUserLocations();
-        $roles = app(RoleRepositoryInterface::class)->getRoleStaff();
+        $roles = app(RoleRepositoryInterface::class)->managerAccessPersonnel();
         return view('livewire.back.personnel.employee.staff',[
             'staffs' => $this->staffs,
             'locations' => $locations,

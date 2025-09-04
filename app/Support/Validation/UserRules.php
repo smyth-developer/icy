@@ -41,10 +41,8 @@ class UserRules
             ],
             'id_card' => [
                 'nullable',
-                'string',
-                // Nếu cập nhật, bỏ qua bản ghi có user_id = $id
+                'regex:/^(?!0{12})(?!.*(\d)\1{11})\d{12}$/',
                 'unique:user_details,id_card' . ($id ? ",$id,user_id" : ''),
-                'regex:/^[0-9]{12}$/', // Chỉ cho phép số
             ],
             'address' => [
                 'nullable',
@@ -90,11 +88,11 @@ class UserRules
             'name.min' => 'Họ và tên phải có ít nhất 2 ký tự.',
             'name.max' => 'Họ và tên không được vượt quá 255 ký tự.',
             'name.regex' => 'Họ và tên chỉ được chứa chữ cái và khoảng trắng.',
-            
+
             'email.email' => 'Email không đúng định dạng.',
             'email.max' => 'Email không được vượt quá 255 ký tự.',
             'email.unique' => 'Email này đã được sử dụng.',
-            
+
             // UserDetail validation messages
             'birthday.date' => 'Ngày sinh không đúng định dạng.',
             'birthday.before' => 'Ngày sinh phải trước ngày hôm nay.',
@@ -102,17 +100,18 @@ class UserRules
 
             'id_card.string' => 'CCCD phải là chuỗi.',
             'id_card.unique' => 'CCCD này đã được sử dụng.',
-            'id_card.regex' => 'CCCD chỉ được chứa số và 12 ký tự.',
             
+            'id_card.regex' => 'CCCD chỉ được chứa số.',
+            'id_card.digits' => 'CCCD phải có 12 chữ số.',
             'address.string' => 'Địa chỉ phải là chuỗi.',
             'address.max' => 'Địa chỉ không được vượt quá 500 ký tự.',
-            
+
             'phone.regex' => 'Số điện thoại không đúng định dạng (VD: 0123456789 hoặc +84123456789).',
 
             'guardian_name.max' => 'Họ và tên người giám hộ không được vượt quá 255 ký tự.',
 
             'guardian_phone.regex' => 'Số điện thoại người giám hộ không đúng định dạng (VD: 0123456789 hoặc +84123456789).',
-            
+
             'avatarFile.image' => 'Avatar phải là hình ảnh.',
             'avatarFile.mimes' => 'Avatar phải có định dạng: jpeg, png, jpg, gif.',
             'avatarFile.max' => 'Avatar không được vượt quá 2MB.',

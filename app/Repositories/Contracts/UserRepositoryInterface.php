@@ -6,6 +6,7 @@ interface UserRepositoryInterface
     public function getAll();
     public function getCurrentUserLocations();
     public function getUserById(int $id);
+    public function getStudentsOfLocation();
 
     public function create(array $data);
     public function delete(int $id);

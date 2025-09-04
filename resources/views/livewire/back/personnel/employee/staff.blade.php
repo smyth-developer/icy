@@ -117,13 +117,13 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <flux:button size="sm" variant="primary" icon="pencil"
-                                            wire:click="editStaffRegistration({{ $staff->id }})"
+                                            wire:click="editStaff({{ $staff->id }})"
                                             class="cursor-pointer">
                                             Sửa thông tin
                                         </flux:button>
 
                                         <flux:button size="sm" variant="danger" icon="trash"
-                                            wire:click="deleteStaffRegistration({{ $staff->id }})"
+                                            wire:click="deleteStaff({{ $staff->id }})"
                                             class="cursor-pointer">
                                             Xóa
                                         </flux:button>

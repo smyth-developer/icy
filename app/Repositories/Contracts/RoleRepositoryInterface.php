@@ -8,5 +8,5 @@ interface RoleRepositoryInterface
     public function update(int $id, array $data);
     public function delete(int $id);
     public function getRoleById(int $id);
-    public function getRoleStaff();
+    public function managerAccessPersonnel();
 }

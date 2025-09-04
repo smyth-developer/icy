@@ -44,7 +44,7 @@ class ActionsStaff extends Component
 
     public function render()
     {
-        $roleStaff = app(RoleRepositoryInterface::class)->getRoleStaff();
+        $roleStaff = app(RoleRepositoryInterface::class)->managerAccessPersonnel();
         return view('livewire.back.personnel.employee.actions-staff', [
             'roleStaff' => $roleStaff,
         ]);
@@ -54,12 +54,20 @@ class ActionsStaff extends Component
     {
         $userRules = UserRules::rules($this->staffId);
         $detailRules = UserRules::detailRules($this->staffId);
+
         $roleRules = [
             'role_id' => ['required', 'exists:roles,id'],
-            'id_card' => ['required'],
         ];
+
+        // Gộp id_card của detailRules với required
+        $detailRules['id_card'] = array_merge(
+            $detailRules['id_card'],
+            ['required']
+        );
+
         return array_merge($userRules, $detailRules, $roleRules);
     }
+
 
     public function messages()
     {
@@ -120,6 +128,23 @@ class ActionsStaff extends Component
             session()->flash('error', 'Cập nhật nhân viên thất bại.');
         }
         Flux::modal('modal-employee')->close();
-        $this->redirectRoute('admin.personnel.staff-registration', navigate: true);
+        $this->redirectRoute('admin.personnel.staff', navigate: true);
+    }
+
+    #[On('delete-staff')]
+    public function deleteStaff($id)
+    {
+        $this->resetForm();
+        $this->staffId = $id;
+        Flux::modal('delete-staff')->show();
+    }
+
+    public function deleteStaffConfirm()
+    {
+        $staff = app(UserRepositoryInterface::class)->getUserById($this->staffId);
+        $staff->delete();
+        session()->flash('success', 'Xóa nhân viên thành công.');
+        Flux::modal('delete-staff')->close();
+        $this->redirectRoute('admin.personnel.staff', navigate: true);
     }
 }

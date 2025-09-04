@@ -3,8 +3,9 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Role;
-use App\Repositories\Contracts\RoleRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\Contracts\RoleRepositoryInterface;
 
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -28,11 +29,11 @@ class RoleRepository implements RoleRepositoryInterface
     public function getAll($perPage = null)
     {
         $query = Role::with('createdBy:id,name')->orderBy('id', 'asc');
-        
+
         if ($perPage) {
             return $query->paginate($perPage);
         }
-        
+
         return $query->get();
     }
 
@@ -58,8 +59,23 @@ class RoleRepository implements RoleRepositoryInterface
         return $this->roleCache[$id] ??= Role::with('createdBy:id,name')->findOrFail($id);
     }
 
-    public function getRoleStaff()
+    public function managerAccessPersonnel(): Collection
     {
-        return Role::whereNotIn('name', ['Student', 'BOD'])->get();
+        $name = Auth::user()->roles->first()->name;
+
+        switch ($name) {
+            case 'BOD':
+                return Role::whereNotIn('name', ['Student', 'BOD'])->get();
+
+            case 'CENTER MANAGER':
+                return Role::whereNotIn('name', [
+                    'BOD',
+                    'Student',
+                    'Center Manager',
+                ])->get();
+
+            default:
+                return new Collection();
+        }
     }
 }

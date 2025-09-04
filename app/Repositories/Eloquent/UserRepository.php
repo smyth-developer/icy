@@ -22,6 +22,17 @@ class UserRepository implements UserRepositoryInterface
         return $user->locations;
     }
 
+    public function getStudentsOfLocation()
+    {
+        $locations = $this->getCurrentUserLocations();
+        return User::where('status', 'active')
+        ->whereHas('locations', function ($query) use ($locations) {
+            $query->whereIn('locations.id', $locations->pluck('id'));
+        })->whereHas('roles', function ($query) {
+            $query->where('name', 'student');
+        })->get();
+    }
+
     public function getUserById(int $id) : User
     {
         return User::find($id);
@@ -55,4 +66,5 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
 }

@@ -4,7 +4,7 @@
 
     <div class="flex items-center justify-between mb-6">
         <div>
-            <flux:heading size="xl" level="1">{{ __('Đăng ký học viên') }}</flux:heading>
+            <flux:heading size="xl" level="1">{{ __('Đăng ký nhân viên') }}</flux:heading>
             <flux:breadcrumbs class="mt-2">
                 <flux:breadcrumbs.item href="{{ route('dashboard') }}">Bảng điều khiển</flux:breadcrumbs.item>
                 <flux:breadcrumbs.item>Đăng ký nhân viên</flux:breadcrumbs.item>

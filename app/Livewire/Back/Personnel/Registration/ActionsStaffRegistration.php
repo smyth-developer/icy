@@ -29,7 +29,7 @@ class ActionsStaffRegistration extends Component
 
     public function render()
     {
-        $roleStaff = app(RoleRepositoryInterface::class)->getRoleStaff();
+        $roleStaff = app(RoleRepositoryInterface::class)->managerAccessPersonnel();
         return view('livewire.back.personnel.registration.actions-staff-registration', [
             'roleStaff' => $roleStaff,
         ]);
@@ -88,7 +88,7 @@ class ActionsStaffRegistration extends Component
         $this->guardian_name = ucwords(trim($this->guardian_name));
     }
 
-    #[On('add-staff')]
+    #[On('add-staff-registration')]
     public function addStaff()
     {
         $this->resetForm();
@@ -140,7 +140,7 @@ class ActionsStaffRegistration extends Component
         $this->redirectRoute('admin.personnel.staff-registration', navigate: true);
     }
 
-    #[On('delete-staff')]
+    #[On('delete-staff-registration')]
     public function deleteStaff($id)
     {
         $this->resetForm();
@@ -156,7 +156,7 @@ class ActionsStaffRegistration extends Component
         $this->redirectRoute('admin.personnel.staff-registration', navigate: true);
     }
 
-    #[On('edit-staff')]
+    #[On('edit-staff-registration')]
     public function editStaff($id)
     {
         $this->resetForm();
@@ -209,7 +209,7 @@ class ActionsStaffRegistration extends Component
         $this->redirectRoute('admin.personnel.staff-registration', navigate: true);
     }
 
-    #[On('approve-staff')]
+    #[On('approve-staff-registration')]
     public function approveStaff($id)
     {
         $this->resetForm();

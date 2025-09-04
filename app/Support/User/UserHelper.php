@@ -34,15 +34,17 @@ class UserHelper
 
     public static function randomAccountCode(): string
     {
-        $number = User::lockForUpdate()->count() + 1;
+        $lastUser = User::withTrashed()
+            ->orderByDesc('account_code')
+            ->first();
 
-        do {
-            $account_code = "ICY" . str_pad($number, 5, '0', STR_PAD_LEFT);
-            $number++; // Nếu trùng, tăng thêm 1    
-        } while (User::withTrashed()->where('account_code', $account_code)
-            ->exists()
-        );
-        return $account_code;
+        if ($lastUser && preg_match('/ICY(\d{5})/', $lastUser->account_code, $matches)) {
+            $number = (int) $matches[1] + 1; // Lấy 5 số cuối + 1
+        } else {
+            $number = 1; // Nếu chưa có user nào
+        }
+
+        return 'ICY' . str_pad($number, 5, '0', STR_PAD_LEFT);
     }
 
     public static function randomPassword($length = 10)
