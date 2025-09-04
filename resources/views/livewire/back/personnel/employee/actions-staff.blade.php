@@ -1,6 +1,6 @@
 <div>
     {{-- Create and Update Staff Modal --}}
-    <flux:modal :dismissible="false" name="modal-staff"
+    <flux:modal :dismissible="false" name="modal-employee"
         class="w-full max-w-[90vw] md:max-w-[720px] lg:max-w-[800px] max-h-[90vh] overflow-y-auto">
 
         <!-- Header -->

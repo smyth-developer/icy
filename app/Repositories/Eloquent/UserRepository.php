@@ -22,7 +22,7 @@ class UserRepository implements UserRepositoryInterface
         return $user->locations;
     }
 
-    public function getUserById(int $id)
+    public function getUserById(int $id) : User
     {
         return User::find($id);
     }

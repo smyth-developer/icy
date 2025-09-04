@@ -88,6 +88,13 @@
                                             wire:click="deleteStudentRegistration({{ $student->id }})" class="cursor-pointer">
                                             Xóa
                                         </flux:button>
+
+                                        @if(auth()->user()->hasRole('BOD') || auth()->user()->hasRole('Manager Center'))
+                                            <flux:button color="green" size="sm" variant="primary" icon="check-circle"
+                                                wire:click="approveStudentRegistration({{ $student->id }})" class="cursor-pointer">
+                                                Xét duyệt
+                                            </flux:button>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

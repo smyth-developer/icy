@@ -57,4 +57,9 @@ class RoleRepository implements RoleRepositoryInterface
     {
         return $this->roleCache[$id] ??= Role::with('createdBy:id,name')->findOrFail($id);
     }
+
+    public function getRoleStaff()
+    {
+        return Role::whereNotIn('name', ['Student', 'BOD'])->get();
+    }
 }

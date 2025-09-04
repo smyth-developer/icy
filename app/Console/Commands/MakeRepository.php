@@ -31,7 +31,7 @@ class MakeRepository extends Command
 
         if (!File::exists($interfacePath)) {
             File::ensureDirectoryExists(dirname($interfacePath));
-            File::put($interfacePath, <<<'PHP'
+            File::put($interfacePath, <<<PHP
                 <?php
 
                 namespace App\Repositories\Contracts;
@@ -39,12 +39,7 @@ class MakeRepository extends Command
 
                 interface {$name}RepositoryInterface
                 {
-                    //public function getAll(int $perPage = 10): LengthAwarePaginator;
-                    //public function create(array $data);
-                    //public function update(int $id, array $data);
-                    //public function delete(int $id);
-                    //public function getLocationById(int $id);
-                    //public function showName(string $name);
+
                 }
                 PHP);
             $this->info("✅ Interface: {$interfacePath}");
@@ -60,7 +55,6 @@ class MakeRepository extends Command
                 namespace App\Repositories\Eloquent;
 
                 use App\Repositories\Contracts\\{$name}RepositoryInterface;
-                use App\Models\\{$name};
 
                 class {$name}Repository implements {$name}RepositoryInterface
                 {

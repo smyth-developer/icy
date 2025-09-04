@@ -18,11 +18,6 @@ class StudentsRegistration extends Component
         ]);
     }
 
-    public function mount()
-    {
-        $this->dispatch('reloadPage');
-    }
-
     public function addStudentRegistration()
     {
         $this->dispatch('add-student');
@@ -41,5 +36,10 @@ class StudentsRegistration extends Component
     public function deleteStudentRegistration($studentId)
     {
         $this->dispatch('delete-student', $studentId);
+    }
+
+    public function approveStudentRegistration($studentId)
+    {
+        $this->dispatch('approve-student', $studentId);
     }
 }

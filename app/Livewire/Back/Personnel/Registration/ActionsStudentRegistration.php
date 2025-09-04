@@ -78,7 +78,9 @@ class ActionsStudentRegistration extends Component
             'avatar',
             'avatarFile',
             'id_card',
-
+            'guardian_name',
+            'guardian_phone',
+            'location_id',
         ]);
         $this->isEditStudentMode = false;
     }
@@ -126,33 +128,32 @@ class ActionsStudentRegistration extends Component
 
         if ($student) {
             session()->flash('success', 'Thêm học viên thành công.');
-        }else{
+        } else {
             session()->flash('error', 'Thêm học viên thất bại.');
         }
         Flux::modal('modal-student')->close();
         $this->redirectRoute('admin.personnel.student-registration', navigate: true);
-       
     }
 
     #[On('edit-student')]
     public function editStudent($id)
     {
-       $student = app(UserRepositoryInterface::class)->getUserById($id);
-       $this->studentId = $student->id;
-       $this->name = $student->name;
-       $this->email = $student->email;
-       $this->username = $student->username;
-       $this->account_code = $student->account_code;
-       $this->phone = $student->detail->phone;
-       $this->address = $student->detail->address;
-       $this->birthday = $student->detail->birthday;
-       $this->id_card = $student->detail->id_card;
-       $this->gender = $student->detail->gender;
-       $this->guardian_name = $student->detail->guardian_name;
-       $this->guardian_phone = $student->detail->guardian_phone;
-       $this->location_id = $student->locations->first()->id;
-       $this->isEditStudentMode = true;
-       Flux::modal('modal-student')->show();
+        $student = app(UserRepositoryInterface::class)->getUserById($id);
+        $this->studentId = $student->id;
+        $this->name = $student->name;
+        $this->email = $student->email;
+        $this->username = $student->username;
+        $this->account_code = $student->account_code;
+        $this->phone = $student->detail->phone;
+        $this->address = $student->detail->address;
+        $this->birthday = $student->detail->birthday;
+        $this->id_card = $student->detail->id_card;
+        $this->gender = $student->detail->gender;
+        $this->guardian_name = $student->detail->guardian_name;
+        $this->guardian_phone = $student->detail->guardian_phone;
+        $this->location_id = $student->locations->first()->id;
+        $this->isEditStudentMode = true;
+        Flux::modal('modal-student')->show();
     }
 
     public function updateStudent()
@@ -177,7 +178,7 @@ class ActionsStudentRegistration extends Component
         ]);
         if ($student) {
             session()->flash('success', 'Cập nhật học viên thành công.');
-        }else{
+        } else {
             session()->flash('error', 'Cập nhật học viên thất bại.');
         }
         Flux::modal('modal-student')->close();
@@ -196,6 +197,29 @@ class ActionsStudentRegistration extends Component
         app(UserRepositoryInterface::class)->delete($this->studentId);
         session()->flash('success', 'Xóa học viên thành công.');
         Flux::modal('delete-student')->close();
+        $this->redirectRoute('admin.personnel.student-registration', navigate: true);
+    }
+
+    #[On('approve-student')]
+    public function approveStudent($id)
+    {
+        $this->resetForm();
+        $this->studentId = $id;
+        $this->approveStudentConfirm();
+    }
+
+    public function approveStudentConfirm()
+    {
+        $student = app(UserRepositoryInterface::class)->getUserById($this->studentId);
+        $student->update([
+            'status' => 'active',
+        ]);
+
+        if ($student) {
+            session()->flash('success', 'Xét duyệt học viên thành công.');
+        } else {
+            session()->flash('error', 'Xét duyệt học viên thất bại.');
+        }
         $this->redirectRoute('admin.personnel.student-registration', navigate: true);
     }
 

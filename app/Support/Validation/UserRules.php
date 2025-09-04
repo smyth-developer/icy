@@ -42,10 +42,9 @@ class UserRules
             'id_card' => [
                 'nullable',
                 'string',
-                'max:12',
                 // Nếu cập nhật, bỏ qua bản ghi có user_id = $id
                 'unique:user_details,id_card' . ($id ? ",$id,user_id" : ''),
-                'regex:/^[0-9]+$/', // Chỉ cho phép số
+                'regex:/^[0-9]{12}$/', // Chỉ cho phép số
             ],
             'address' => [
                 'nullable',
@@ -101,10 +100,9 @@ class UserRules
             'birthday.before' => 'Ngày sinh phải trước ngày hôm nay.',
             'birthday.after' => 'Ngày sinh không hợp lệ.',
 
-            'id_card.string' => 'CMND/CCCD phải là chuỗi.',
-            'id_card.max' => 'CMND/CCCD không được vượt quá 12 ký tự.',
-            'id_card.unique' => 'CMND/CCCD này đã được sử dụng.',
-            'id_card.regex' => 'CMND/CCCD chỉ được chứa số.',
+            'id_card.string' => 'CCCD phải là chuỗi.',
+            'id_card.unique' => 'CCCD này đã được sử dụng.',
+            'id_card.regex' => 'CCCD chỉ được chứa số và 12 ký tự.',
             
             'address.string' => 'Địa chỉ phải là chuỗi.',
             'address.max' => 'Địa chỉ không được vượt quá 500 ký tự.',
