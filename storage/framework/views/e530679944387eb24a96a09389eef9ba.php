@@ -98,6 +98,26 @@ if (isset($__slots)) unset($__slots);
 <?php endif; ?>
         </div>
 
+        <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['wire:click' => 'addStaff()','icon' => 'plus-circle','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:click' => 'addStaff()','icon' => 'plus-circle','class' => 'cursor-pointer']); ?>Thêm nhân viên <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+
     </div>
 
     <div class="mt-4 mb-4">
@@ -315,7 +335,7 @@ if (isset($__slots)) unset($__slots);
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                     <div class="flex items-center gap-3">
                                         <img class="h-8 w-8 rounded-full object-cover"
-                                            src="<?php echo e($staff->detail?->avatar ?? asset('images/default-avatar.png')); ?>"
+                                            src="<?php echo e($staff->detail?->avatar ?? asset('storage/images/avatars/default-avatar.png')); ?>"
                                             alt="<?php echo e($staff->name); ?>">
                                         <div>
                                             <div class="font-medium"><?php echo e($staff->name); ?></div>

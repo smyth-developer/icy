@@ -5,6 +5,8 @@ namespace App\Livewire\Back\Personnel\Employee;
 use Flux\Flux;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use App\Support\User\UserHelper;
+use Illuminate\Support\Facades\Hash;
 use App\Support\Validation\UserRules;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -18,6 +20,17 @@ class ActionsStaff extends Component
     public $location_id;
     public $role_id;
     public $avatarFile;
+
+    public function updateUsername()
+    {
+        $this->username = UserHelper::randomUsername($this->name);
+        $this->name = UserHelper::convertNameToTitleCase($this->name);
+    }
+
+    public function updateGuardian()
+    {
+        $this->guardian_name = UserHelper::convertNameToTitleCase($this->guardian_name);
+    }
 
     public function resetForm()
     {
@@ -68,6 +81,57 @@ class ActionsStaff extends Component
         return array_merge($userRules, $detailRules, $roleRules);
     }
 
+    #[On('add-staff')]
+    public function addStaff()
+    {
+        $this->resetForm();
+        Flux::modal('modal-employee')->show();
+    }
+
+    public function createStaff()
+    {
+        $this->validate();
+        $selectedLocationId = $this->location_id;
+        if (!$selectedLocationId) {
+            $location = app(UserRepositoryInterface::class)->getCurrentUserLocations()->first();
+            $selectedLocationId = $location?->id;
+        }
+
+        $role = app(RoleRepositoryInterface::class)->getRoleById($this->role_id);
+
+        $this->account_code = UserHelper::randomAccountCode();
+
+        $staff = app(UserRepositoryInterface::class)->create([
+            'user' => [
+                'name' => $this->name,
+                'email' => $this->email,
+                'username' => $this->username,
+                'account_code' => $this->account_code,
+                'password' => Hash::make($this->account_code),
+                'status' => 'active',
+            ],
+            'locations' => [$selectedLocationId],
+            'roles' => [$role->name],
+            'detail' => [
+                'phone' => $this->phone,
+                'address' => $this->address,
+                'birthday' => $this->birthday,
+                'avatar' => $this->avatar,
+                'id_card' => $this->id_card,
+                'gender' => $this->gender,
+                'guardian_name' => $this->guardian_name,
+                'guardian_phone' => $this->guardian_phone,
+            ]
+        ]);
+
+        if ($staff) {
+            session()->flash('success', 'Thêm nhân viên thành công.');
+        } else {
+            session()->flash('error', 'Thêm nhân viên thất bại.');
+        }
+        Flux::modal('modal-employee')->close();
+        $this->redirectRoute('admin.personnel.staff', navigate: true);
+    }
 
     public function messages()
     {

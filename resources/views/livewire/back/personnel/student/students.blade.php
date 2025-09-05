@@ -1,5 +1,7 @@
 <div class="relative mb-4 w-full">
 
+    <livewire:back.personnel.student.actions-student />
+
     <div class="flex items-center justify-between mb-6">
         <div>
             <flux:heading size="xl" level="1">{{ __('Học viên') }}</flux:heading>
@@ -8,6 +10,8 @@
                 <flux:breadcrumbs.item>Danh sách học viên</flux:breadcrumbs.item>
             </flux:breadcrumbs>
         </div>
+
+        <flux:button wire:click="addStudent()" icon="plus-circle" class="cursor-pointer">Thêm học viên</flux:button>
 
     </div>
 
@@ -79,13 +83,13 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <flux:button size="sm" variant="primary" icon="pencil"
-                                            wire:click="editstudent({{ $student->id }})"
+                                            wire:click="editStudent({{ $student->id }})"
                                             class="cursor-pointer">
                                             Sửa thông tin
                                         </flux:button>
 
                                         <flux:button size="sm" variant="danger" icon="trash"
-                                            wire:click="deletestudent({{ $student->id }})"
+                                            wire:click="deleteStudent({{ $student->id }})"
                                             class="cursor-pointer">
                                             Xóa
                                         </flux:button>

@@ -11,6 +11,8 @@
             </flux:breadcrumbs>
         </div>
 
+        <flux:button wire:click="addStaff()" icon="plus-circle" class="cursor-pointer">Thêm nhân viên</flux:button>
+
     </div>
 
     <div class="mt-4 mb-4">
@@ -81,7 +83,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
                                     <div class="flex items-center gap-3">
                                         <img class="h-8 w-8 rounded-full object-cover"
-                                            src="{{ $staff->detail?->avatar ?? asset('images/default-avatar.png') }}"
+                                            src="{{ $staff->detail?->avatar ?? asset('storage/images/avatars/default-avatar.png') }}"
                                             alt="{{ $staff->name }}">
                                         <div>
                                             <div class="font-medium">{{ $staff->name }}</div>

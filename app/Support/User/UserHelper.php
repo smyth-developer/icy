@@ -7,6 +7,12 @@ use Illuminate\Support\Str;
 
 class UserHelper
 {
+
+    public static function convertNameToTitleCase(string $name): string
+    {
+        return mb_convert_case(trim($name), MB_CASE_TITLE, "UTF-8");
+    }
+
     public static function randomUsername(string $name): string
     {
         $student_name = ucwords(trim($name));

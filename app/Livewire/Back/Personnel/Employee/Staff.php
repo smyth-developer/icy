@@ -37,6 +37,11 @@ class Staff extends Component
         ]);
     }
 
+    public function addStaff()
+    {
+        $this->dispatch('add-staff');
+    }
+
     public function editStaff($staffId)
     {
         $this->dispatch('edit-staff', $staffId);
@@ -63,4 +68,5 @@ class Staff extends Component
             'roles' => $roles,
         ]);
     }
+    
 }

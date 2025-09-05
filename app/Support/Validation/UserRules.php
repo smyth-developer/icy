@@ -40,7 +40,6 @@ class UserRules
                 'after:1960-01-01',
             ],
             'id_card' => [
-                'nullable',
                 'regex:/^(?!0{12})(?!.*(\d)\1{11})\d{12}$/',
                 'unique:user_details,id_card' . ($id ? ",$id,user_id" : ''),
             ],
@@ -98,11 +97,9 @@ class UserRules
             'birthday.before' => 'Ngày sinh phải trước ngày hôm nay.',
             'birthday.after' => 'Ngày sinh không hợp lệ.',
 
-            'id_card.string' => 'CCCD phải là chuỗi.',
             'id_card.unique' => 'CCCD này đã được sử dụng.',
-            
-            'id_card.regex' => 'CCCD chỉ được chứa số.',
-            'id_card.digits' => 'CCCD phải có 12 chữ số.',
+            'id_card.regex' => 'CCCD không hợp lệ.',
+
             'address.string' => 'Địa chỉ phải là chuỗi.',
             'address.max' => 'Địa chỉ không được vượt quá 500 ký tự.',
 

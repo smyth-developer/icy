@@ -21,8 +21,8 @@ use App\Livewire\Back\Finance\Tuitions;
 // Personnel
 use App\Livewire\Back\Personnel\Employee\Staff;
 use App\Livewire\Back\Personnel\Student\Students;
-use App\Livewire\Back\Personnel\Registration\StaffsRegistration;
-use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
+//use App\Livewire\Back\Personnel\Registration\StaffsRegistration;
+//use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
 
 // Management
 use App\Livewire\Back\Management\Course\Courses;
@@ -73,11 +73,11 @@ Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.
 
         Route::get('staff', Staff::class)->name('staff');
 
-        Route::get('staff-registration', StaffsRegistration::class)->name('staff-registration');
+        //Route::get('staff-registration', StaffsRegistration::class)->name('staff-registration');
 
         Route::get('students', Students::class)->name('students');
 
-        Route::get('student-registration', StudentsRegistration::class)->name('student-registration');
+        //Route::get('student-registration', StudentsRegistration::class)->name('student-registration');
     });
 
     Route::prefix('finance')->name('finance.')->group(function () {
