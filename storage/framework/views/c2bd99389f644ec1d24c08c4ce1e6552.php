@@ -1,3 +1,5 @@
+
+
 <?php
 extract(Flux::forwardedAttributes($attributes, [
     'tooltipPosition',
@@ -46,7 +48,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php if ($tooltip): ?>
     <?php if (isset($component)) { $__componentOriginalf5109f209df079b3a83484e1e6310749 = $component; } ?>

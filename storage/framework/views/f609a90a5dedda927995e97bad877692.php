@@ -1,5 +1,5 @@
-<?php $iconTrailing = $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
-<?php $iconVariant = $iconVariant ??= $attributes->pluck('icon:variant'); ?>
+<?php $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
+<?php $iconVariant ??= $attributes->pluck('icon:variant'); ?>
 
 <?php foreach (([ 'variant' ]) as $__key => $__value) {
     $__consumeVariable = is_string($__key) ? $__key : $__value;
@@ -52,7 +52,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 // Button should be a square if it has no text contents...
@@ -172,17 +172,17 @@ $classes = Flux::classes()
 
     <?php endif; ?>
 
-    <?php if ($badge): ?>
+    <?php if (isset($badge) && $badge !== ''): ?>
         <?php if (isset($component)) { $__componentOriginaledebcd5c8007c849df3a15805a9c8af1 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginaledebcd5c8007c849df3a15805a9c8af1 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::navlist.badge','data' => ['color' => $badgeColor]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::navlist.badge','data' => ['attributes' => Flux::attributesAfter('badge:', $attributes, ['color' => $badgeColor])]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::navlist.badge'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['color' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($badgeColor)]); ?><?php echo e($badge); ?> <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['attributes' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(Flux::attributesAfter('badge:', $attributes, ['color' => $badgeColor]))]); ?><?php echo e($badge); ?> <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginaledebcd5c8007c849df3a15805a9c8af1)): ?>
 <?php $attributes = $__attributesOriginaledebcd5c8007c849df3a15805a9c8af1; ?>

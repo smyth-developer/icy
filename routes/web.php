@@ -16,7 +16,7 @@ use App\Livewire\Back\Access\Permission\Permissions;
 
 // Finance
 use App\Livewire\Back\Finance\Bank\AccountsBank;
-use App\Livewire\Back\Finance\Tuitions;
+use App\Livewire\Back\Finance\Tuition\Tuitions;
 
 // Personnel
 use App\Livewire\Back\Personnel\Employee\Staff;

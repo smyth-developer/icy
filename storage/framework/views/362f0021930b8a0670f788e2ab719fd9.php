@@ -1,3 +1,5 @@
+
+
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
 $__newAttributes = [];
@@ -36,7 +38,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 $classes = Flux::classes()
@@ -72,4 +74,4 @@ $classes = Flux::classes()
     ;
 ?>
 
-<?php if ($inline) : ?><span <?php echo e($attributes->class($classes)); ?> data-flux-text <?php if($color): ?> color="<?php echo e($color); ?>" <?php endif; ?>><?php echo e($slot); ?></span><?php else: ?><div <?php echo e($attributes->class($classes)); ?> data-flux-text <?php if($color): ?> data-color="<?php echo e($color); ?>" <?php endif; ?>><?php echo e($slot); ?></div><?php endif; ?><?php /**PATH /Users/smyth/Herd/icy/vendor/livewire/flux/src/../stubs/resources/views/flux/text.blade.php ENDPATH**/ ?>
+<?php if ($inline) : ?><span <?php echo e($attributes->class($classes)); ?> data-flux-text <?php if($color): ?> color="<?php echo e($color); ?>" <?php endif; ?>><?php echo e($slot); ?></span><?php else: ?><p <?php echo e($attributes->class($classes)); ?> data-flux-text <?php if($color): ?> data-color="<?php echo e($color); ?>" <?php endif; ?>><?php echo e($slot); ?></p><?php endif; ?><?php /**PATH /Users/smyth/Herd/icy/vendor/livewire/flux/src/../stubs/resources/views/flux/text.blade.php ENDPATH**/ ?>

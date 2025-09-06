@@ -18,20 +18,19 @@
     <div class="mt-4 mb-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
-                <flux:input
-                    wire:model.live="search"
-                    placeholder="Tìm theo họ và tên hoặc Account code..."
-                    icon="magnifying-glass"
-                    class="w-full" />
+                <flux:input wire:model.live="search" placeholder="Tìm theo họ và tên hoặc Account code..."
+                    icon="magnifying-glass" class="w-full" clearable />
             </div>
-            <div>
-                <flux:select wire:model.live="filterLocationId" placeholder="Lọc theo cơ sở">
-                    <flux:select.option :value='null' label="Tất cả cơ sở" />
-                    @foreach ($locations as $location)
-                        <flux:select.option :value="$location->id" label="{{ $location->name }}" />
-                    @endforeach
-                </flux:select>
-            </div>
+            @if ($locations->count() > 1)
+                <div>
+                    <flux:select wire:model.live="filterLocationId" placeholder="Lọc theo cơ sở">
+                        <flux:select.option :value='null' label="Tất cả cơ sở" />
+                        @foreach ($locations as $location)
+                            <flux:select.option :value="$location->id" label="{{ $location->name }}" />
+                        @endforeach
+                    </flux:select>
+                </div>
+            @endif
             <div>
                 <flux:select wire:model.live="filterRoleId" placeholder="Lọc theo chức vụ">
                     <flux:select.option :value='null' label="Tất cả chức vụ" />
@@ -119,14 +118,12 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex items-center justify-center gap-2">
                                         <flux:button size="sm" variant="primary" icon="pencil"
-                                            wire:click="editStaff({{ $staff->id }})"
-                                            class="cursor-pointer">
+                                            wire:click="editStaff({{ $staff->id }})" class="cursor-pointer">
                                             Sửa thông tin
                                         </flux:button>
 
                                         <flux:button size="sm" variant="danger" icon="trash"
-                                            wire:click="deleteStaff({{ $staff->id }})"
-                                            class="cursor-pointer">
+                                            wire:click="deleteStaff({{ $staff->id }})" class="cursor-pointer">
                                             Xóa
                                         </flux:button>
                                     </div>

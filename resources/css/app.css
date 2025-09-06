@@ -104,3 +104,13 @@ select:focus[data-flux-control] {
 .dark .sortable-drag {
     background: #f59e0b !important;
 }
+
+/* Loại bỏ con trỏ nhấp nháy trên toàn bộ trang */
+* {
+    caret-color: transparent !important;
+}
+
+/* Chỉ hiển thị con trỏ khi thực sự focus vào input */
+input:focus, textarea:focus, [contenteditable]:focus {
+    caret-color: auto !important;
+}

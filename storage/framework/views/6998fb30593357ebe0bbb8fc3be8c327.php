@@ -1,5 +1,7 @@
-<?php $iconVariant = $iconVariant ??= $attributes->pluck('icon:variant'); ?>
-<?php $iconTrailing = $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
+
+
+<?php $iconVariant ??= $attributes->pluck('icon:variant'); ?>
+<?php $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
 
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
@@ -45,17 +47,10 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 $iconTrailing = $iconTrailing ?? ($chevron ? 'chevron-down' : null);
-
-// If no initials are provided, we'll try to generate them from the name by taking the first letter of the first and last name...
-$initials ??= collect(explode(' ', $name ?? ''))
-    ->map(fn($part) => Str::substr($part, 0, 1))
-    ->filter()
-    ->only([0, count(explode(' ', $name ?? '')) - 1])
-    ->implode('');
 
 // When using the outline icon variant, we need to size it down to match the default icon sizes...
 $iconClasses = Flux::classes('text-zinc-400 dark:text-white/80 group-hover:text-zinc-800 dark:group-hover:text-white')

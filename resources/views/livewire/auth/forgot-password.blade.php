@@ -11,8 +11,8 @@
             :label="__('Địa chỉ Email')"
             type="email"
             required
-            autofocus
             placeholder="email@example.com"
+            autofocus
         />
 
         <flux:button variant="primary" type="submit" class="w-full">{{ __('Gửi liên kết đặt lại mật khẩu') }}</flux:button>

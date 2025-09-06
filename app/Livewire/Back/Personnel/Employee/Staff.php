@@ -16,25 +16,14 @@ class Staff extends Component
     public $search = '';
     public $staffs = [];
 
-    public function updatedSearch()
-    {
-        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters([
-            'search' => $this->search,
-        ]);
-    }
-
-    public function updatedFilterLocationId()
-    {
-        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters([
-            'location_id' => $this->filterLocationId,
-        ]);
-    }
-
     public function updatedFilterRoleId()
     {
-        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters([
+        $filters = [
+            'location_id' => $this->filterLocationId,
             'role_id' => $this->filterRoleId,
-        ]);
+            'search' => $this->search,
+        ];
+        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters($filters);
     }
 
     public function addStaff()
@@ -50,6 +39,26 @@ class Staff extends Component
     public function deleteStaff($staffId)
     {
         $this->dispatch('delete-staff', $staffId);
+    }
+
+    public function updatedSearch()
+    {
+        $filters = [
+            'location_id' => $this->filterLocationId,
+            'role_id' => $this->filterRoleId,
+            'search' => $this->search,
+        ];
+        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters($filters);
+    }
+
+    public function updatedFilterLocationId()
+    {
+        $filters = [
+            'location_id' => $this->filterLocationId,
+            'role_id' => $this->filterRoleId,
+            'search' => $this->search,
+        ];
+        $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters($filters);
     }
 
     public function render()

@@ -50,6 +50,37 @@ class StudentRepository implements StudentRepositoryInterface
         dd($data);
         return User::create($data);
     }
+
+    public function getStudentsOfLocationWithFilters(array $filters = [])
+    {
+        $query = User::with(['locations', 'roles', 'detail'])
+            ->where('status', '=', 'active')
+            ->whereHas('roles', function ($q) {
+                $q->where('name', 'student');
+            });
+
+        if (!empty($filters['location_id'])) {
+            $query->whereHas('locations', function ($q) use ($filters) {
+                $q->where('locations.id', $filters['location_id']);
+            });
+        }
+
+        if (!empty($filters['search'])) {
+            $search = trim($filters['search']);
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('account_code', 'like', "%{$search}%");
+            });
+        }
+
+        return $query->get()->sortBy(function ($user) {
+            return [
+                $user->locations->pluck('id')->first(),
+                $user->roles->pluck('id')->first(),
+            ];
+        });
+    }
+
 }
 
 

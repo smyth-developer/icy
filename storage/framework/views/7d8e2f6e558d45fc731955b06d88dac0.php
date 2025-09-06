@@ -1,4 +1,5 @@
 
+
 <ui-close data-flux-modal-close>
     <?php echo e($slot); ?>
 

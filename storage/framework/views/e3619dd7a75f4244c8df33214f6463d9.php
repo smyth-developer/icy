@@ -5,6 +5,7 @@ $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'name' => null,
     'message' => null,
     'nested' => true,
+    'bag' => 'default',
 ]));
 
 foreach ($attributes->all() as $__key => $__value) {
@@ -24,6 +25,7 @@ foreach (array_filter(([
     'name' => null,
     'message' => null,
     'nested' => true,
+    'bag' => 'default',
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
 }
@@ -34,13 +36,14 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
-$message ??= $name ? $errors->first($name) : null;
+$errorBag = $errors->getBag($bag);
+$message ??= $name ? $errorBag->first($name) : null;
 
 if ($name && (is_null($message) || $message === '') && filter_var($nested, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) !== false) {
-    $message = $errors->first($name . '.*');
+    $message = $errorBag->first($name . '.*');
 }
 
 $classes = Flux::classes('mt-3 text-sm font-medium text-red-500 dark:text-red-400')

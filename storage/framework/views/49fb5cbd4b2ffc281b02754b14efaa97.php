@@ -1,6 +1,6 @@
-<?php $iconTrailing = $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
-<?php $iconLeading = $iconLeading ??= $attributes->pluck('icon:leading'); ?>
-<?php $iconVariant = $iconVariant ??= $attributes->pluck('icon:variant'); ?>
+<?php $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
+<?php $iconLeading ??= $attributes->pluck('icon:leading'); ?>
+<?php $iconVariant ??= $attributes->pluck('icon:variant'); ?>
 
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
@@ -66,7 +66,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 

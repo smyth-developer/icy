@@ -1,3 +1,5 @@
+
+
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
 $__newAttributes = [];
@@ -32,13 +34,13 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
     $classes = Flux::classes()
         ->add('inline-flex items-center')
         ->add('text-sm font-medium')
-        ->add('[:where(&)]:text-pink-700 [:where(&)]:dark:text-white')
+        ->add('[:where(&)]:text-zinc-800 [:where(&)]:dark:text-white')
         ;
 ?>
 

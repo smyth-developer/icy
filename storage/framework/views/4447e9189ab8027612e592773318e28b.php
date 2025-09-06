@@ -1,6 +1,8 @@
-<?php $iconTrailing = $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
-<?php $iconLeading = $iconLeading ??= $attributes->pluck('icon:leading'); ?>
-<?php $iconVariant = $iconVariant ??= $attributes->pluck('icon:variant'); ?>
+
+
+<?php $iconTrailing ??= $attributes->pluck('icon:trailing'); ?>
+<?php $iconLeading ??= $attributes->pluck('icon:leading'); ?>
+<?php $iconVariant ??= $attributes->pluck('icon:variant'); ?>
 
 <?php $attributes ??= new \Illuminate\View\ComponentAttributeBag;
 
@@ -56,7 +58,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 $iconLeading = $icon ??= $iconLeading;
@@ -103,7 +105,12 @@ $classes = Flux::classes()
     ->add('relative items-center font-medium justify-center gap-2 whitespace-nowrap')
     ->add('disabled:opacity-75 dark:disabled:opacity-75 disabled:cursor-default disabled:pointer-events-none')
     ->add(match ($size) { // Size...
-        'base' => 'h-10 text-sm rounded-lg' . ' ' . ($square ? 'w-10' : 'px-4 [&:has(>:not(span):first-child)]:ps-3 [&:has(>:not(span):last-child)]:pe-3'),
+        'base' => 'h-10 text-sm rounded-lg' . ' ' . (
+            $square
+                ? 'w-10'
+                // If we have an icon, we want to reduce the padding on the side that has the icon...
+                : ($iconLeading && $iconLeading !== '' ? 'ps-3' : 'ps-4') . ' ' . ($iconTrailing && $iconTrailing !== '' ? 'pe-3' : 'pe-4')
+        ),
         'sm' => 'h-8 text-sm rounded-md' . ' ' . ($square ? 'w-8' : 'px-3'),
         'xs' => 'h-6 text-xs rounded-md' . ' ' . ($square ? 'w-6' : 'px-2'),
     })

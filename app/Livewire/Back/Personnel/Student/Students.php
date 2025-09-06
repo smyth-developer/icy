@@ -5,10 +5,15 @@ namespace App\Livewire\Back\Personnel\Student;
 use Livewire\Component;
 use Livewire\Attributes\Title;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 
 #[Title('Học viên')]
 class Students extends Component
 {
+    public $filterLocationId = null;
+    public $search = '';
+    public $students = [];
+
     public function addStudent()
     {
         $this->dispatch('add-student');
@@ -29,11 +34,35 @@ class Students extends Component
         $this->dispatch('delete-student', $studentId);
     }
 
+    public function updatedSearch()
+    {
+        $filters = [
+            'location_id' => $this->filterLocationId,
+            'search' => $this->search,
+        ];
+        $this->students = app(StudentRepositoryInterface::class)->getStudentsOfLocationWithFilters($filters);
+    }
+
+    public function updatedFilterLocationId()
+    {
+        $filters = [
+            'location_id' => $this->filterLocationId,
+            'search' => $this->search,
+        ];
+        $this->students = app(StudentRepositoryInterface::class)->getStudentsOfLocationWithFilters($filters);
+    }
+
     public function render()
     {
-        $students = app(UserRepositoryInterface::class)->getStudentsOfLocation();
+        $filters = [
+            'location_id' => $this->filterLocationId,
+            'search' => $this->search,
+        ];
+        $this->students = app(StudentRepositoryInterface::class)->getStudentsOfLocationWithFilters($filters);
+        $locations = app(UserRepositoryInterface::class)->getCurrentUserLocations();
         return view('livewire.back.personnel.student.students', [
-            'students' => $students,
+            'students' => $this->students,
+            'locations' => $locations,
         ]);
     }
 }

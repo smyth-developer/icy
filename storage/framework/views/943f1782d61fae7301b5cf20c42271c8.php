@@ -35,7 +35,7 @@ foreach ($attributes->all() as $__key => $__value) {
     if (array_key_exists($__key, $__defined_vars)) unset($$__key);
 }
 
-unset($__defined_vars); ?>
+unset($__defined_vars, $__key, $__value); ?>
 
 <?php
 // This prevents variants picked up by `@aware()` from other wrapping components like flux::modal from being used here...
