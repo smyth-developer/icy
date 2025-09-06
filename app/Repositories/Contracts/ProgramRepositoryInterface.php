@@ -8,7 +8,7 @@ interface ProgramRepositoryInterface
     public function create(array $data);
     public function updateOrdering(array $orderedIds);
     public function update(int $id, array $data);
-    public function delete(int $id);
+    public function delete(int $id): bool;
     public function getProgramById(int $id);
     //public function showName(string $name);
 }

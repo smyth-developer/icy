@@ -16,12 +16,19 @@ class ActionsProgram extends Component
     public $name;
     public $english_name;
     public $description;
+    public $price;
     public $isEditProgramMode = false;
+
+    public function resetForm()
+    {
+        $this->reset(['programId', 'name', 'english_name', 'description', 'price']);
+        $this->isEditProgramMode = false;
+    }
 
     #[On('add-program')]
     public function addProgram()
     {
-        $this->reset(['programId', 'name', 'english_name', 'description']);
+        $this->resetForm();
         Flux::modal('modal-program')->show();
     }
 
@@ -32,8 +39,8 @@ class ActionsProgram extends Component
             'name' => $this->name,
             'description' => $this->description,
             'english_name' => $this->english_name,
+            'price' => $this->price,
         ]);
-        $this->reset(['name', 'description', 'english_name', 'programId']);
         session()->flash('success', 'Thêm chương trình học thành công.');
         Flux::modal('modal-program')->close();
         $this->redirectRoute('admin.management.programs', navigate: true);
@@ -42,11 +49,13 @@ class ActionsProgram extends Component
     #[On('edit-program')]
     public function editProgram($id)
     {
+        $this->resetForm();
         $program = app(ProgramRepositoryInterface::class)->getProgramById($id);
         $this->programId = $program->id;
         $this->name = $program->name;
         $this->english_name = $program->english_name;
         $this->description = $program->description;
+        $this->price = $program->price;
         $this->isEditProgramMode = true;
         Flux::modal('modal-program')->show();
     }
@@ -58,6 +67,7 @@ class ActionsProgram extends Component
             'name' => $this->name,
             'description' => $this->description,
             'english_name' => $this->english_name,
+            'price' => $this->price,
         ]);
         session()->flash('success', 'Cập nhật chương trình học thành công.');
         Flux::modal('modal-program')->close();
@@ -67,21 +77,31 @@ class ActionsProgram extends Component
     #[On('delete-program')]
     public function deleteProgram($id)
     {
+        $this->resetForm();
         $this->programId = $id;
         Flux::modal('delete-program')->show();
     }
 
     public function deleteProgramConfirm()
     {
+        $program = app(ProgramRepositoryInterface::class)->getProgramById($this->programId);
+        
+        // Kiểm tra xem có môn học nào đang sử dụng chương trình này không
+        if ($program->subjects()->count() > 0) {
+            session()->flash('error', 'Không thể xóa chương trình học này vì có môn học đang sử dụng.');
+            Flux::modal('delete-program')->close();
+            return;
+        }
+
         $delete = app(ProgramRepositoryInterface::class)->delete($this->programId);
         if ($delete) {
             session()->flash('success', 'Xoá chương trình học thành công.');
+            $this->redirectRoute('admin.management.programs', navigate: true);
         } else {
             session()->flash('error', 'Xoá chương trình học thất bại.');
         }
 
         $this->reset(['programId']);
-        $this->redirectRoute('admin.management.programs', navigate: true);
         Flux::modal('delete-program')->close();
     }
 

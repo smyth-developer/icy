@@ -14,14 +14,38 @@
             <flux:separator />
 
             <div class="flex gap-2">
-                <div class="form-group w-3/5" >
-                    <flux:input wire:model='name' autocomplete="off" clearable label="Tên chương trình" autofocus></flux:input>
+                <div class="form-group w-3/5">
+                    <flux:input wire:model='name' autocomplete="off" clearable label="Tên chương trình" autofocus>
+                    </flux:input>
                 </div>
                 <div class="form-group w-2/5">
                     <flux:input wire:model='english_name' autocomplete="off" clearable label="Tên tiếng anh">
                     </flux:input>
                 </div>
             </div>
+
+            <div class="form-group">
+                <flux:label>💰 Học phí (VNĐ) 🚩</flux:label>
+                <flux:input.group>
+                    <flux:input wire:model='price' 
+                        autocomplete="off" 
+                        clearable 
+                        placeholder="Nhập học phí"
+                        min="1000"
+                        max="99999999"
+                        step="1000" />
+                    <flux:input.group.suffix>VNĐ</flux:input.group.suffix>
+                </flux:input.group>
+                @error('price')
+                    <div class="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
 
             <div class="form-group ">
                 <flux:textarea wire:model='description' placeholder="Nhập thông tin chương trình áp dụng cho ai?"
@@ -68,8 +92,7 @@
                 <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="currentColor"
-                                viewBox="0 0 20 20">
+                            <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                     clip-rule="evenodd"></path>
@@ -83,6 +106,7 @@
                                 <p class="mb-2">Bạn có chắc chắn muốn xóa chương trình học này không?</p>
                                 <ul class="list-disc list-inside space-y-1 text-sm">
                                     <li>Tất cả thông tin chương trình học sẽ bị xóa vĩnh viễn</li>
+                                    <li>Thông tin học phí và giá cả sẽ bị mất</li>
                                     <li>Các môn học và khóa học liên quan sẽ bị ảnh hưởng</li>
                                     <li>Dữ liệu học tập của học viên có thể bị mất</li>
                                     <li>Thứ tự sắp xếp chương trình sẽ bị thay đổi</li>

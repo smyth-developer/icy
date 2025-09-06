@@ -74,10 +74,7 @@
                                         <th
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
                                             Tên môn học</th>
-                                            <th
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
-                                            Học phí</th>
-                                        
+
                                         <th
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell">
                                             Mô tả</th>
@@ -98,9 +95,6 @@
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
                                                 {{ $subject->name }}</td>
-                                                <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
-                                                {{ $subject->price }}</td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300 hidden 2xl:table-cell">
                                                 {{ $subject->description }}

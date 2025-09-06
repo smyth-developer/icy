@@ -41,6 +41,7 @@
                                 <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">STT</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-30">Chương trình học</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell">Mô tả</th>
+                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Học phí</th>
                                 <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
                             </tr>
                         </thead>
@@ -64,6 +65,13 @@
                                             {{ $program->description }}
                                         </div>
                                     </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-center font-bold">
+                                        <div class="text-sm text-green-600 dark:text-green-400 font-semibold">
+                                            {{ $program->price_formatted }} VNĐ
+                                        </div>
+                                    </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                         <div class="flex items-center justify-center gap-2">
                                             <flux:button size="sm" variant="primary" icon="square-pen"

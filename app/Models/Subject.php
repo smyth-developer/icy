@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    protected $fillable = ['name', 'code', 'program_id', 'description', 'ordering', 'price'];
-
-    public function getPriceAttribute($value)
-    {
-        return number_format($value, 0, ',', '.') . ' VNĐ';
-    }
+    protected $fillable = ['name', 'code', 'program_id', 'description', 'ordering'];
 
     public function courses()
     {

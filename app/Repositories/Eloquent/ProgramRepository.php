@@ -5,9 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Repositories\Contracts\ProgramRepositoryInterface;
 use App\Models\Program;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Exception;
 use Throwable;
-use Illuminate\Database\QueryException;
 
 class ProgramRepository implements ProgramRepositoryInterface
 {
@@ -16,8 +14,8 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     protected function prepareData(array $data): array
     {
-        $data['name'] = trim($data['name']);
-        $data['english_name'] = trim($data['english_name']);
+        $data['name'] = ucfirst(trim($data['name']));
+        $data['english_name'] = ucwords(trim($data['english_name']));
         return $data;
     }
 
@@ -46,22 +44,21 @@ class ProgramRepository implements ProgramRepositoryInterface
         return $program;
     }
 
-    public function delete(int $id): void
+    public function delete(int $id): bool
     {
         try {
             $program = $this->getProgramById($id);
 
             if ($program->subjects()->count() > 0) {
-                session()->flash('error', "Không thể xóa chương trình học này vì có môn học đang sử dụng.");
-                return;
+                return false;
             }
 
             $program->delete();
             $remainingIds = Program::orderBy('ordering')->pluck('id')->toArray();
             $this->updateOrdering($remainingIds);
+            return true;
         } catch (Throwable $e) {
-            session()->flash('error', "Lỗi không xác định: " . $e->getMessage());
-            return;
+            return false;
         }
     }
 

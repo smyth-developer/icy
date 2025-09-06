@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('tuitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('receipt_number')->unique()->nullable();
-            $table->foreignId('program_id')->constrained('programs');
-            $table->foreignId('season_id')->constrained('seasons');
+            $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
+            $table->foreignId('season_id')->constrained('seasons')->cascadeOnDelete();
             $table->decimal('price', 10, 2);
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
-            $table->string('payment_method');
-            $table->foreignId('bank_id')->constrained('banks');
+            $table->enum('payment_method', ['cash', 'bank_transfer'])->default('cash');
+            $table->foreignId('bank_id')->nullable()->constrained('banks')->nullOnDelete();
             $table->string('note')->nullable();
             $table->timestamps();
         });
