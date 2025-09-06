@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,6 +21,23 @@ class Tuition extends Model
         'bank_id',
         'note',
     ];
+
+    protected $appends = ['price_formatted'];
+
+    protected function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => (float) $value,
+            set: fn ($value) => (float) str_replace(['.', ',', ' VNĐ'], '', $value)
+        );
+    }
+
+    protected function priceFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => number_format($this->price, 0, ',', '.')
+        );
+    }
 
     public function user()
     {

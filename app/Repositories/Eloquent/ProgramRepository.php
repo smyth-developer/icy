@@ -29,6 +29,11 @@ class ProgramRepository implements ProgramRepositoryInterface
         return Program::orderBy('ordering', 'asc')->paginate($perPage);
     }
 
+    public function getAllPrograms()
+    {
+        return Program::orderBy('ordering', 'asc')->get();
+    }
+
     public function create(array $data)
     {
         $data = $this->prepareData($data);

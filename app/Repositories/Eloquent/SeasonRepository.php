@@ -36,6 +36,14 @@ class SeasonRepository implements SeasonRepositoryInterface
             ->paginate($perPage);
     }
 
+    public function getAllSeasons()
+    {
+        return Season::orderByRaw("
+            RIGHT(code, 2) DESC,                      
+            FIELD(LEFT(code, 2), 'WI', 'FA', 'SU', 'SP') 
+        ")->get();
+    }
+
 
     public function create(array $data)
     {

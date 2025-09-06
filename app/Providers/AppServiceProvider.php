@@ -15,8 +15,8 @@ use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\BankRepositoryInterface;
 use App\Repositories\Contracts\StaffRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
-
 use App\Repositories\Contracts\SyllabusRepositoryInterface;
+use App\Repositories\Contracts\TuitionRepositoryInterface;
 
 
 use App\Repositories\Eloquent\LocationRepository;
@@ -29,9 +29,9 @@ use App\Repositories\Eloquent\CourseRepository;
 use App\Repositories\Eloquent\PermissionRepository;
 use App\Repositories\Eloquent\BankRepository;
 use App\Repositories\Eloquent\StaffRepository;
-
 use App\Repositories\Eloquent\StudentRepository;
 use App\Repositories\Eloquent\SyllabusRepository;
+use App\Repositories\Eloquent\TuitionRepository;
 
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
@@ -60,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(StaffRepositoryInterface::class, StaffRepository::class);
         $this->app->bind(BankRepositoryInterface::class, BankRepository::class);
         $this->app->bind(SyllabusRepositoryInterface::class, SyllabusRepository::class);
+        $this->app->bind(TuitionRepositoryInterface::class, TuitionRepository::class);
     }
 
     /**

@@ -15,6 +15,8 @@
 
     </div>
 
+    <flux:separator variant="subtle" />
+
     <div class="mt-4 mb-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>

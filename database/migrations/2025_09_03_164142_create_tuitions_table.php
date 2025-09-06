@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('bank_id')->nullable()->constrained('banks')->nullOnDelete();
             $table->string('note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -11,7 +11,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['size' => 'xl','level' => '1']); ?>Chương trình học <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['size' => 'xl','level' => '1']); ?><?php echo e(__('Tài khoản ngân hàng')); ?> <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginale0fd5b6a0986beffac17a0a103dfd7b9)): ?>
 <?php $attributes = $__attributesOriginale0fd5b6a0986beffac17a0a103dfd7b9; ?>
@@ -59,7 +59,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes([]); ?>Các chương trình học <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes([]); ?>Tài khoản ngân hàng <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalced986e8ff6641d3797206c3198c2b83)): ?>
 <?php $attributes = $__attributesOriginalced986e8ff6641d3797206c3198c2b83; ?>
@@ -83,14 +83,14 @@
 
         <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['wire:click' => 'addProgram','icon' => 'plus-circle','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['icon' => 'plus-circle','class' => 'cursor-pointer','wire:click' => 'addBank']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['wire:click' => 'addProgram','icon' => 'plus-circle','class' => 'cursor-pointer']); ?>Thêm khoá học <?php echo $__env->renderComponent(); ?>
+<?php $component->withAttributes(['icon' => 'plus-circle','class' => 'cursor-pointer','wire:click' => 'addBank']); ?>Thêm tài khoản <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
 <?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
@@ -100,7 +100,6 @@
 <?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
 <?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
 <?php endif; ?>
-
     </div>
 
     <?php if (isset($component)) { $__componentOriginalc481942d30cc0ab06077963cf20a45e8 = $component; } ?>
@@ -128,9 +127,9 @@
 $__split = function ($name, $params = []) {
     return [$name, $params];
 };
-[$__name, $__params] = $__split('back.management.program.actions-program', []);
+[$__name, $__params] = $__split('back.finance.bank.actions-account-bank', []);
 
-$__html = app('livewire')->mount($__name, $__params, 'lw-1591531750-0', $__slots ?? [], get_defined_vars());
+$__html = app('livewire')->mount($__name, $__params, 'lw-3610009167-0', $__slots ?? [], get_defined_vars());
 
 echo $__html;
 
@@ -141,118 +140,107 @@ unset($__split);
 if (isset($__slots)) unset($__slots);
 ?>
 
-    
     <div class="mt-6">
-        <div x-data x-init="const el = document.getElementById('sortable-program');
-        new Sortable(el, {
-            animation: 150,
-            handle: '.drag-handle',
-            onEnd: function() {
-                let orderedIds = [];
-                el.querySelectorAll('[data-id]').forEach(item => {
-                    orderedIds.push(item.getAttribute('data-id'));
-                });
-        
-                $wire.updateProgramOrdering(orderedIds);
-            }
-        });">
+        <div
+            class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
+                    <thead class="bg-gray-50 dark:bg-gray-800">
+                        <tr>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Ngân hàng</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Mã ngân hàng</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Số tài khoản</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Chủ tài khoản</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Trạng thái</th>
+                            <th
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
+                        <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $banks; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $bank): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                            <tr wire:key="bank-<?php echo e($bank->id); ?>"
+                                class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                                <td
+                                    class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 font-medium">
+                                    <?php echo e($bank->bank_name); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
+                                    <?php echo e($bank->bank_code); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300">
+                                    <?php echo e($bank->account_number); ?></td>
+                                <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300"><?php echo e($bank->account_name); ?>
 
-            <div class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
-                <div class="overflow-x-auto">
-                    <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
-                        <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr>
-                                <th class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">STT</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-30">Chương trình học</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell">Mô tả</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Học phí</th>
-                                <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">Thao tác</th>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <span
+                                        class="px-2 py-1 rounded-full text-xs <?php echo e($bank->status === 'active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400' : 'bg-gray-100 text-gray-700 dark:bg-gray-800/60 dark:text-gray-300'); ?>">
+                                        <?php echo e($bank->status === 'active' ? 'Hoạt động' : 'Ngưng'); ?>
+
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editBank('.e($bank->id).')','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Sửa
+                                         <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+                                        <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteBank('.e($bank->id).')','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteBank('.e($bank->id).')','class' => 'cursor-pointer']); ?>Xoá
+                                         <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody id="sortable-program" class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-800">
-                            <!--[if BLOCK]><![endif]--><?php $__empty_1 = true; $__currentLoopData = $programs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $program): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-                                <tr wire:key="program-<?php echo e($program->id); ?>" data-id="<?php echo e($program->id); ?>"
-                                    class="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 cursor-move drag-handle">
-                                    <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 text-center">
-                                        <?php echo e($program->ordering); ?>
-
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100">
-                                        <div class="flex items-center">
-                                            <span class="font-medium"><?php echo e($program->name); ?></span>
-                                            <span class="ml-2 text-xs text-pink-500 dark:text-pink-400 font-medium">
-                                                (<?php echo e($program->english_name); ?>)
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-gray-300 hidden 2xl:table-cell">
-                                        <div class=" truncate" title="<?php echo e($program->description); ?>">
-                                            <?php echo e($program->description); ?>
-
-                                        </div>
-                                    </td>
-
-                                    <td class="px-6 py-4 whitespace-nowrap text-center font-bold">
-                                        <div class="text-sm text-green-600 dark:text-green-400 font-semibold">
-                                            <?php echo e($program->price_formatted); ?> VNĐ
-                                        </div>
-                                    </td>
-
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        <div class="flex items-center justify-center gap-2">
-                                            <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editProgram('.e($program->id).')','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('flux::button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['size' => 'sm','variant' => 'primary','icon' => 'square-pen','wire:click' => 'editProgram('.e($program->id).')','class' => 'cursor-pointer']); ?>
-                                                Sửa
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-                                            <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteProgram('.e($program->id).')','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('flux::button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['size' => 'sm','variant' => 'danger','icon' => 'trash','wire:click' => 'deleteProgram('.e($program->id).')','class' => 'cursor-pointer']); ?>
-                                                Xóa
-                                             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-                                <tr>
-                                    <td colspan="4" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
-                                        <div class="flex flex-col items-center">
-                                            <?php if (isset($component)) { $__componentOriginal76d8dfc5ede7830a506df27ed24d5d51 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal76d8dfc5ede7830a506df27ed24d5d51 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::icon.book-marked','data' => ['class' => 'w-8 h-8 text-gray-400 dark:text-gray-600 mb-2']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('flux::icon.book-marked'); ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                            <tr>
+                                <td colspan="5" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                    <div class="flex flex-col items-center">
+                                        <?php if (isset($component)) { $__componentOriginal1a2aab62646bbf4070a26cfe0540f0d4 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal1a2aab62646bbf4070a26cfe0540f0d4 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::icon.banknotes','data' => ['class' => 'w-8 h-8 text-gray-400 dark:text-gray-600 mb-2']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::icon.banknotes'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
@@ -261,30 +249,31 @@ if (isset($__slots)) unset($__slots);
 <?php $component->withAttributes(['class' => 'w-8 h-8 text-gray-400 dark:text-gray-600 mb-2']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
-<?php if (isset($__attributesOriginal76d8dfc5ede7830a506df27ed24d5d51)): ?>
-<?php $attributes = $__attributesOriginal76d8dfc5ede7830a506df27ed24d5d51; ?>
-<?php unset($__attributesOriginal76d8dfc5ede7830a506df27ed24d5d51); ?>
+<?php if (isset($__attributesOriginal1a2aab62646bbf4070a26cfe0540f0d4)): ?>
+<?php $attributes = $__attributesOriginal1a2aab62646bbf4070a26cfe0540f0d4; ?>
+<?php unset($__attributesOriginal1a2aab62646bbf4070a26cfe0540f0d4); ?>
 <?php endif; ?>
-<?php if (isset($__componentOriginal76d8dfc5ede7830a506df27ed24d5d51)): ?>
-<?php $component = $__componentOriginal76d8dfc5ede7830a506df27ed24d5d51; ?>
-<?php unset($__componentOriginal76d8dfc5ede7830a506df27ed24d5d51); ?>
+<?php if (isset($__componentOriginal1a2aab62646bbf4070a26cfe0540f0d4)): ?>
+<?php $component = $__componentOriginal1a2aab62646bbf4070a26cfe0540f0d4; ?>
+<?php unset($__componentOriginal1a2aab62646bbf4070a26cfe0540f0d4); ?>
 <?php endif; ?>
-                                            <div class="text-sm">Không có khoá học nào</div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!--[if BLOCK]><![endif]--><?php if($programs->hasPages()): ?>
-                    <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
-                        <?php echo e($programs->links()); ?>
-
-                    </div>
-                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                                        <div class="text-sm">Chưa có tài khoản ngân hàng</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+                    </tbody>
+                </table>
             </div>
+
+            <!--[if BLOCK]><![endif]--><?php if($banks->hasPages()): ?>
+                <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-800">
+                    <?php echo e($banks->links()); ?>
+
+                </div>
+            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
         </div>
     </div>
-</div><?php /**PATH /Users/smyth/Herd/icy/resources/views/livewire/back/management/program/programs.blade.php ENDPATH**/ ?>
+
+</div>
+<?php /**PATH /Users/smyth/Herd/icy/resources/views/livewire/back/finance/bank/accounts-bank.blade.php ENDPATH**/ ?>

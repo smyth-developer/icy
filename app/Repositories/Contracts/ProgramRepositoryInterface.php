@@ -5,6 +5,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 interface ProgramRepositoryInterface
 {
     public function getAll(int $perPage = 10): LengthAwarePaginator;
+    public function getAllPrograms();
     public function create(array $data);
     public function updateOrdering(array $orderedIds);
     public function update(int $id, array $data);
