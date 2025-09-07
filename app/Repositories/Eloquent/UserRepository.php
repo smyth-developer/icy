@@ -67,4 +67,17 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
+    public function searchStudents(string $searchTerm, int $limit = 10)
+    {
+        return User::whereHas('roles', function($query) {
+            $query->where('name', 'student');
+        })
+        ->where(function($query) use ($searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('email', 'like', '%' . $searchTerm . '%');
+        })
+        ->limit($limit)
+        ->get();
+    }
+
 }

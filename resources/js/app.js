@@ -1,6 +1,8 @@
 import Sortable from 'sortablejs';
 window.Sortable = Sortable;
 
+import './audio';
+
 // Loại bỏ con trỏ nhấp nháy không cần thiết
 document.addEventListener('DOMContentLoaded', function() {
     // Blur any focused element khi trang load

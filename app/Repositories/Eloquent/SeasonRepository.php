@@ -94,4 +94,9 @@ class SeasonRepository implements SeasonRepositoryInterface
     {
         return Season::where('name', $name)->value('name');
     }
+
+    public function getSeasonAvailable()
+    {
+        return Season::where('status', ['ongoing', 'upcoming'])->get();
+    }
 }

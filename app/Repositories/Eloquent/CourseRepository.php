@@ -12,4 +12,29 @@ class CourseRepository implements CourseRepositoryInterface
     {
         return Course::paginate($perPage);
     }
+
+    public function getCoursesBySeasonAndProgram(int $seasonId, int $programId)
+    {
+        return Course::where('season_id', $seasonId)
+            ->where('program_id', $programId)
+            ->with(['program', 'season'])
+            ->get();
+    }
+
+    public function getCourseById(int $id)
+    {
+        return Course::with(['program', 'season'])->find($id);
+    }
+
+    public function getAvailableCoursesForStudent(int $studentId, int $seasonId, int $programId)
+    {
+        return Course::where('season_id', $seasonId)
+            ->where('program_id', $programId)
+            ->whereDoesntHave('tuitions', function($query) use ($studentId) {
+                $query->where('user_id', $studentId)
+                      ->where('status', 'paid');
+            })
+            ->with(['program', 'season'])
+            ->get();
+    }
 }

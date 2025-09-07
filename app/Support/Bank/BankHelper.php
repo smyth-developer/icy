@@ -101,4 +101,9 @@ class BankHelper
         return $bank['bin'];
     }
 
+    public static function generateDescriptionTransaction(string $studentName, string $programName, string $seasonName): string
+    {
+        return "{$studentName} - {$programName} - {$seasonName}";
+    }
+
 }

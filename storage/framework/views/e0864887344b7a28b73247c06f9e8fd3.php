@@ -1,22 +1,5 @@
 <div class="relative mb-4 w-full">
 
-    <?php
-$__split = function ($name, $params = []) {
-    return [$name, $params];
-};
-[$__name, $__params] = $__split('back.finance.tuition.actions-tuition', []);
-
-$__html = app('livewire')->mount($__name, $__params, 'lw-3501069900-0', $__slots ?? [], get_defined_vars());
-
-echo $__html;
-
-unset($__html);
-unset($__name);
-unset($__params);
-unset($__split);
-if (isset($__slots)) unset($__slots);
-?>
-
     <div class="flex items-center justify-between mb-6">
         <div>
             <?php if (isset($component)) { $__componentOriginale0fd5b6a0986beffac17a0a103dfd7b9 = $component; } ?>
@@ -122,35 +105,14 @@ if (isset($__slots)) unset($__slots);
 <?php endif; ?>
             <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['wire:click' => 'addTuition','icon' => 'plus-circle','class' => 'cursor-pointer']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['wire:click' => 'clearFilters','variant' => 'filled','icon' => 'x-mark']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['wire:click' => 'addTuition','icon' => 'plus-circle','class' => 'cursor-pointer']); ?>
-                Thêm giao dịch
-             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
-<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
-<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
-<?php endif; ?>
-            <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['wire:click' => 'clearFilters','variant' => 'outline','icon' => 'x-mark']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('flux::button'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['wire:click' => 'clearFilters','variant' => 'outline','icon' => 'x-mark']); ?>
+<?php $component->withAttributes(['wire:click' => 'clearFilters','variant' => 'filled','icon' => 'x-mark']); ?>
                 Xóa bộ lọc
              <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -723,7 +685,7 @@ if (isset($__slots)) unset($__slots);
                                 </td>
                                 <td
                                     class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100 hidden md:table-cell">
-                                    <?php echo e($tuition->season->name ?? 'N/A'); ?>
+                                    <?php echo e($tuition->season->code ?? 'N/A'); ?>
 
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center hidden xl:table-cell">

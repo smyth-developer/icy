@@ -5,19 +5,19 @@
     <?php echo $__env->make('partials.head', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800 ">
-    <div class="flex min-h-screen">
+<body class="h-screen bg-white dark:bg-zinc-800 overflow-hidden">
+    <div class="flex h-full">
         
         <?php if (isset($component)) { $__componentOriginal17e56bc23bb0192e474b351c4358d446 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal17e56bc23bb0192e474b351c4358d446 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::sidebar.index','data' => ['sticky' => true,'stashable' => true,'class' => 'w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::sidebar.index','data' => ['sticky' => true,'stashable' => true,'class' => 'w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 h-full']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::sidebar'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['sticky' => true,'stashable' => true,'class' => 'w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900']); ?>
+<?php $component->withAttributes(['sticky' => true,'stashable' => true,'class' => 'w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 h-full']); ?>
             <?php if (isset($component)) { $__componentOriginal1b6467b07b302021134396bbd98e74a9 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal1b6467b07b302021134396bbd98e74a9 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::sidebar.toggle','data' => ['class' => 'lg:hidden','icon' => 'x-mark']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -330,14 +330,14 @@
 
                     <?php if (isset($component)) { $__componentOriginalda376aa217444bbd92367ba1444eb3b8 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalda376aa217444bbd92367ba1444eb3b8 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::navlist.item','data' => ['icon' => 'credit-card','href' => route('admin.finance.tuitions'),'current' => request()->routeIs('admin.finance.tuitions'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::navlist.item','data' => ['icon' => 'credit-card','href' => route('admin.finance.tuitions-payment'),'current' => request()->routeIs('admin.finance.tuitions-payment'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::navlist.item'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['icon' => 'credit-card','href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('admin.finance.tuitions')),'current' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(request()->routeIs('admin.finance.tuitions')),'wire:navigate' => true]); ?>
+<?php $component->withAttributes(['icon' => 'credit-card','href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('admin.finance.tuitions-payment')),'current' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(request()->routeIs('admin.finance.tuitions-payment')),'wire:navigate' => true]); ?>
                         Đóng học phí
                      <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -349,6 +349,29 @@
 <?php $component = $__componentOriginalda376aa217444bbd92367ba1444eb3b8; ?>
 <?php unset($__componentOriginalda376aa217444bbd92367ba1444eb3b8); ?>
 <?php endif; ?>
+
+                    <?php if (isset($component)) { $__componentOriginalda376aa217444bbd92367ba1444eb3b8 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalda376aa217444bbd92367ba1444eb3b8 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::navlist.item','data' => ['icon' => 'banknotes','href' => route('admin.finance.tuition-history'),'current' => request()->routeIs('admin.finance.tuition-history'),'wire:navigate' => true]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::navlist.item'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['icon' => 'banknotes','href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('admin.finance.tuition-history')),'current' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(request()->routeIs('admin.finance.tuition-history')),'wire:navigate' => true]); ?>
+                        Lịch sử đóng học phí
+                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalda376aa217444bbd92367ba1444eb3b8)): ?>
+<?php $attributes = $__attributesOriginalda376aa217444bbd92367ba1444eb3b8; ?>
+<?php unset($__attributesOriginalda376aa217444bbd92367ba1444eb3b8); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalda376aa217444bbd92367ba1444eb3b8)): ?>
+<?php $component = $__componentOriginalda376aa217444bbd92367ba1444eb3b8; ?>
+<?php unset($__componentOriginalda376aa217444bbd92367ba1444eb3b8); ?>
+<?php endif; ?>
+
                  <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal8b1fe5c87f0876e7c101dbc6fe82a9a4)): ?>
@@ -823,7 +846,7 @@
 <?php unset($__componentOriginal17e56bc23bb0192e474b351c4358d446); ?>
 <?php endif; ?>
 
-        <div class="flex flex-col flex-1 min-h-screen">
+        <div class="flex flex-col flex-1 h-full bg-white dark:bg-zinc-800 overflow-hidden">
             
             <?php if (isset($component)) { $__componentOriginale96c14d638c792103c11b984a4ed1896 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginale96c14d638c792103c11b984a4ed1896 = $attributes; } ?>
@@ -1104,7 +1127,7 @@
 <?php endif; ?>
 
             
-            <main class="flex-grow p-4">
+            <main class="flex-grow p-4 overflow-auto">
                 <?php echo e($slot); ?>
 
             </main>
@@ -1140,10 +1163,7 @@
     <?php app('livewire')->forceAssetInjection(); ?>
 <?php echo app('flux')->scripts(); ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <audio id="sound-success" preload="auto" src="<?php echo e(asset('storage/audio/success.mp3')); ?>"></audio>
-    <audio id="sound-error" preload="auto" src="<?php echo e(asset('storage/audio/error.mp3')); ?>"></audio>
-    <audio id="sound-banking-success" preload="auto" src="<?php echo e(asset('storage/audio/banking-success.mp3')); ?>"></audio>
+    
 </body>
 
 

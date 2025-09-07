@@ -47,13 +47,20 @@ class StudentRepository implements StudentRepositoryInterface
     {
         $data = $this->prepareStudentData($data);
 
-        dd($data);
         return User::create($data);
     }
 
     public function getStudentsOfLocationWithFilters(array $filters = [])
-    {
+    {      
+        $locations = app(UserRepositoryInterface::class)->getCurrentUserLocations();
+        if ($locations->isEmpty()) {
+            return collect();
+        }
+
         $query = User::with(['locations', 'roles', 'detail'])
+            ->whereHas('locations', function ($q) use ($locations) {
+                $q->whereIn('locations.id', $locations->pluck('id'));
+            })
             ->where('status', '=', 'active')
             ->whereHas('roles', function ($q) {
                 $q->where('name', 'student');

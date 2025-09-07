@@ -1,7 +1,5 @@
 <div class="relative mb-4 w-full">
 
-    <livewire:back.finance.tuition.actions-tuition />
-
     <div class="flex items-center justify-between mb-6">
         <div>
             <flux:heading size="xl" level="1">{{ __('Lịch sử đóng học phí') }}</flux:heading>
@@ -15,10 +13,7 @@
             <flux:button icon="arrow-path" wire:click="loadTuitions" variant="outline">
                 Làm mới
             </flux:button>
-            <flux:button wire:click="addTuition" icon="plus-circle" class="cursor-pointer">
-                Thêm giao dịch
-            </flux:button>
-            <flux:button wire:click="clearFilters" variant="outline" icon="x-mark">
+            <flux:button wire:click="clearFilters" variant="filled" icon="x-mark">
                 Xóa bộ lọc
             </flux:button>
         </div>
@@ -95,44 +90,44 @@
     <div class="mt-6">
         <div
             class="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden shadow-sm">
-            <div class="overflow-x-auto">
+            <div class="overflow-x-auto max-h-[calc(100vh-300px)]">
                 <table class="w-full divide-y divide-gray-200 dark:divide-gray-800">
-                    <thead class="bg-gray-50 dark:bg-gray-800">
+                    <thead class="bg-gray-50 dark:bg-gray-800 sticky top-0 z-10 shadow-sm">
                         <tr>
                             <th
-                                class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16">
+                                class="px-3 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider w-16 bg-gray-50 dark:bg-gray-800">
                                 STT
                             </th>
                             <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
                                 Học viên
                             </th>
                             <th
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden lg:table-cell">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden lg:table-cell bg-gray-50 dark:bg-gray-800">
                                 Chương trình
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden md:table-cell">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden md:table-cell bg-gray-50 dark:bg-gray-800">
                                 Học kỳ
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden xl:table-cell">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden xl:table-cell bg-gray-50 dark:bg-gray-800">
                                 Số biên lai
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
                                 Số tiền
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider bg-gray-50 dark:bg-gray-800">
                                 Trạng thái
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden sm:table-cell">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden sm:table-cell bg-gray-50 dark:bg-gray-800">
                                 Phương thức
                             </th>
                             <th
-                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell">
+                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-200 uppercase tracking-wider hidden 2xl:table-cell bg-gray-50 dark:bg-gray-800">
                                 Ngày đóng
                             </th>
                         </tr>
@@ -167,7 +162,7 @@
                                 </td>
                                 <td
                                     class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900 dark:text-gray-100 hidden md:table-cell">
-                                    {{ $tuition->season->name ?? 'N/A' }}
+                                    {{ $tuition->season->code ?? 'N/A' }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center hidden xl:table-cell">
                                     <div class="text-sm font-mono text-gray-900 dark:text-gray-100">

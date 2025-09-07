@@ -188,14 +188,14 @@
                     <div class="form-group md:col-span-2">
                         <?php if (isset($component)) { $__componentOriginal26c546557cdc09040c8dd00b2090afd0 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal26c546557cdc09040c8dd00b2090afd0 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::input.index','data' => ['wire:model' => 'username','label' => '🔑 Tên đăng nhập','placeholder' => 'username','disabled' => true,'class' => 'rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::input.index','data' => ['wire:model' => 'username','label' => '👤 Tên đăng nhập','placeholder' => 'username','disabled' => true,'class' => 'rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::input'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['wire:model' => 'username','label' => '🔑 Tên đăng nhập','placeholder' => 'username','disabled' => true,'class' => 'rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300']); ?>
+<?php $component->withAttributes(['wire:model' => 'username','label' => '👤 Tên đăng nhập','placeholder' => 'username','disabled' => true,'class' => 'rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition-all duration-300']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal26c546557cdc09040c8dd00b2090afd0)): ?>

@@ -5,11 +5,11 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800 ">
-    <div class="flex min-h-screen">
+<body class="h-screen bg-white dark:bg-zinc-800 overflow-hidden">
+    <div class="flex h-full">
         {{-- Sidebar bên trái --}}
         <flux:sidebar sticky stashable
-            class="w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+            class="w-[300px] border-e border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 h-full">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="me-5 flex items-center space-x-2 rtl:space-x-reverse" wire:navigate>
@@ -75,10 +75,16 @@
                         Tài khoản ngân hàng
                     </flux:navlist.item>
 
-                    <flux:navlist.item icon="credit-card" :href="route('admin.finance.tuitions')"
-                        :current="request()->routeIs('admin.finance.tuitions')" wire:navigate>
+                    <flux:navlist.item icon="credit-card" :href="route('admin.finance.tuitions-payment')"
+                        :current="request()->routeIs('admin.finance.tuitions-payment')" wire:navigate>
                         Đóng học phí
                     </flux:navlist.item>
+
+                    <flux:navlist.item icon="banknotes" :href="route('admin.finance.tuition-history')"
+                        :current="request()->routeIs('admin.finance.tuition-history')" wire:navigate>
+                        Lịch sử đóng học phí
+                    </flux:navlist.item>
+
                 </flux:navlist.group>
 
                 <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
@@ -167,7 +173,7 @@
             </flux:dropdown>
         </flux:sidebar>
 
-        <div class="flex flex-col flex-1 min-h-screen">
+        <div class="flex flex-col flex-1 h-full bg-white dark:bg-zinc-800 overflow-hidden">
             {{-- Mobile header --}}
             <flux:header class="lg:hidden">
                 <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
@@ -209,7 +215,7 @@
             </flux:header>
 
             {{-- Nội dung --}}
-            <main class="flex-grow p-4">
+            <main class="flex-grow p-4 overflow-auto">
                 {{ $slot }}
             </main>
 
@@ -223,10 +229,7 @@
     </div>
     @stack('scripts')
     @fluxScripts
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-    <audio id="sound-success" preload="auto" src="{{ asset('storage/audio/success.mp3') }}"></audio>
-    <audio id="sound-error" preload="auto" src="{{ asset('storage/audio/error.mp3') }}"></audio>
-    <audio id="sound-banking-success" preload="auto" src="{{ asset('storage/audio/banking-success.mp3') }}"></audio>
+    
 </body>
 
 

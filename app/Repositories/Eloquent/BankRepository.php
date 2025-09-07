@@ -13,7 +13,7 @@ class BankRepository implements BankRepositoryInterface
     public function prepareData(array $data)
     {
         return [
-            'bank_name' => strtoupper(trim($data['bank_name'])),
+            'bank_name' => trim($data['bank_name']),
             'bank_code' => BankHelper::getBankCode($data['bank_name']),
             'account_name' => BankHelper::nonAccent($data['account_name']),
             'account_number' => $data['account_number'],
@@ -30,6 +30,11 @@ class BankRepository implements BankRepositoryInterface
     public function getById(int $id)
     {
         return Bank::findOrFail($id);
+    }
+
+    public function getActiveBanks()
+    {
+        return Bank::where('status', 'active')->orderBy('bank_name')->get();
     }
 
     public function create(array $data)

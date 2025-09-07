@@ -1,38 +1,39 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Livewire\Settings\Profile;
 
 
 // Settings
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Appearance;
-use App\Livewire\Settings\Profile;
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Settings\Notification;
-use App\Livewire\Settings\AuthenticationLogs;
+use App\Livewire\Back\Access\Role\Roles;
 
 // Access
-use App\Livewire\Back\Access\Role\Roles;
-use App\Livewire\Back\Access\Permission\Permissions;
+use App\Livewire\Settings\AuthenticationLogs;
 
 // Finance
+use App\Livewire\Back\Personnel\Employee\Staff;
 use App\Livewire\Back\Finance\Bank\AccountsBank;
-use App\Livewire\Back\Finance\Tuition\Tuitions;
 
 // Personnel
-use App\Livewire\Back\Personnel\Employee\Staff;
-use App\Livewire\Back\Personnel\Student\Students;
+use App\Livewire\Back\Management\Course\Courses;
+use App\Livewire\Back\Management\Season\Seasons;
 //use App\Livewire\Back\Personnel\Registration\StaffsRegistration;
 //use App\Livewire\Back\Personnel\Registration\StudentsRegistration;
 
 // Management
-use App\Livewire\Back\Management\Course\Courses;
-use App\Livewire\Back\Management\Season\Seasons;
+use App\Livewire\Back\Personnel\Student\Students;
 use App\Livewire\Back\Management\Program\Programs;
 use App\Livewire\Back\Management\Subject\Subjects;
-
-use App\Livewire\Back\Management\Location\Locations;
-use App\Livewire\Back\Management\Curriculum\Curricula;
 use App\Livewire\Back\Management\Syllabus\Syllabi;
+
+use App\Livewire\Back\Access\Permission\Permissions;
+use App\Livewire\Back\Management\Location\Locations;
+use App\Livewire\Back\Finance\Tuition\TuitionsHistory;
+use App\Livewire\Back\Finance\Tuition\TuitionsPayment;
+use App\Livewire\Back\Management\Curriculum\Curricula;
 
 
 Route::get('/', function () {
@@ -84,7 +85,10 @@ Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.
 
         Route::get('bank-accounts', AccountsBank::class)->name('bank-accounts');
 
-        Route::get('tuitions', Tuitions::class)->name('tuitions');
+        Route::get('tuition-history', TuitionsHistory::class)->name('tuition-history');
+
+        Route::get('tuitions-payment', TuitionsPayment::class)->name('tuitions-payment');
+
     });
 
     Route::redirect('settings', 'settings/profile');

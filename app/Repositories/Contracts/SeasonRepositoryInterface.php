@@ -11,4 +11,6 @@ interface SeasonRepositoryInterface
     public function delete(int $id);
     public function getSeasonById(int $id);
     public function showName(string $name);
+
+    public function getSeasonAvailable();
 }

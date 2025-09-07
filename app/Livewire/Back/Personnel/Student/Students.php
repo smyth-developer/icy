@@ -24,9 +24,10 @@ class Students extends Component
         $this->dispatch('edit-student', $studentId);
     }
 
-    public function viewStudent($studentId)
+    public function actionsTuition($studentId)
     {
-        $this->dispatch('view-student', $studentId);
+        $this->dispatch('add-tuition', $studentId);
+        //back/finance/tuition/tuitions
     }
 
     public function deleteStudent($studentId)
