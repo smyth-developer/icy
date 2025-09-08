@@ -561,7 +561,7 @@
         });
 
         document.addEventListener('process-payment', function(qrCode) {
-            window.serialPortManager.processPayment(qrCode.detail[0]);
+            window.serialPortManager.processPayment(qrCode);
         });
 
         document.addEventListener('turnOnBankTransfer', function() {

@@ -186,7 +186,15 @@ class SerialPortManager {
      */
     async sendPaymentCommand(qrCode) {
         await this.backToMainMenu();
-        const command = `QBAR(0,${qrCode});SET_TXT(0, );SET_TXT(1,STK: );SET_TXT(2, );`;
+
+        const CRC16 = qrCode.detail[0];
+        const bankName = qrCode.detail[1];
+        const accountNumber = qrCode.detail[2];
+        const amount = qrCode.detail[3];
+
+        console.log(CRC16, bankName, accountNumber, amount);
+        
+        const command = `QBAR(0,${CRC16});SET_TXT(0, ${bankName});SET_TXT(1,STK:${accountNumber});SET_TXT(2,1.500.000);`;
         return await this.sendCommand(command);
     }
 

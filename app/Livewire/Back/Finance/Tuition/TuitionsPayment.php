@@ -355,8 +355,11 @@ class TuitionsPayment extends Component
     public function showQrCode($transactionId)
     {
         $transaction = app(TuitionRepositoryInterface::class)->getTuitionById($transactionId);
-        $informationTransaction = TuitionHelper::generateInformationTransaction($transaction);
-        $this->dispatch('process-payment', $informationTransaction);
+        $crc16 = TuitionHelper::generateInformationTransaction($transaction);
+        $bankName = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->bank_name;
+        $accountNumber = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->account_number;
+        $amount = trim(number_format($transaction->price, 0, ',', '.'));
+        $this->dispatch('process-payment', $crc16, $bankName, $accountNumber, $amount);
     }
 
     public function render()
