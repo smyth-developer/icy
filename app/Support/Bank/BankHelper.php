@@ -2,7 +2,10 @@
 
 namespace App\Support\Bank;
 
+use App\Models\Subject;
 use Illuminate\Support\Facades\Http;
+use App\Repositories\Contracts\SeasonRepositoryInterface;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 
 class BankHelper
 {
@@ -104,6 +107,15 @@ class BankHelper
     public static function generateDescriptionTransaction(string $studentName, string $programName, string $seasonName): string
     {
         return "{$studentName} - {$programName} - {$seasonName}";
+    }
+
+    public static function generateDescriptionTransactionBankTransfer(int $studentId, int $seasonId, int $programId): string
+    {
+        $student = strtoupper(app(StudentRepositoryInterface::class)->getStudentById($studentId)->username);
+        $season = app(SeasonRepositoryInterface::class)->getSeasonById($seasonId);
+        $subject_code = substr(Subject::find($programId)?->code, 0, 2);
+        $uniqid = uniqid();
+        return "{$student}_{$season->code}_{$subject_code}_{$uniqid}";
     }
 
 }

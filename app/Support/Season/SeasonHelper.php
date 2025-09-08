@@ -90,4 +90,14 @@ class SeasonHelper
             return 'ongoing';
         }
     }
+
+    public static function getSeasonAvailable(): array
+    {
+        $seasons = app(SeasonRepositoryInterface::class)->getSeasonAvailable();
+        foreach ($seasons as $season) {
+            $season->status = self::getSeasonStatus($season->start_date, $season->end_date);
+            $season->save();
+        }
+        return $seasons;
+    }
 }

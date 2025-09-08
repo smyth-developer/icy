@@ -22,7 +22,7 @@ class Tuition extends Model
         'note',
     ];
 
-    protected $appends = ['price_formatted'];
+    protected $appends = ['price_formatted', 'created_at_formatted'];
 
     protected function price(): Attribute
     {
@@ -36,6 +36,13 @@ class Tuition extends Model
     {
         return Attribute::make(
             get: fn () => number_format($this->price, 0, ',', '.')
+        );
+    }
+
+    protected function createdAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->created_at ? $this->created_at->format('d/m/Y H:i') : null
         );
     }
 

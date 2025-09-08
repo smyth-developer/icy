@@ -77,7 +77,7 @@
 
                     <flux:navlist.item icon="credit-card" :href="route('admin.finance.tuitions-payment')"
                         :current="request()->routeIs('admin.finance.tuitions-payment')" wire:navigate>
-                        Đóng học phí
+                        Thanh toán học phí
                     </flux:navlist.item>
 
                     <flux:navlist.item icon="banknotes" :href="route('admin.finance.tuition-history')"

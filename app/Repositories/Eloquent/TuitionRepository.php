@@ -82,6 +82,11 @@ class TuitionRepository implements TuitionRepositoryInterface
         return $query->orderBy('created_at', 'desc')->get();
     }
 
+    public function getTuitionById(int $id): object
+    {
+        return Tuition::findOrFail($id);
+    }
+
     public function create(array $data): object
     {
         return Tuition::create($data);
@@ -102,6 +107,16 @@ class TuitionRepository implements TuitionRepositoryInterface
         try {
             $tuition = Tuition::findOrFail($id);
             return $tuition->delete();
+        } catch (Throwable $e) {
+            return false;
+        }
+    }
+
+    public function updateStatus(string $content, float $transferAmount): bool
+    {
+        try {
+            $tuition = Tuition::where('note', $content)->where('price', $transferAmount)->first();
+            return $tuition->update(['status' => 'paid']);
         } catch (Throwable $e) {
             return false;
         }

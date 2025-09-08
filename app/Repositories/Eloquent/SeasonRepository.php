@@ -97,6 +97,6 @@ class SeasonRepository implements SeasonRepositoryInterface
 
     public function getSeasonAvailable()
     {
-        return Season::where('status', ['ongoing', 'upcoming'])->get();
+        return Season::whereIn('status', ['ongoing', 'upcoming'])->get();
     }
 }
