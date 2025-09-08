@@ -96,7 +96,6 @@ class SerialPortManager {
 
             for (const port of ports) {
                 const portInfo = port.getInfo();
-                console.log('Port info:', portInfo);
 
                 if (portInfo.usbVendorId === this.targetUsbDevice.usbVendorId &&
                     portInfo.usbProductId === this.targetUsbDevice.usbProductId) {
@@ -286,11 +285,7 @@ class SerialPortManager {
      */
     async autoConnect() {
         const success = await this.initializePort();
-        if (success) {
-            console.log('Auto-connect successful!');
-        } else {
-            console.log('Auto-connect failed, manual selection required');
-        }
+
         return success;
     }
 
