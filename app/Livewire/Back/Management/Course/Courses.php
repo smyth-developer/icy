@@ -20,6 +20,11 @@ class Courses extends Component
         $this->dispatch('add-course');
     }  
 
+    public function mount()
+    {
+        $this->dispatch('turnOnBankTransfer');
+    }
+
     public function render()
     {
         $courses = app(CourseRepositoryInterface::class)->getAll(5);

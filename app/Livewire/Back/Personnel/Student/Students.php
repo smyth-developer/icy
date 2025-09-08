@@ -53,6 +53,11 @@ class Students extends Component
         $this->students = app(StudentRepositoryInterface::class)->getStudentsOfLocationWithFilters($filters);
     }
 
+    public function mount()
+    {
+        $this->dispatch('turnOnBankTransfer');
+    }
+
     public function render()
     {
         $filters = [

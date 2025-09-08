@@ -25,6 +25,7 @@ class Subjects extends Component
         $programId = request('program') ?? Program::first()?->id;
         $this->selectedProgramId = $programId ? (int)$programId : null;
         $this->loadPrograms();
+        $this->dispatch('turnOnBankTransfer');
     }
 
     public function updatingSelectedProgramId()

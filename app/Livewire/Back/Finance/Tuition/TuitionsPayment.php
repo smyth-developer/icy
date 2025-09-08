@@ -3,6 +3,7 @@
 namespace App\Livewire\Back\Finance\Tuition;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use App\Support\Bank\BankHelper;
 use App\Support\Tuition\TuitionHelper;
@@ -53,7 +54,12 @@ class TuitionsPayment extends Component
         $this->loadStudents();
         $this->loadSeasons();
         $this->loadBanks();
-        $this->dispatch('turnOffBankTransfer');
+    }
+
+    #[On('turnOnBankTransfer')]
+    public function turnOnBankTransfer()
+    {
+        $this->dispatch('turnOnBankTransfer');
     }
 
     public function loadPrograms()

@@ -5,13 +5,17 @@ namespace App\Livewire\Back\Access\Permission;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Repositories\Contracts\PermissionRepositoryInterface;
-use Flux\Flux;
 use Livewire\Attributes\Title;
 
 #[Title('Permission')]
 class Permissions extends Component
 {
     use WithPagination;
+
+    public function mount()
+    {
+        $this->dispatch('turnOnBankTransfer');
+    }
 
     public function addPermission()
     {

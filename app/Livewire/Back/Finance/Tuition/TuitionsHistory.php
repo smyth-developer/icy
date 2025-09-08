@@ -23,6 +23,7 @@ class TuitionsHistory extends Component
     public function mount()
     {
         $this->loadTuitions();
+        $this->dispatch('turnOnBankTransfer');
     }
 
     public function updatedSearch()
