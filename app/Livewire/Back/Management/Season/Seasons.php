@@ -28,11 +28,6 @@ class Seasons extends Component
         $this->dispatch('edit-season', $id);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $seasons = app(SeasonRepositoryInterface::class)->getAll(5);

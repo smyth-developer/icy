@@ -12,11 +12,6 @@ class Permissions extends Component
 {
     use WithPagination;
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function addPermission()
     {
         $this->dispatch('add-permission');

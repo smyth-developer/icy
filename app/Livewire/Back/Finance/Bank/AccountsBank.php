@@ -29,11 +29,6 @@ class AccountsBank extends Component
         $this->dispatch('delete-bank', $id);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $banks = app(BankRepositoryInterface::class)->getAll(10);

@@ -61,11 +61,6 @@ class Staff extends Component
         $this->staffs = app(StaffRepositoryInterface::class)->getStaffsOfLocationWithFilters($filters);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $filters = [

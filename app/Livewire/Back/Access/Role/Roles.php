@@ -28,11 +28,6 @@ class Roles extends Component
         $this->dispatch('edit-role', $id);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $roles = app(RoleRepositoryInterface::class)->getAll(10);

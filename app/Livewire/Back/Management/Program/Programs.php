@@ -41,11 +41,6 @@ class Programs extends Component
         $this->redirectRoute('admin.management.programs', navigate: true);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $programs = app(ProgramRepositoryInterface::class)->getAll(10);

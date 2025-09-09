@@ -40,11 +40,6 @@ class Syllabi extends Component
         session()->flash('message', 'Syllabus đã được xóa thành công!');
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $syllabi = Syllabus::with(['subject.program'])

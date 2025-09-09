@@ -28,11 +28,6 @@ class Locations extends Component
         $this->dispatch('delete-location', $id);
     }
 
-    public function mount()
-    {
-        $this->dispatch('turnOnBankTransfer');
-    }
-
     public function render()
     {
         $locations = app(LocationRepositoryInterface::class)->getAll(5);
