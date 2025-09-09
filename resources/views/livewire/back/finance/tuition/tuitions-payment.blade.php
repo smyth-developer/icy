@@ -45,6 +45,8 @@
                         {{-- Search Program --}}
                         <div class="flex-1">
                             <input type="text" wire:model.live="searchProgram" clearable
+                                wire:focus="onProgramSearchFocus"
+                                wire:blur="onProgramSearchBlur"
                                 placeholder="Tìm kiếm chương trình theo tên..."
                                 class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
                         </div>
@@ -59,7 +61,13 @@
                     </div>
 
                     {{-- Search Results --}}
-                    @if (count($filteredPrograms) > 0)
+                    @if (!$selectedStudent)
+                        {{-- Chưa chọn học sinh --}}
+                        <div class="text-center py-8">
+                            <div class="text-gray-500 dark:text-gray-400 text-lg">Vui lòng chọn học sinh trước</div>
+                            <div class="text-gray-400 dark:text-gray-500 text-sm mt-1">Sau khi chọn học sinh, danh sách chương trình sẽ hiển thị</div>
+                        </div>
+                    @elseif (count($filteredPrograms) > 0)
                         <div class="max-h-64 overflow-y-auto space-y-2">
                             @foreach ($filteredPrograms as $program)
                                 <div
@@ -71,7 +79,21 @@
                                                 {{ $program['name'] }}
                                             </div>
                                             <div class="text-blue-600 dark:text-blue-400 text-sm font-bold">
-                                                {{ number_format($program['price'], 0, ',', '.') }} VNĐ
+                                                @php
+                                                    $locationId = $selectedStudent['location_id'] ?? null;
+                                                    if ($locationId) {
+                                                        $price = app(\App\Repositories\Contracts\ProgramLocationPriceRepositoryInterface::class)
+                                                            ->getPriceByProgramAndLocation($program['id'], $locationId);
+                                                        $displayPrice = $price ? $price->price : 0;
+                                                    } else {
+                                                        $displayPrice = 0;
+                                                    }
+                                                @endphp
+                                                @if($displayPrice > 0)
+                                                    {{ number_format($displayPrice, 0, ',', '.') }} VNĐ
+                                                @else
+                                                    Chưa có giá
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="text-blue-600 dark:text-blue-400">

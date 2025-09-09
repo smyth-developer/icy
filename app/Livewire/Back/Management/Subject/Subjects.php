@@ -41,6 +41,7 @@ class Subjects extends Component
         $this->selectedProgramId = (int)$programId;
         $this->resetPage();
         $this->dispatch('update-selected-program', $programId);
+        $this->dispatch('program-changed');
         $this->loadPrograms();
     }
 

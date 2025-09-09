@@ -11,7 +11,10 @@
             </flux:breadcrumbs>
         </div>
 
-        <flux:button wire:click="addStudent()" icon="plus-circle" class="cursor-pointer">Thêm học viên</flux:button>
+        <div class="flex items-center gap-3">
+            <flux:button href="/admin/finance/tuitions-payment" color="green" variant="primary" icon="credit-card" class="cursor-pointer">Thanh toán học phí</flux:button>
+            <flux:button wire:click="addStudent()" icon="plus-circle" class="cursor-pointer">Thêm học viên</flux:button>
+        </div>
 
     </div>
 

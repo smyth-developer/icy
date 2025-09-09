@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('receipt_number')->unique()->nullable();
-            $table->foreignId('program_id')->constrained('programs')->cascadeOnDelete();
-            $table->foreignId('season_id')->constrained('seasons')->cascadeOnDelete();
+            $table->foreignId('program_id')->nullable()->constrained('programs')->cascadeOnDelete();
+            $table->foreignId('season_id')->nullable()->constrained('seasons')->cascadeOnDelete();
             $table->decimal('price', 10, 2);
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->enum('payment_method', ['cash', 'bank_transfer'])->default('cash');

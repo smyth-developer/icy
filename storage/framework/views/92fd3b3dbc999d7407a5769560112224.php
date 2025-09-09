@@ -1,0 +1,1 @@
+e60dd9d2c3a62d619c9acb38f20d5aa5::badge.index<?php /**PATH /Users/smyth/Herd/icy/storage/framework/views/6bb49d9083c255fe5233aa4f2d1d5f69.blade.php ENDPATH**/ ?>

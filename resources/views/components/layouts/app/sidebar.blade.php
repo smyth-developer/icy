@@ -70,6 +70,12 @@
                 <hr class="h-px my-2 bg-gray-200 border-0 dark:bg-gray-700">
 
                 <flux:navlist.group :heading="__('Finance')" class="grid">
+
+                    <flux:navlist.item icon="currency-dollar" :href="route('admin.finance.program-prices')"
+                        :current="request()->routeIs('admin.finance.program-prices')" wire:navigate>
+                        Quản lý giá tiền
+                    </flux:navlist.item>
+
                     <flux:navlist.item icon="banknotes" :href="route('admin.finance.bank-accounts')"
                         :current="request()->routeIs('admin.finance.bank-accounts')" wire:navigate>
                         Tài khoản ngân hàng
@@ -229,7 +235,7 @@
     </div>
     @stack('scripts')
     @fluxScripts
-    
+
 </body>
 
 

@@ -12,6 +12,7 @@ use App\Repositories\Contracts\SeasonRepositoryInterface;
 use App\Repositories\Contracts\ProgramRepositoryInterface;
 use App\Repositories\Contracts\StudentRepositoryInterface;
 use App\Repositories\Contracts\TuitionRepositoryInterface;
+use App\Repositories\Contracts\ProgramLocationPriceRepositoryInterface;
 
 #[Title('Thanh toán học phí')]
 class TuitionsPayment extends Component
@@ -64,7 +65,19 @@ class TuitionsPayment extends Component
 
     public function loadPrograms()
     {
-        $this->programs = app(ProgramRepositoryInterface::class)->getAllPrograms()->toArray();
+        $programs = app(ProgramRepositoryInterface::class)->getAllPrograms();
+        $this->programs = [];
+        
+        // Chuyển đổi và thêm giá mặc định (sẽ được override khi chọn học sinh)
+        foreach ($programs as $program) {
+            $this->programs[] = [
+                'id' => $program->id,
+                'name' => $program->name,
+                'english_name' => $program->english_name,
+                'price' => 0, // Giá mặc định, sẽ được cập nhật khi chọn học sinh
+            ];
+        }
+        
         $this->filteredPrograms = []; // Không hiển thị gì ban đầu
     }
 
@@ -89,14 +102,59 @@ class TuitionsPayment extends Component
         $this->transactionHistory = app(TuitionRepositoryInterface::class)->getTuitionsByUserId($studentId)->toArray();
     }
 
+    public function getProgramPriceForStudent($programId, $studentId)
+    {
+        try {
+            // Lấy location_id từ bảng pivot location_user
+            $locationUser = \Illuminate\Support\Facades\DB::table('location_user')
+                ->where('user_id', $studentId)
+                ->first();
+            
+            if (!$locationUser || !$locationUser->location_id) {
+                return 0;
+            }
+            
+            // Lấy giá từ ProgramLocationPrice
+            $programLocationPrice = app(ProgramLocationPriceRepositoryInterface::class)
+                ->getPriceByProgramAndLocation($programId, $locationUser->location_id);
+            
+            if ($programLocationPrice) {
+                return (float) $programLocationPrice->price;
+            }
+            
+            // Nếu không tìm thấy giá theo location, trả về 0
+            return 0;
+            
+        } catch (\Exception $e) {
+            return 0;
+        }
+    }
+
     public function updatedSearchProgram()
     {
         if (empty($this->searchProgram)) {
-            $this->filteredPrograms = []; // Không hiển thị gì khi chưa tìm kiếm
+            $this->filteredPrograms = $this->programs; // Hiển thị tất cả chương trình khi chưa tìm kiếm
         } else {
             $this->filteredPrograms = array_filter($this->programs, function($program) {
-                return stripos($program['name'], $this->searchProgram) !== false;
+                return stripos($program['name'], $this->searchProgram) !== false ||
+                       stripos($program['english_name'], $this->searchProgram) !== false;
             });
+        }
+    }
+
+    public function onProgramSearchFocus()
+    {
+        // Chỉ hiển thị danh sách chương trình khi đã chọn học sinh
+        if ($this->selectedStudent) {
+            $this->filteredPrograms = $this->programs;
+        }
+    }
+
+    public function onProgramSearchBlur()
+    {
+        // Khi blur khỏi ô tìm kiếm, giữ danh sách hiển thị nếu đã chọn học sinh
+        if ($this->selectedStudent) {
+            $this->filteredPrograms = $this->programs;
         }
     }
 
@@ -136,7 +194,25 @@ class TuitionsPayment extends Component
     {
         $student = collect($this->students)->firstWhere('id', $studentId);
         if ($student) {
-            $this->selectedStudent = $student;
+            // Lấy thông tin đầy đủ của học sinh từ database
+            $fullStudent = app(StudentRepositoryInterface::class)->getStudentById($studentId);
+            if ($fullStudent) {
+                // Lấy location_id từ bảng pivot
+                $locationUser = \Illuminate\Support\Facades\DB::table('location_user')
+                    ->where('user_id', $studentId)
+                    ->first();
+                $locationId = $locationUser ? $locationUser->location_id : null;
+                
+                $this->selectedStudent = [
+                    'id' => $fullStudent->id,
+                    'name' => $fullStudent->name,
+                    'account_code' => $fullStudent->account_code,
+                    'location_id' => $locationId,
+                ];
+            } else {
+                $this->selectedStudent = $student;
+            }
+            
             $this->searchStudent = ''; // Xóa từ khóa tìm kiếm sau khi chọn
             $this->filteredStudents = []; // Xóa danh sách kết quả
             // Load lịch sử giao dịch của học sinh
@@ -153,18 +229,40 @@ class TuitionsPayment extends Component
 
     public function addProgram($programId)
     {
+        if (!$this->selectedStudent) {
+            session()->flash('error', 'Vui lòng chọn học sinh trước khi thêm chương trình!');
+            return;
+        }
+
         $program = collect($this->programs)->firstWhere('id', $programId);
         if ($program) {
-            // Luôn thêm mới, không gom lại
-            $this->selectedItems[] = [
+            // Lấy giá từ ProgramLocationPrice dựa trên location của học sinh
+            $price = $this->getProgramPriceForStudent($programId, $this->selectedStudent['id']);
+            
+            if ($price <= 0) {
+                session()->flash('error', 'Chương trình này chưa có giá cho cơ sở của học sinh!');
+                return;
+            }
+            
+            $newItem = [
                 'id' => (int) $program['id'],
                 'name' => $program['name'],
-                'price' => (float) $program['price'],
+                'price' => (float) $price,
                 'season_id' => null, // Sẽ được chọn sau
                 'season_name' => null,
                 'type' => 'program'
             ];
+            
+            $this->selectedItems[] = $newItem;
+            
+            // Giữ danh sách chương trình hiển thị sau khi thêm
+            $this->filteredPrograms = $this->programs;
+            
             $this->calculateTotal();
+            
+            // Force refresh component
+            $this->dispatch('$refresh');
+            
         }
     }
 

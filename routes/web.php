@@ -34,6 +34,7 @@ use App\Livewire\Back\Management\Location\Locations;
 use App\Livewire\Back\Finance\Tuition\TuitionsHistory;
 use App\Livewire\Back\Finance\Tuition\TuitionsPayment;
 use App\Livewire\Back\Management\Curriculum\Curricula;
+use App\Livewire\Back\Finance\Price\ProgramPricesManagement;
 
 
 Route::get('/', function () {
@@ -88,6 +89,8 @@ Route::prefix('admin')->middleware(['auth', 'preventBackHistory'])->name('admin.
         Route::get('tuition-history', TuitionsHistory::class)->name('tuition-history');
 
         Route::get('tuitions-payment', TuitionsPayment::class)->name('tuitions-payment');
+
+        Route::get('program-prices', ProgramPricesManagement::class)->name('program-prices');
 
     });
 

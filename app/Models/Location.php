@@ -31,4 +31,9 @@ class Location extends Model
     {
         return $this->belongsToMany(User::class, 'location_user');
     }
+
+    public function programLocationPrices()
+    {
+        return $this->hasMany(ProgramLocationPrice::class);
+    }
 }

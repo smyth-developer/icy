@@ -10,7 +10,6 @@ class ProgramRules
             'name' => ['required', 'string', 'min:3', 'max:255', 'unique:programs,name' . ($id ? ",$id" : ''),'regex:/^[\p{L}0-9\s]+$/u'],
             'description' => ['nullable', 'string', 'max:500'],
             'english_name' => ['nullable','string', 'max:100'],
-            'price' => ['required', 'numeric', 'min:1000','max:99999999'],
         ];
     }
 
@@ -24,10 +23,6 @@ class ProgramRules
             'name.regex' => 'Tên chương trình học chỉ không được chứa ký tự đặc biệt.',
             'description.max' => 'Mô tả không được vượt quá 500 ký tự.',
             'english_name.max' => 'Tên tiếng anh không được vượt quá 100 ký tự.',
-            'price.required' => 'Học phí là bắt buộc.',
-            'price.numeric' => 'Học phí phải là số.',
-            'price.min' => 'Học phí phải lớn hơn 1000.',
-            'price.max' => 'Học phí phải nhỏ hơn 1 tỷ.',
         ];
     }
 }

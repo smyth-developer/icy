@@ -16,12 +16,11 @@ class ActionsProgram extends Component
     public $name;
     public $english_name;
     public $description;
-    public $price;
     public $isEditProgramMode = false;
 
     public function resetForm()
     {
-        $this->reset(['programId', 'name', 'english_name', 'description', 'price']);
+        $this->reset(['programId', 'name', 'english_name', 'description']);
         $this->isEditProgramMode = false;
     }
 
@@ -39,7 +38,6 @@ class ActionsProgram extends Component
             'name' => $this->name,
             'description' => $this->description,
             'english_name' => $this->english_name,
-            'price' => $this->price,
         ]);
         session()->flash('success', 'Thêm chương trình học thành công.');
         Flux::modal('modal-program')->close();
@@ -55,7 +53,6 @@ class ActionsProgram extends Component
         $this->name = $program->name;
         $this->english_name = $program->english_name;
         $this->description = $program->description;
-        $this->price = $program->price;
         $this->isEditProgramMode = true;
         Flux::modal('modal-program')->show();
     }
@@ -67,7 +64,6 @@ class ActionsProgram extends Component
             'name' => $this->name,
             'description' => $this->description,
             'english_name' => $this->english_name,
-            'price' => $this->price,
         ]);
         session()->flash('success', 'Cập nhật chương trình học thành công.');
         Flux::modal('modal-program')->close();

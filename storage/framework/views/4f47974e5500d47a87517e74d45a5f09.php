@@ -1,0 +1,1 @@
+e60dd9d2c3a62d619c9acb38f20d5aa5::button.index<?php /**PATH /Users/smyth/Herd/icy/storage/framework/views/40fbcd2b9ea1550d6a37547389f70aa3.blade.php ENDPATH**/ ?>

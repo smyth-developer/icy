@@ -1,0 +1,1 @@
+e60dd9d2c3a62d619c9acb38f20d5aa5::spacer<?php /**PATH /Users/smyth/Herd/icy/storage/framework/views/65edf0e817889ce9c35fd435d946c74e.blade.php ENDPATH**/ ?>

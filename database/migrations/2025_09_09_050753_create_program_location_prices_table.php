@@ -7,16 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations. Chương trình học
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('programs', function (Blueprint $table) {
+        Schema::create('program_location_prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('ordering')->default(1000);
-            $table->string('name');
-            $table->string('english_name');
-            $table->text('description')->nullable();
+            $table->foreignId('program_id')->constrained('programs');
+            $table->foreignId('location_id')->constrained('locations');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('programs');
+        Schema::dropIfExists('program_location_prices');
     }
 };

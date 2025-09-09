@@ -1,52 +1,74 @@
 <div>
     {{-- Create and Update Subject Modal --}}
-    <flux:modal :dismissible="false" name="modal-subject" class="md:w-900">
+    <flux:modal :dismissible="false" name="modal-subject" class="md:w-[600px]">
         <form wire:submit='{{ $isEditSubjectMode ? 'updateSubject' : 'createSubject' }}' class="space-y-6">
             <div>
                 <flux:heading class="font-bold" size="lg">
                     {{ $isEditSubjectMode ? 'Cập nhật môn học' : 'Tạo mới môn học' }}
                 </flux:heading>
                 <flux:text class="mt-2">
-                    {{ $isEditSubjectMode ? 'Chỉnh sửa thông tin môn học' : 'Thêm mới môn học' }}.
+                    {{ $isEditSubjectMode ? 'Chỉnh sửa thông tin môn học' : 'Thêm mới môn học vào hệ thống' }}
                 </flux:text>
             </div>
 
-            <flux:separator />
-
             <div class="flex gap-2">
                 <div class="form-group w-3/5">
-                    <flux:label>Tên môn học</flux:label>
-                    <flux:input.group>
-                        <flux:input.group.prefix>ICY</flux:input.group.prefix>
-                        <flux:input wire:model='name' placeholder="Nhập Tên môn học (ICY)" autofocus/>
-                    </flux:input.group>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tên môn học</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 text-sm font-medium">ICY</span>
+                        </div>
+                        <input type="text" wire:model='name' 
+                            class="block w-full pl-12 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                            placeholder="Tên môn học" autofocus>
+                    </div>
+                    @error('name')
+                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
                 </div>
-
                 <div class="form-group w-2/5">
-                    <flux:input wire:model='code' label="Mã môn học" />
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mã môn học</label>
+                    <input type="text" wire:model='code' 
+                        class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
+                        placeholder="Mã môn học">
+                    @error('code')
+                        <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
+            
 
             <div class="form-group">
-                <flux:select wire:model="program_id" placeholder="Chọn chương trình học" label="Chương trình học">
-                    <flux:select.option value="">Chọn chương trình học</flux:select.option>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Chương trình học</label>
+                <select wire:model="program_id" 
+                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200">
+                    <option value="">Chọn chương trình học</option>
                     @forelse ($programs as $program)
-                        <flux:select.option :value="$program->id">{{ $program->name }}</flux:select.option>
+                        <option value="{{ $program->id }}">{{ $program->name }}</option>
                     @empty
-                        <flux:select.option value="">Không có chương trình học</flux:select.option>
+                        <option value="">Không có chương trình học</option>
                     @endforelse
-                </flux:select>
+                </select>
+                @error('program_id')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-group">
-                <flux:textarea wire:model='description' label="Mô tả môn học" />
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mô tả môn học</label>
+                <textarea wire:model='description' rows="4"
+                    class="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 resize-none"
+                    placeholder="Nhập mô tả chi tiết về môn học..."></textarea>
+                @error('description')
+                    <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="flex">
-                <flux:spacer />
-                <flux:button type="submit" class="cursor-pointer" variant="primary">
+            <div class="flex justify-end">
+                <button type="submit" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium transition-colors duration-200">
                     {{ $isEditSubjectMode ? 'Cập nhật' : 'Thêm mới' }}
-                </flux:button>
+                </button>
             </div>
         </form>
     </flux:modal>
@@ -82,8 +104,7 @@
                 <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6">
                     <div class="flex items-start">
                         <div class="flex-shrink-0">
-                            <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="currentColor"
-                                viewBox="0 0 20 20">
+                            <svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                     clip-rule="evenodd"></path>

@@ -26,7 +26,9 @@ class ProgramRepository implements ProgramRepositoryInterface
 
     public function getAll(int $perPage = 10): LengthAwarePaginator
     {
-        return Program::orderBy('ordering', 'asc')->paginate($perPage);
+        return Program::with(['programLocationPrices.location'])
+            ->orderBy('ordering', 'asc')
+            ->paginate($perPage);
     }
 
     public function getAllPrograms()
