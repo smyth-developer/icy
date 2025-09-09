@@ -78,10 +78,21 @@
                     </h3>
 
                     
-                    <div class="mb-4">
-                        <input type="text" wire:model.live="searchProgram" clearable
-                            placeholder="Tìm kiếm chương trình theo tên..."
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                    <div class="mb-4 flex gap-3">
+                        
+                        <div class="flex-1">
+                            <input type="text" wire:model.live="searchProgram" clearable
+                                placeholder="Tìm kiếm chương trình theo tên..."
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                        </div>
+                        
+                        
+                        <div class="w-1/5">
+                            <button wire:click="addUniform"
+                                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                👕 Thêm đồng phục
+                            </button>
+                        </div>
                     </div>
 
                     
@@ -177,18 +188,24 @@
 
                                         
                                         <div class="w-32">
-                                            <select
-                                                wire:change="selectSeason(<?php echo e($index); ?>, $event.target.value)"
-                                                class="w-full px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
-                                                <option value="">-- Mùa --</option>
-                                                <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $seasons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $season): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <option value="<?php echo e($season['id']); ?>"
-                                                        <?php echo e($item['season_id'] == $season['id'] ? 'selected' : ''); ?>>
-                                                        <?php echo e($season['name']); ?>
+                                            <!--[if BLOCK]><![endif]--><?php if($item['type'] === 'uniform'): ?>
+                                                <div class="w-full px-2 py-1 text-xs text-gray-500 dark:text-gray-400 text-center">
+                                                    --
+                                                </div>
+                                            <?php else: ?>
+                                                <select
+                                                    wire:change="selectSeason(<?php echo e($index); ?>, $event.target.value)"
+                                                    class="w-full px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="">-- Mùa --</option>
+                                                    <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $seasons; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $season): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($season['id']); ?>"
+                                                            <?php echo e($item['season_id'] == $season['id'] ? 'selected' : ''); ?>>
+                                                            <?php echo e($season['name']); ?>
 
-                                                    </option>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
-                                            </select>
+                                                        </option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><!--[if ENDBLOCK]><![endif]-->
+                                                </select>
+                                            <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
                                         </div>
 
                                         
@@ -535,11 +552,11 @@
                                 <!--[if BLOCK]><![endif]--><?php $__currentLoopData = $transactionHistory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $transaction): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            <?php echo e($transaction['program']['name'] ?? 'N/A'); ?>
+                                            <?php echo e($transaction['program']['name'] ?? 'Đồng phục'); ?>
 
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            <?php echo e($transaction['season']['name'] ?? 'N/A'); ?>
+                                            <?php echo e($transaction['season']['name'] ?? '--'); ?>
 
                                         </td>
                                         <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">

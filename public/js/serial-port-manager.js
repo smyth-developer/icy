@@ -211,7 +211,7 @@ class SerialPortManager {
 
         console.log(CRC16, bankName, accountNumber, amount);
         
-        const command = `QBAR(0,${CRC16});SET_TXT(0, ${bankName});SET_TXT(1,STK:${accountNumber});SET_TXT(2,1.500.000);`;
+        const command = `QBAR(0,${CRC16});SET_TXT(0, ${bankName});SET_TXT(1,STK:${accountNumber});SET_TXT(2,${amount});`;
         return await this.sendCommand(command);
     }
 

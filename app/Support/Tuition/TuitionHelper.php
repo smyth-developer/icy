@@ -11,7 +11,7 @@ class TuitionHelper
     {
         $bank_code = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->bank_code;
         $bank_number = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->account_number;
-        $amount = $transaction->price;
+        $amount = (string) $transaction->price;
 
         $description = $transaction->note;
 

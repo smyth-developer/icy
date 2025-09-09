@@ -40,11 +40,22 @@
                         📚 Tìm kiếm chương trình
                     </h3>
 
-                    {{-- Search Program --}}
-                    <div class="mb-4">
-                        <input type="text" wire:model.live="searchProgram" clearable
-                            placeholder="Tìm kiếm chương trình theo tên..."
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                    {{-- Search Program and Uniform Button --}}
+                    <div class="mb-4 flex gap-3">
+                        {{-- Search Program --}}
+                        <div class="flex-1">
+                            <input type="text" wire:model.live="searchProgram" clearable
+                                placeholder="Tìm kiếm chương trình theo tên..."
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-300">
+                        </div>
+                        
+                        {{-- Uniform Button --}}
+                        <div class="w-1/5">
+                            <button wire:click="addUniform"
+                                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                👕 Thêm đồng phục
+                            </button>
+                        </div>
                     </div>
 
                     {{-- Search Results --}}
@@ -137,17 +148,23 @@
 
                                         {{-- Season Selection --}}
                                         <div class="w-32">
-                                            <select
-                                                wire:change="selectSeason({{ $index }}, $event.target.value)"
-                                                class="w-full px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
-                                                <option value="">-- Mùa --</option>
-                                                @foreach ($seasons as $season)
-                                                    <option value="{{ $season['id'] }}"
-                                                        {{ $item['season_id'] == $season['id'] ? 'selected' : '' }}>
-                                                        {{ $season['name'] }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
+                                            @if ($item['type'] === 'uniform')
+                                                <div class="w-full px-2 py-1 text-xs text-gray-500 dark:text-gray-400 text-center">
+                                                    --
+                                                </div>
+                                            @else
+                                                <select
+                                                    wire:change="selectSeason({{ $index }}, $event.target.value)"
+                                                    class="w-full px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-1 focus:ring-blue-500 focus:border-blue-500">
+                                                    <option value="">-- Mùa --</option>
+                                                    @foreach ($seasons as $season)
+                                                        <option value="{{ $season['id'] }}"
+                                                            {{ $item['season_id'] == $season['id'] ? 'selected' : '' }}>
+                                                            {{ $season['name'] }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            @endif
                                         </div>
 
                                         {{-- Discount Input --}}
@@ -486,10 +503,10 @@
                                 @foreach ($transactionHistory as $transaction)
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            {{ $transaction['program']['name'] ?? 'N/A' }}
+                                            {{ $transaction['program']['name'] ?? 'Đồng phục' }}
                                         </td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                                            {{ $transaction['season']['name'] ?? 'N/A' }}
+                                            {{ $transaction['season']['name'] ?? '--' }}
                                         </td>
                                         <td class="px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
                                             {{ number_format($transaction['price'], 0, ',', '.') }} VNĐ

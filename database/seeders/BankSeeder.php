@@ -24,7 +24,7 @@ class BankSeeder extends Seeder
             [
                 'bank_name' => 'MBBANK',
                 'bank_code' => '970422',
-                'account_number' => '00866683539',
+                'account_number' => '00866683593',
                 'account_name' => 'NGUYEN THI THUY VY',
                 'status' => 'active',
                 'description' => 'Bank account for the PERSONNEL',

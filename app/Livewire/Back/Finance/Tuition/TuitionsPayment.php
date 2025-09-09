@@ -168,6 +168,20 @@ class TuitionsPayment extends Component
         }
     }
 
+    public function addUniform()
+    {
+        $this->selectedItems[] = [
+            'id' => 'uniform',
+            'name' => 'Đồng phục',
+            'price' => 100000,
+            'season_id' => null,
+            'season_name' => null,
+            'type' => 'uniform'
+        ];
+        
+        $this->calculateTotal();
+    }
+
     public function removeItem($index)
     {
         if (isset($this->selectedItems[$index])) {
@@ -286,9 +300,9 @@ class TuitionsPayment extends Component
             return;
         }
 
-        // Kiểm tra xem tất cả chương trình đã chọn season chưa
+        // Kiểm tra xem tất cả chương trình đã chọn season chưa (trừ đồng phục)
         foreach ($this->selectedItems as $item) {
-            if (!$item['season_id']) {
+            if ($item['type'] !== 'uniform' && !$item['season_id']) {
                 session()->flash('error', 'Vui lòng chọn season cho tất cả chương trình!');
                 return;
             }
@@ -333,8 +347,12 @@ class TuitionsPayment extends Component
                 }
 
                 if ($this->paymentMethod === 'bank_transfer') {
-                    $note = BankHelper::generateDescriptionTransactionBankTransfer($student->id, $item['season_id'], $item['id']);
-                }else{
+                    if ($item['type'] === 'uniform') {
+                        $note = "Uniform - " . $student->username;
+                    } else {
+                        $note = BankHelper::generateDescriptionTransactionBankTransfer($student->id, $item['season_id'], $item['id']);
+                    }
+                } else {
                     $note = $this->note;
                 }
                 
@@ -344,8 +362,8 @@ class TuitionsPayment extends Component
                 $tuition = [
                     'user_id' => $student->id,
                     'receipt_number' => $baseReceiptNumber . '-' . ($index + 1), // Thêm số thứ tự
-                    'program_id' => $item['id'],
-                    'season_id' => $item['season_id'],
+                    'program_id' => $item['type'] === 'uniform' ? null : $item['id'],
+                    'season_id' => $item['type'] === 'uniform' ? null : $item['season_id'],
                     'price' => $finalItemPrice,
                     'status' => 'pending',
                     'payment_method' => $this->paymentMethod,
@@ -374,7 +392,8 @@ class TuitionsPayment extends Component
         $crc16 = TuitionHelper::generateInformationTransaction($transaction);
         $bankName = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->bank_name;
         $accountNumber = app(BankRepositoryInterface::class)->getById($transaction->bank_id)->account_number;
-        $amount = trim(number_format($transaction->price, 0, ',', '.'));
+        $amount = (string) $transaction->price;
+
         $this->dispatch('process-payment', $crc16, $bankName, $accountNumber, $amount);
     }
 

@@ -52,6 +52,11 @@ class BankHelper
         $amount = trim($amount);
         $desc = trim($desc);
 
+        // Xử lý số tiền: loại bỏ dấu chấm thập phân nếu có
+        if ($amount !== '') {
+            $amount = (string) (int) (float) $amount;
+        }
+
         // TLV helpers
         $pad2 = fn(string $s) => strlen($s) < 2 ? '0' . $s : $s;
         $tlv  = fn(string $id, string $value) => $id . $pad2((string)strlen($value)) . $value;
