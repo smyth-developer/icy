@@ -16,9 +16,16 @@
     @endif
 
 
+        <div class="flex items-center justify-start ml-6">
+            <flux:button icon="bookmark-slash" wire:click="turnOffBankTransfer" color="red" variant="primary">
+                Turn Off QR
+            </flux:button>
+        </div>
+
 
     {{-- Main Content --}}
     <div class="p-6">
+        
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
 
             {{-- Left Side - Programs and Selection --}}
@@ -556,8 +563,8 @@
     <script src="{{ asset('js/serial-port-manager.js') }}"></script>
     <script>
         // Tự động khởi tạo và gửi lệnh chuyển khoản
-        document.addEventListener('initialization-bank-transfer', function() {
-            window.serialPortManager.initializeAndSendBankTransfer();
+        document.addEventListener('turnOffBankTransfer', function() {
+            window.serialPortManager.turnOffBankTransfer();
         });
 
         document.addEventListener('process-payment', function(qrCode) {

@@ -167,7 +167,7 @@ class SerialPortManager {
     /**
      * Gửi lệnh mở giao diện chuyển khoản
      */
-    async turnOnBankTransfer() {
+    async turnOffBankTransfer() {
         const command = 'JUMP(0);';
         return await this.sendCommand(command);
     }

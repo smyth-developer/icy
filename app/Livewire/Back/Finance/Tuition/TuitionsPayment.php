@@ -122,6 +122,11 @@ class TuitionsPayment extends Component
         // Method để Livewire tự động detect changes
     }
 
+    public function turnOffBankTransfer()
+    {
+        $this->dispatch('turnOffBankTransfer');
+    }
+
     public function selectStudent($studentId)
     {
         $student = collect($this->students)->firstWhere('id', $studentId);
