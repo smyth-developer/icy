@@ -122,9 +122,14 @@ class TuitionsPayment extends Component
         // Method để Livewire tự động detect changes
     }
 
-    public function turnOffBankTransfer()
+    public function mainMenuQRCode()
     {
-        $this->dispatch('turnOffBankTransfer');
+        $this->dispatch('mainMenuQRCode');
+    }
+
+    public function turnOffQRCode()
+    {
+        $this->dispatch('turnOffQRCode');
     }
 
     public function selectStudent($studentId)

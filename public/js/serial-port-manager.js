@@ -167,8 +167,25 @@ class SerialPortManager {
     /**
      * Gửi lệnh mở giao diện chuyển khoản
      */
-    async turnOffBankTransfer() {
+    async turnOnLightQRCode() {
+        const command = 'BL(0);';
+        return await this.sendCommand(command);
+    }
+
+    /**
+     * Gửi lệnh mở giao diện chuyển khoản
+     */
+    async mainMenuQRCode() {
+        await this.turnOnLightQRCode();
         const command = 'JUMP(0);';
+        return await this.sendCommand(command);
+    }
+
+    /**
+     * Gửi lệnh mở giao diện chuyển khoản
+     */
+    async turnOffQRCode() {
+        const command = 'BL(255);';
         return await this.sendCommand(command);
     }
 
@@ -176,6 +193,7 @@ class SerialPortManager {
      * Gửi lệnh quay về menu chính
      */
     async backToMainMenu() {
+        await this.turnOnLightQRCode();
         const command = 'JUMP(1);';
         return await this.sendCommand(command);
     }

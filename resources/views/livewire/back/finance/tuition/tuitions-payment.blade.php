@@ -16,8 +16,11 @@
     @endif
 
 
-        <div class="flex items-center justify-start ml-6">
-            <flux:button icon="bookmark-slash" wire:click="turnOffBankTransfer" color="red" variant="primary">
+        <div class="flex items-center justify-start ml-6 gap-2">
+            <flux:button icon="bookmark-square" wire:click="mainMenuQRCode" color="green" variant="primary">
+                Main Menu QR
+            </flux:button>
+            <flux:button icon="bookmark-slash" wire:click="turnOffQRCode" color="red" variant="primary">
                 Turn Off QR
             </flux:button>
         </div>
@@ -563,8 +566,8 @@
     <script src="{{ asset('js/serial-port-manager.js') }}"></script>
     <script>
         // Tự động khởi tạo và gửi lệnh chuyển khoản
-        document.addEventListener('turnOffBankTransfer', function() {
-            window.serialPortManager.turnOffBankTransfer();
+        document.addEventListener('mainMenuQRCode', function() {
+            window.serialPortManager.mainMenuQRCode();
         });
 
         document.addEventListener('process-payment', function(qrCode) {
@@ -573,6 +576,10 @@
 
         document.addEventListener('turnOnBankTransfer', function() {
             window.serialPortManager.turnOnBankTransfer();
+        });
+
+        document.addEventListener('turnOffQRCode', function() {
+            window.serialPortManager.turnOffQRCode();
         });
 
     </script>

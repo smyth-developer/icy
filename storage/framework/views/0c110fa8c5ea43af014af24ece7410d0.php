@@ -17,17 +17,38 @@
     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
 
-        <div class="flex items-center justify-start ml-6">
+        <div class="flex items-center justify-start ml-6 gap-2">
             <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['icon' => 'bookmark-slash','wire:click' => 'turnOffBankTransfer','color' => 'red','variant' => 'primary']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['icon' => 'bookmark-square','wire:click' => 'mainMenuQRCode','color' => 'green','variant' => 'primary']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('flux::button'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['icon' => 'bookmark-slash','wire:click' => 'turnOffBankTransfer','color' => 'red','variant' => 'primary']); ?>
+<?php $component->withAttributes(['icon' => 'bookmark-square','wire:click' => 'mainMenuQRCode','color' => 'green','variant' => 'primary']); ?>
+                Main Menu QR
+             <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $attributes = $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580)): ?>
+<?php $component = $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580; ?>
+<?php unset($__componentOriginalc04b147acd0e65cc1a77f86fb0e81580); ?>
+<?php endif; ?>
+            <?php if (isset($component)) { $__componentOriginalc04b147acd0e65cc1a77f86fb0e81580 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalc04b147acd0e65cc1a77f86fb0e81580 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'e60dd9d2c3a62d619c9acb38f20d5aa5::button.index','data' => ['icon' => 'bookmark-slash','wire:click' => 'turnOffQRCode','color' => 'red','variant' => 'primary']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('flux::button'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['icon' => 'bookmark-slash','wire:click' => 'turnOffQRCode','color' => 'red','variant' => 'primary']); ?>
                 Turn Off QR
              <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
@@ -613,8 +634,8 @@
     <script src="<?php echo e(asset('js/serial-port-manager.js')); ?>"></script>
     <script>
         // Tự động khởi tạo và gửi lệnh chuyển khoản
-        document.addEventListener('turnOffBankTransfer', function() {
-            window.serialPortManager.turnOffBankTransfer();
+        document.addEventListener('mainMenuQRCode', function() {
+            window.serialPortManager.mainMenuQRCode();
         });
 
         document.addEventListener('process-payment', function(qrCode) {
@@ -623,6 +644,10 @@
 
         document.addEventListener('turnOnBankTransfer', function() {
             window.serialPortManager.turnOnBankTransfer();
+        });
+
+        document.addEventListener('turnOffQRCode', function() {
+            window.serialPortManager.turnOffQRCode();
         });
 
     </script>
